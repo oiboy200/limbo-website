@@ -6,8 +6,8 @@ backend:
 media_folder: "uploads"
 public_folder: "/uploads"
 
-site_url: "https://YOUR-NETLIFY-SITE.netlify.app"
-display_url: "https://YOUR-NETLIFY-SITE.netlify.app"
+site_url: "https://limbo-vicenza.netlify.app"
+display_url: "https://limbo-vicenza.netlify.app"
 logo_url: "/assets/limbo-logo-original.png"
 
 collections:
