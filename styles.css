@@ -106,3 +106,12 @@
 
 /* Remove the divider below the fixed header */
 .site-header{border-bottom:0}
+
+
+/* Inline EN | IT language selector */
+.language-switch{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.language-switch span{opacity:.55}
+.language-option{border:0;background:transparent;color:inherit;padding:8px 0;font:inherit;cursor:pointer;opacity:.5}
+.language-option.active{opacity:1}
+.language-option:hover{opacity:1}
+@media(max-width:760px){.language-switch{font-size:10px;gap:6px}}
