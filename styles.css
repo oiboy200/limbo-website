@@ -102,3 +102,7 @@
   .language,
   .language-toggle{font-size:10px}
 }
+
+
+/* Remove the divider below the fixed header */
+.site-header{border-bottom:0}
