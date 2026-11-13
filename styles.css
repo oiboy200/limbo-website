@@ -177,8 +177,9 @@
 .custom-project-heading{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid currentColor;padding:13px 0 20px;margin-bottom:22px}
 .custom-project-heading h2{font-size:clamp(13px,1.2vw,17px);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin:0}
 .custom-project-heading span{font-size:10px;opacity:.6}
-.custom-project-hero{margin:0;width:100%}
-.custom-project-hero img{display:block;width:100%;height:auto;max-height:88vh;object-fit:contain}
+.custom-project-hero{margin:0;width:100%;aspect-ratio:16/9;overflow:hidden;background:#eee}
+.custom-project-hero img,
+.custom-project-hero .custom-project-hero-image{display:block;width:100%;height:100%;max-height:none;object-fit:cover;object-position:center}
 .custom-project-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,28px);margin-top:clamp(18px,2.5vw,36px);align-items:start}
 .custom-project-detail{margin:0;min-width:0}
 .custom-project-detail img{display:block;width:100%;height:auto;object-fit:contain}
@@ -187,7 +188,7 @@
 @media(max-width:760px){
  .custom-project{margin-bottom:88px}
  .custom-project-heading{padding:10px 0 15px;margin-bottom:15px}
- .custom-project-hero img{max-height:none}
+ .custom-project-hero{aspect-ratio:4/3}\n .custom-project-hero img,.custom-project-hero .custom-project-hero-image{max-height:none}
  .custom-project-details{gap:10px;margin-top:14px}
  .custom-project-detail:nth-child(even){margin-top:22px}
 }
