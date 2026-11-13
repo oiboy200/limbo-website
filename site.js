@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(gallery){
       gallery.classList.add('custom-projects');
       const loadImage=(src,label)=>new Promise(resolve=>{
-        const im=new Image();im.src=src;im.alt=label+' — custom framing';im.loading='lazy';
+        const im=new Image();im.src=src;im.alt=label+' — custom framing';
         const done=()=>resolve({im,landscape:im.naturalWidth>im.naturalHeight});
         if(im.complete)done();else{im.onload=done;im.onerror=()=>resolve({im,landscape:false});}
       });
