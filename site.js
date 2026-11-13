@@ -86,7 +86,29 @@ document.addEventListener('DOMContentLoaded',()=>{
       ['COLOUR STUDIES','/limbo_web_assets/colour-studies/',8],['JAPAN PRINTS','/limbo_web_assets/japan-prints/',9],
       ['TURQUOISE ARCHIVE','/limbo_web_assets/turquoise-archive/',5]
     ];
-    if(gallery){let n=0;collections.forEach(([label,base,count],group)=>{for(let i=1;i<=count;i++){const figure=document.createElement('figure');figure.className='custom-item item-'+(n%7);const im=document.createElement('img');im.src=base+String(i).padStart(2,'0')+'.webp';im.alt=label+' — custom framing detail';im.loading='lazy';const classify=()=>{figure.classList.toggle('is-landscape',im.naturalWidth>im.naturalHeight);figure.classList.toggle('is-portrait',im.naturalHeight>=im.naturalWidth);};if(im.complete&&im.naturalWidth)classify();else im.addEventListener('load',classify,{once:true});figure.append(im);if(i===1){const cap=document.createElement('figcaption');cap.textContent=label;figure.append(cap);}gallery.append(figure);n++;}});}
+    if(gallery){
+      gallery.classList.add('custom-projects');
+      const loadImage=(src,label)=>new Promise(resolve=>{
+        const im=new Image();im.src=src;im.alt=label+' — custom framing';im.loading='lazy';
+        const done=()=>resolve({im,landscape:im.naturalWidth>im.naturalHeight});
+        if(im.complete)done();else{im.onload=done;im.onerror=()=>resolve({im,landscape:false});}
+      });
+      for(const [label,base,count] of collections){
+        const section=document.createElement('section');section.className='custom-project';
+        const heading=document.createElement('div');heading.className='custom-project-heading';
+        const title=document.createElement('h2');title.textContent=label;
+        const number=document.createElement('span');number.textContent=String(collections.indexOf(collections.find(c=>c[0]===label))+1).padStart(2,'0');
+        heading.append(title,number);section.append(heading);
+        const images=await Promise.all(Array.from({length:count},(_,i)=>loadImage(base+String(i+1).padStart(2,'0')+'.webp',label)));
+        const heroIndex=images.findIndex(x=>x.landscape);
+        const hero=images.splice(heroIndex>=0?heroIndex:0,1)[0];
+        const heroFigure=document.createElement('figure');heroFigure.className='custom-project-hero';heroFigure.append(hero.im);section.append(heroFigure);
+        const details=document.createElement('div');details.className='custom-project-details';
+        images.forEach(({im})=>{const figure=document.createElement('figure');figure.className='custom-project-detail';figure.append(im);details.append(figure);});
+        if(images.length)section.append(details);
+        gallery.append(section);
+      }
+    }
     setText('.custom-main .page-main .page-title',lang==='it'?'Su misura.':'Custom frames.');
     setText('.custom-main .page-lead',lang==='it'?'Una cornice non è mai soltanto un bordo. Cambia il modo in cui guardiamo ciò che conta.':'A frame is never just a border. It changes the way we see what matters.');
     const ci=document.querySelector('.custom-intro');if(ci&&lang==='it')ci.innerHTML='<span>01 — MATERIA / COLORE / DETTAGLIO</span><p>Opere, spazi e modi diversi di incorniciare. Una selezione di lavori su misura, sperimentazioni e dettagli dall’archivio LIMBO.</p>';
