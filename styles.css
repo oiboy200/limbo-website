@@ -311,3 +311,9 @@ em{font-style:normal;font-family:'Inter',Arial,sans-serif;font-weight:700}
  .home-custom h2,.home-about>h2{font-size:clamp(58px,13vw,96px)}
  .home-contact h2{font-size:clamp(58px,13vw,96px)}
 }
+/* Larger LIMBO header signature */
+.site-header .mini-logo{width:clamp(110px,9vw,145px)}
+.site-header .mini-logo img{width:100%;height:auto}
+@media(max-width:760px){
+ .site-header .mini-logo{width:clamp(100px,28vw,125px)}
+}
