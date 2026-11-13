@@ -80,3 +80,25 @@
   .page-title{font-size:clamp(68px,10vw,120px)}
   .page-lead{font-size:clamp(25px,3.5vw,38px)}
 }
+
+
+/* Slightly larger bold navigation and utility labels */
+.site-header nav a,
+.footer-links a{font-size:12px}
+.language,
+.language-toggle{font-size:11px}
+.hero-index,
+.eyebrow,
+.scroll-note,
+.project-meta{font-size:11px}
+.site-footer small{font-size:10px}
+@media(max-width:760px){
+  .eyebrow,
+  .hero-index,
+  .scroll-note,
+  .project-meta{font-size:10px}
+  .site-header nav a,
+  .footer-links a{font-size:12px}
+  .language,
+  .language-toggle{font-size:10px}
+}
