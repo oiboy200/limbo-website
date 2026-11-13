@@ -10,7 +10,10 @@
         "/assets/frame-detail-01.png"
       ],
       "description": "A study of framing, material and detail. Replace this text with the final project description.",
-      "featured": true
+      "featured": true,
+      "title_it": "Serie Giappone",
+      "category_it": "Cornici su misura",
+      "description_it": "Uno studio sulle cornici, sui materiali e sui dettagli. Testo da sostituire con la descrizione definitiva del progetto."
     }
   ]
 }
