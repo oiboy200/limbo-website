@@ -67,18 +67,34 @@ document.addEventListener('DOMContentLoaded',()=>{
     setText('.page-main .eyebrow',lang==='it'?'01 / PROGETTI SELEZIONATI':'01 / SELECTED WORK');
     setText('.page-main .page-lead',lang==='it'?'Una raccolta di cornici, oggetti e spazi. Ogni progetto è realizzato su misura, con attenzione all’immagine e alla materia.':'A collection of frames, objects and spaces. Each one made to measure, with care for the image and the material.');
     const grid=document.querySelector('.page-main .page-grid');
-    if(grid&&projects.length){grid.innerHTML='';projects.forEach(d=>{
+    if(grid&&projects.length){grid.innerHTML='';projects.forEach((d,i)=>{
       const title=field(d,'title'),category=field(d,'category');
-      const a=document.createElement('a');a.href='project-japan.html?project='+encodeURIComponent(d.slug);
+      const a=document.createElement('a');a.className='project-card';a.href='project-japan.html?project='+encodeURIComponent(d.slug);
       const im=document.createElement('img');im.src=d.cover;im.alt=title;a.append(im);
       const meta=document.createElement('p');meta.className='project-meta';
       const left=document.createElement('span'),right=document.createElement('span');
       left.textContent=title.toUpperCase();right.textContent=category+' ↗';meta.append(left,right);a.append(meta);grid.append(a);
     });}
   }
+  if(page==='custom'){
+    const gallery=document.querySelector('#custom-gallery');
+    const collections=[
+      ['GREEN','/limbo_web_assets/green/',5],['GREEN / ORANGE','/limbo_web_assets/green-orange/',4],
+      ['JACK','/limbo_web_assets/jack/',5],['RED','/limbo_web_assets/red/',6],
+      ['NIC FRAMES','/limbo_web_assets/nic-frames/',8],['BLUE / ORANGE','/limbo_web_assets/blue-orange/',5],
+      ['BICYCLE','/limbo_web_assets/bicycle/',3],['PINK HOUSE','/limbo_web_assets/pink-house/',5],
+      ['COLOUR STUDIES','/limbo_web_assets/colour-studies/',8],['JAPAN PRINTS','/limbo_web_assets/japan-prints/',9],
+      ['TURQUOISE ARCHIVE','/limbo_web_assets/turquoise-archive/',5]
+    ];
+    if(gallery){let n=0;collections.forEach(([label,base,count],group)=>{for(let i=1;i<=count;i++){const figure=document.createElement('figure');figure.className='custom-item item-'+(n%7);const im=document.createElement('img');im.src=base+String(i).padStart(2,'0')+'.webp';im.alt=label+' — custom framing detail';im.loading='lazy';figure.append(im);if(i===1){const cap=document.createElement('figcaption');cap.textContent=label;figure.append(cap);}gallery.append(figure);n++;}});}
+    setText('.custom-main .page-main .page-title',lang==='it'?'Su misura.':'Custom frames.');
+    setText('.custom-main .page-lead',lang==='it'?'Una cornice non è mai soltanto un bordo. Cambia il modo in cui guardiamo ciò che conta.':'A frame is never just a border. It changes the way we see what matters.');
+    const ci=document.querySelector('.custom-intro');if(ci&&lang==='it')ci.innerHTML='<span>01 — MATERIA / COLORE / DETTAGLIO</span><p>Opere, spazi e modi diversi di incorniciare. Una selezione di lavori su misura, sperimentazioni e dettagli dall’archivio LIMBO.</p>';
+    const ce=document.querySelector('.custom-end');if(ce&&lang==='it')ce.innerHTML='<span>SU MISURA A VICENZA, ITALIA</span><a href="contact.html">Inizia un progetto ↗</a>';
+  }
   if(page==='project-japan'){
     const slug=new URLSearchParams(location.search).get('project')||'japan-series',d=projects.find(x=>x.slug===slug)||projects[0];
-    if(d){setText('.page-main .page-title',field(d,'title')+'.');setText('.page-main .page-lead',field(d,'description'));const imgs=document.querySelectorAll('.detail-grid img');if(imgs[0])imgs[0].src=d.cover;if(imgs[1]&&d.gallery?.[0])imgs[1].src=d.gallery[0];}
+    if(d){document.title=field(d,'title')+' — LIMBO';setText('.page-main .page-title',field(d,'title')+'.');setText('.page-main .page-lead',field(d,'description'));const grid=document.querySelector('.project-gallery');if(grid){grid.innerHTML='';(d.gallery?.length?d.gallery:[d.cover]).forEach((src,i)=>{const im=document.createElement('img');im.src=src;im.alt=field(d,'title')+' — '+(i+1);im.loading=i>1?'lazy':'eager';grid.append(im);});}}
     setText('.page-main .eyebrow',lang==='it'?'PROGETTO 001 / CORNICI SU MISURA':'PROJECT 001 / CUSTOM FRAMING');
     const back=document.querySelector('.page-copy a');if(back)back.textContent=lang==='it'?'← Torna a tutti i progetti':'← Back to all projects';
   }
