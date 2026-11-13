@@ -19,7 +19,7 @@ button{font:inherit}
 .menu-toggle{display:none;border:0;background:none;font-size:24px;cursor:pointer}
 .hero{background:var(--yellow);min-height:100svh;padding:clamp(120px,17vh,180px) var(--pad) 30px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
 .hero-copy{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;position:relative;z-index:2}
-.hero-copy p{font-size:clamp(25px,4.1vw,58px);line-height:.98;font-weight:700;letter-spacing:-.065em;max-width:850px;margin:0}
+.hero-copy p{font-size:clamp(25px,4.1vw,58px);line-height:.98;font-weight:700;letter-spacing:-.025em;max-width:850px;margin:0}
 .hero-index,.eyebrow,.scroll-note,.project-meta,.site-footer small{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .hero-index{padding-top:8px;white-space:nowrap}
 .logo-stage{position:relative;margin:auto 0;display:flex;justify-content:center;align-items:center;padding:8vh 0 6vh}
@@ -28,7 +28,7 @@ button{font:inherit}
 .scroll-note span{font-size:18px}
 .intro{background:var(--paper);padding:100px var(--pad) 125px;display:grid;grid-template-columns:1fr 2fr 1fr;gap:28px;align-items:start;border-top:1px solid var(--line)}
 .eyebrow{margin:0;color:var(--muted)}
-.intro h1{font-size:clamp(54px,8.2vw,124px);line-height:.88;letter-spacing:-.085em;margin:0;font-weight:700}
+.intro h1{font-size:clamp(54px,8.2vw,124px);line-height:.88;letter-spacing:-.06em;margin:0;font-weight:700}
 .intro h1 em,.manifesto h2 em{font-family:Georgia,serif;font-weight:700}
 .intro-text{font-size:14px;line-height:1.55;max-width:260px;align-self:end;margin:0}
 .featured{background:var(--yellow);padding:0 var(--pad) 130px}
@@ -45,12 +45,12 @@ button{font:inherit}
 .project-meta{display:flex;justify-content:space-between;gap:16px;margin-top:12px;font-size:9px}
 .manifesto{background:#20201e;color:var(--paper);padding:65px var(--pad) 95px;min-height:620px;position:relative}
 .manifesto .eyebrow{color:#aaa9a2}
-.manifesto h2{font-size:clamp(68px,10vw,150px);line-height:.84;letter-spacing:-.085em;margin:100px 0 0;font-weight:700}
+.manifesto h2{font-size:clamp(68px,10vw,150px);line-height:.84;letter-spacing:-.06em;margin:100px 0 0;font-weight:700}
 .round-link{position:absolute;right:11%;bottom:13%;width:145px;height:145px;border:1px solid #77766f;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-size:12px;line-height:1.2;transition:background .25s,color .25s,border .25s}
 .round-link:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .round-link span{margin-top:8px}
 .contact-strip{padding:90px var(--pad);display:flex;align-items:end;justify-content:space-between}
-.contact-strip p{font-size:clamp(42px,6.5vw,92px);font-weight:700;letter-spacing:-.08em;line-height:.9;margin:0}
+.contact-strip p{font-size:clamp(42px,6.5vw,92px);font-weight:700;letter-spacing:-.055em;line-height:.9;margin:0}
 .contact-strip>a{font-size:clamp(22px,3vw,38px);font-weight:700;border-bottom:1px solid;padding-bottom:9px}
 .contact-strip>a span{font-size:.7em}
 .site-footer{background:#20201e;color:var(--paper);padding:42px var(--pad) 25px;display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:25px;align-items:end}
@@ -62,9 +62,9 @@ button{font:inherit}
 /* Internal pages */
 .page-main{padding:145px var(--pad) 110px;min-height:78vh}
 .page-main>.eyebrow{border-top:1px solid var(--line);padding-top:12px}
-.page-title{font-size:clamp(68px,12vw,176px);line-height:.82;letter-spacing:-.09em;margin:48px 0 65px;font-weight:700}
+.page-title{font-size:clamp(68px,12vw,176px);line-height:.82;letter-spacing:-.065em;margin:48px 0 65px;font-weight:700}
 .page-title span{font-size:.22em;vertical-align:top;letter-spacing:0}
-.page-lead{font-size:clamp(24px,4vw,54px);line-height:1.04;letter-spacing:-.05em;max-width:1000px;margin:0}
+.page-lead{font-size:clamp(24px,4vw,54px);line-height:1.04;letter-spacing:-.035em;max-width:1000px;margin:0}
 .page-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:5vw;margin-top:75px;align-items:start}
 .page-grid img,.detail-grid img{width:100%;display:block}
 .page-copy{max-width:660px;font-size:15px;line-height:1.65}
@@ -87,7 +87,7 @@ button{font:inherit}
 /* Custom archive */
 .custom-intro{display:grid;grid-template-columns:1fr 1.2fr;gap:5vw;margin:75px 0 70px;align-items:start}
 .custom-intro span,.custom-end span{font-size:10px;font-weight:700;letter-spacing:.08em}
-.custom-intro p{font-size:clamp(20px,2.4vw,32px);line-height:1.18;letter-spacing:-.04em;max-width:620px;margin:0}
+.custom-intro p{font-size:clamp(20px,2.4vw,32px);line-height:1.18;letter-spacing:-.025em;max-width:620px;margin:0}
 .custom-gallery{display:block}
 .custom-project{margin:0 0 clamp(100px,14vw,190px)}
 .custom-project-heading{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding:13px 0 20px;margin-bottom:22px}
@@ -100,7 +100,7 @@ button{font:inherit}
 .custom-project-detail img{width:100%;height:auto;object-fit:contain}
 .custom-project-detail:nth-child(even){margin-top:clamp(24px,5vw,72px)}
 .custom-end{display:flex;justify-content:space-between;align-items:center;margin-top:100px;padding-top:22px;border-top:1px solid var(--line)}
-.custom-end a{font-size:clamp(22px,3vw,38px);font-weight:700;letter-spacing:-.05em}
+.custom-end a{font-size:clamp(22px,3vw,38px);font-weight:700;letter-spacing:-.035em}
 @media(max-width:760px){
  :root{--pad:21px}
  .site-header{height:62px;padding-inline:var(--pad)}
