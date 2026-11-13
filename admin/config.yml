@@ -19,43 +19,61 @@ collections:
         file: content/pages/home.json
         format: json
         fields:
-          - { label: Testo introduttivo, name: hero_intro, widget: text }
-          - { label: Eyebrow workshop, name: workshop_eyebrow, widget: string }
-          - { label: Titolo workshop, name: workshop_title, widget: string }
-          - { label: Testo workshop, name: workshop_text, widget: text }
-          - { label: Titolo manifesto, name: manifesto_title, widget: string }
-          - { label: Testo CTA, name: contact_cta, widget: string }
+          - { label: Intro — EN, name: hero_intro, widget: text }
+          - { label: Intro — IT, name: hero_intro_it, widget: text }
+          - { label: Eyebrow workshop — EN, name: workshop_eyebrow, widget: string }
+          - { label: Eyebrow workshop — IT, name: workshop_eyebrow_it, widget: string }
+          - { label: Titolo workshop — EN, name: workshop_title, widget: string }
+          - { label: Titolo workshop — IT, name: workshop_title_it, widget: string }
+          - { label: Testo workshop — EN, name: workshop_text, widget: text }
+          - { label: Testo workshop — IT, name: workshop_text_it, widget: text }
+          - { label: Titolo manifesto — EN, name: manifesto_title, widget: string }
+          - { label: Titolo manifesto — IT, name: manifesto_title_it, widget: string }
+          - { label: CTA — EN, name: contact_cta, widget: string }
+          - { label: CTA — IT, name: contact_cta_it, widget: string }
       - name: about
-        label: About
+        label: About / Studio
         file: content/pages/about.json
         format: json
         fields:
-          - { label: Etichetta sezione, name: eyebrow, widget: string }
-          - { label: Titolo, name: title, widget: string }
-          - { label: Introduzione, name: lead, widget: text }
+          - { label: Etichetta — EN, name: eyebrow, widget: string }
+          - { label: Etichetta — IT, name: eyebrow_it, widget: string }
+          - { label: Titolo — EN, name: title, widget: string }
+          - { label: Titolo — IT, name: title_it, widget: string }
+          - { label: Introduzione — EN, name: lead, widget: text }
+          - { label: Introduzione — IT, name: lead_it, widget: text }
           - { label: Immagine, name: image, widget: image }
-          - { label: Testo, name: body, widget: markdown }
+          - { label: Testo — EN, name: body, widget: markdown }
+          - { label: Testo — IT, name: body_it, widget: markdown }
       - name: custom
-        label: Custom Frames
+        label: Custom Frames / Su misura
         file: content/pages/custom.json
         format: json
         fields:
-          - { label: Etichetta sezione, name: eyebrow, widget: string }
-          - { label: Titolo, name: title, widget: string }
-          - { label: Introduzione, name: lead, widget: text }
+          - { label: Etichetta — EN, name: eyebrow, widget: string }
+          - { label: Etichetta — IT, name: eyebrow_it, widget: string }
+          - { label: Titolo — EN, name: title, widget: string }
+          - { label: Titolo — IT, name: title_it, widget: string }
+          - { label: Introduzione — EN, name: lead, widget: text }
+          - { label: Introduzione — IT, name: lead_it, widget: text }
           - { label: Immagine, name: image, widget: image }
-          - { label: Testo, name: body, widget: markdown }
+          - { label: Testo — EN, name: body, widget: markdown }
+          - { label: Testo — IT, name: body_it, widget: markdown }
       - name: contact
         label: Contatti
         file: content/pages/contact.json
         format: json
         fields:
-          - { label: Etichetta sezione, name: eyebrow, widget: string }
-          - { label: Titolo, name: title, widget: string }
-          - { label: Introduzione, name: lead, widget: text }
+          - { label: Etichetta — EN, name: eyebrow, widget: string }
+          - { label: Etichetta — IT, name: eyebrow_it, widget: string }
+          - { label: Titolo — EN, name: title, widget: string }
+          - { label: Titolo — IT, name: title_it, widget: string }
+          - { label: Introduzione — EN, name: lead, widget: text }
+          - { label: Introduzione — IT, name: lead_it, widget: text }
           - { label: Email, name: email, widget: string, required: false }
           - { label: Instagram, name: instagram, widget: string, required: false }
-          - { label: Testo, name: body, widget: markdown }
+          - { label: Testo — EN, name: body, widget: markdown }
+          - { label: Testo — IT, name: body_it, widget: markdown }
   - name: projects
     label: Progetti
     files:
@@ -70,10 +88,13 @@ collections:
             summary: "{{fields.title}} — {{fields.category}}"
             fields:
               - { label: Slug (indirizzo breve), name: slug, widget: string }
-              - { label: Titolo progetto, name: title, widget: string }
-              - { label: Categoria, name: category, widget: string }
+              - { label: Titolo — EN, name: title, widget: string }
+              - { label: Titolo — IT, name: title_it, widget: string }
+              - { label: Categoria — EN, name: category, widget: string }
+              - { label: Categoria — IT, name: category_it, widget: string }
               - { label: Anno, name: year, widget: string, required: false }
               - { label: Immagine copertina, name: cover, widget: image }
               - { label: Galleria immagini, name: gallery, widget: list, required: false, field: { label: Immagine, name: image, widget: image } }
-              - { label: Descrizione, name: description, widget: markdown }
+              - { label: Descrizione — EN, name: description, widget: markdown }
+              - { label: Descrizione — IT, name: description_it, widget: markdown }
               - { label: In evidenza in homepage, name: featured, widget: boolean, default: false }
