@@ -115,3 +115,40 @@
 .language-option.active{opacity:1}
 .language-option:hover{opacity:1}
 @media(max-width:760px){.language-switch{font-size:10px;gap:6px}}
+
+
+/* Editorial Custom archive and selected project layout */
+.project-list{display:block;margin-top:80px}
+.project-list .project-card{display:block;width:82%;margin-left:0}
+.project-list .project-card img{display:block;width:100%;max-height:78vh;object-fit:cover}
+.project-list .project-meta{margin:14px 0 90px}
+.project-gallery{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:18px}
+.project-gallery img{width:100%;height:auto;display:block}
+.project-gallery img:nth-child(3n+2){margin-top:12vh}
+.custom-intro{display:grid;grid-template-columns:1fr 1.2fr;gap:5vw;margin:80px 0 70px;align-items:start}
+.custom-intro span,.custom-end span{font-size:10px;font-weight:700;letter-spacing:.08em}
+.custom-intro p{font-size:clamp(20px,2.4vw,32px);line-height:1.18;letter-spacing:-.04em;max-width:620px;margin:0}
+.custom-gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(12px,2vw,28px);align-items:start}
+.custom-item{margin:0;grid-column:span 4}
+.custom-item img{width:100%;height:auto;display:block}
+.custom-item:nth-child(7n+1){grid-column:span 7}
+.custom-item:nth-child(7n+2){grid-column:span 5;margin-top:9vw}
+.custom-item:nth-child(7n+3){grid-column:span 4;margin-left:15%}
+.custom-item:nth-child(7n+4){grid-column:span 5;margin-top:5vw}
+.custom-item:nth-child(7n+5){grid-column:span 3;margin-top:13vw}
+.custom-item:nth-child(7n+6){grid-column:span 6;margin-left:10%}
+.custom-item:nth-child(7n){grid-column:span 5}
+.custom-item figcaption{font-size:9px;font-weight:700;letter-spacing:.08em;margin-top:10px}
+.custom-end{display:flex;justify-content:space-between;align-items:center;margin-top:100px;padding-top:22px;border-top:1px solid currentColor}
+.custom-end a{font-size:clamp(22px,3vw,38px);font-weight:700;letter-spacing:-.05em}
+@media(max-width:760px){
+ .project-list .project-card{width:100%}
+ .project-list .project-meta{margin-bottom:55px}
+ .project-gallery{grid-template-columns:1fr;gap:14px}
+ .project-gallery img:nth-child(3n+2){margin-top:0}
+ .custom-intro{grid-template-columns:1fr;gap:18px;margin:48px 0}
+ .custom-gallery{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+ .custom-item,.custom-item:nth-child(n){grid-column:span 3!important;margin:0!important}
+ .custom-item:nth-child(5n+1){grid-column:span 6!important}
+ .custom-end{display:flex;align-items:flex-start;gap:20px;flex-direction:column;margin-top:65px}
+}
