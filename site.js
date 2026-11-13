@@ -130,7 +130,34 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   if(page==='project-japan'){
     const slug=new URLSearchParams(location.search).get('project')||'japan-series',d=projects.find(x=>x.slug===slug)||projects[0];
-    if(d){document.title=field(d,'title')+' — LIMBO';setText('.page-main .page-title',field(d,'title')+'.');setText('.page-main .page-lead',field(d,'description'));const grid=document.querySelector('.project-gallery');if(grid){grid.innerHTML='';(d.gallery?.length?d.gallery:[d.cover]).forEach((src,i)=>{const im=document.createElement('img');im.src=src;im.alt=field(d,'title')+' — '+(i+1);im.loading=i>1?'lazy':'eager';grid.append(im);});}}
+    if(d){
+      const title=field(d,'title'),description=field(d,'description'),gallery=d.gallery?.length?d.gallery:[d.cover];
+      document.title=title+' — LIMBO';
+      const main=document.querySelector('.page-main');
+      if(main){
+        main.classList.add('case-study');
+        main.innerHTML='';
+        const top=document.createElement('div');top.className='case-topline';
+        const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent=lang==='it'?'PROGETTO / '+String(d.year||'2026'):'CASE STUDY / '+String(d.year||'2026');
+        const index=document.createElement('span');index.textContent='LIMBO — VICENZA';top.append(eyebrow,index);main.append(top);
+        const titleEl=document.createElement('h1');titleEl.className='case-title';titleEl.textContent=title;main.append(titleEl);
+        const deck=document.createElement('div');deck.className='case-deck';
+        const lead=document.createElement('p');lead.textContent=description;
+        const facts=document.createElement('div');facts.className='case-facts';
+        [[lang==='it'?'AMBITO':'SCOPE',field(d,'category')],[lang==='it'?'ANNO':'YEAR',String(d.year||'2026')],[lang==='it'?'LUOGO':'LOCATION','Vicenza, Italy']].forEach(([k,v])=>{const item=document.createElement('div');const small=document.createElement('span');small.textContent=k;const strong=document.createElement('b');strong.textContent=v;item.append(small,strong);facts.append(item);});
+        deck.append(lead,facts);main.append(deck);
+        const galleryWrap=document.createElement('div');galleryWrap.className='case-gallery';
+        gallery.forEach((src,i)=>{
+          const figure=document.createElement('figure');figure.className='case-image case-image-'+(i+1);
+          const im=document.createElement('img');im.src=src;im.alt=title+' — '+(i+1);im.loading=i>1?'lazy':'eager';figure.append(im);
+          const cap=document.createElement('figcaption');cap.innerHTML='<span>'+String(i+1).padStart(2,'0')+'</span><span>'+title.toUpperCase()+'</span>';figure.append(cap);galleryWrap.append(figure);
+        });
+        main.append(galleryWrap);
+        const end=document.createElement('div');end.className='case-end';
+        const back=document.createElement('a');back.href='projects.html';back.textContent=lang==='it'?'← Tutti i progetti':'← All projects';
+        const contact=document.createElement('a');contact.href='contact.html';contact.textContent=lang==='it'?'Hai un progetto? ↗':'Have a project? ↗';end.append(back,contact);main.append(end);
+      }
+    }
     setText('.page-main .eyebrow',lang==='it'?'PROGETTO 001 / CORNICI SU MISURA':'PROJECT 001 / CUSTOM FRAMING');
     const back=document.querySelector('.page-copy a');if(back)back.textContent=lang==='it'?'← Torna a tutti i progetti':'← Back to all projects';
   }
