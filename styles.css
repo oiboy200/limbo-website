@@ -209,3 +209,92 @@ button{font:inherit}
  .case-end{margin-top:60px;gap:18px}
  .case-end a{font-size:9px}
 }
+
+/* LIMBO new visual direction — Inter Display / yellow editorial layout */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap');
+:root{--yellow:#ffc900;--paper:#ffc900;--ink:#050505;--muted:#262626;--line:rgba(0,0,0,.28);--pad:clamp(20px,4vw,64px)}
+html,body,button,input,textarea,select{font-family:'Inter',Arial,sans-serif!important;font-weight:700}
+body{background:var(--yellow);color:#050505}
+h1,h2,h3,h4,p,a,span,b,strong,small,button{font-family:'Inter',Arial,sans-serif}
+em{font-style:normal;font-family:'Inter',Arial,sans-serif;font-weight:700}
+.site-header{height:68px;background:var(--yellow);border:0;padding-inline:var(--pad)}
+.site-header nav a,.language-switch,.language-option{font-size:10px;font-weight:700;letter-spacing:-.025em}
+.mini-logo{width:68px}
+.hero{min-height:100svh;padding:105px var(--pad) 24px;background:var(--yellow)}
+.hero-copy{align-items:flex-start}
+.hero-copy p{font-size:clamp(20px,2.1vw,30px);line-height:1.05;letter-spacing:-.055em;max-width:610px;font-weight:700}
+.hero-index,.eyebrow,.scroll-note,.project-meta{color:#050505;font-size:9px;letter-spacing:-.01em;font-weight:700}
+.logo-stage{padding:5vh 0 4vh}
+.big-logo{width:min(94vw,1450px);max-height:55vh;object-fit:contain}
+.scroll-note{border-top:1px solid rgba(0,0,0,.3);padding-top:10px}
+.limbo-home section{background:var(--yellow)}
+.home-image-section{padding:0 var(--pad) 7vw}
+.home-image-link,.custom-feature-image{display:block;overflow:hidden;line-height:0}
+.home-image-link img,.custom-feature-image img,.home-project img,.about-split>img{width:100%;height:100%;object-fit:cover;transition:transform 1.8s cubic-bezier(.22,.72,.18,1);will-change:transform}
+.home-image-link img{max-height:78vh;object-position:center 48%}
+.home-image-link:hover img,.custom-feature-image:hover img,.home-project:hover img{transform:scale(1.025)}
+.image-caption,.home-section-label{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid rgba(0,0,0,.35);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:-.02em}
+.image-caption{border-top:0}
+.home-custom{padding:0 var(--pad) 9vw}
+.home-section-label a{border-bottom:1px solid;padding-bottom:2px}
+.custom-feature-image{height:min(60vw,650px);margin-bottom:28px}
+.custom-feature-image img{object-position:center}
+.home-custom h2{font-size:clamp(76px,14vw,210px);line-height:.78;letter-spacing:-.095em;margin:0;font-weight:800}
+.home-custom h2 span{font-size:.18em;vertical-align:top;letter-spacing:0}
+.home-featured{padding:0 var(--pad) 10vw}
+.home-projects{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.home-project{display:block;min-width:0;overflow:hidden}
+.home-project-b{margin-top:13vw}
+.home-project img{display:block;width:100%;height:clamp(280px,48vw,650px);object-fit:cover}
+.home-project>div{display:flex;justify-content:space-between;gap:12px;padding-top:10px;font-size:12px}
+.home-about{padding:0 var(--pad) 10vw}
+.home-about>h2{font-size:clamp(76px,14vw,210px);line-height:.78;letter-spacing:-.09em;margin:7vw 0 3vw;font-weight:800}
+.about-split{display:grid;grid-template-columns:.8fr 1.2fr;gap:8vw;align-items:start}
+.about-split>img{width:100%;max-height:620px;object-fit:cover}
+.about-copy{max-width:650px;font-size:clamp(18px,2.2vw,28px);line-height:1.08;letter-spacing:-.045em}
+.about-copy p{margin:0 0 1.5em}
+.about-copy a{display:inline-block;margin-top:10px;border-bottom:1px solid;padding-bottom:5px;font-size:13px}
+.home-contact{background:#050505!important;color:#fff;padding:8vw var(--pad) 7vw;display:flex;justify-content:space-between;align-items:end;gap:30px}
+.home-contact h2{font-size:clamp(72px,13vw,190px);line-height:.78;letter-spacing:-.09em;margin:0;font-weight:800}
+.home-contact>div{display:flex;flex-direction:column;gap:8px;text-align:right;font-size:11px}
+.home-contact a{border-bottom:1px solid #fff;padding-bottom:4px}
+.site-footer{background:#050505;color:#fff;padding:35px var(--pad) 25px;grid-template-columns:2fr 1fr 1fr 1fr auto}
+.footer-logo{filter:none;width:min(100%,210px)}
+.footer-logo img{filter:invert(1)}
+.site-footer>div{font-size:12px}
+.footer-social{display:flex;flex-direction:column;gap:9px;font-size:11px}
+.site-footer small{color:#aaa}
+.page-main{padding-top:120px}
+.page-title{font-size:clamp(82px,15vw,210px);line-height:.78;letter-spacing:-.09em;font-weight:800}
+.page-lead{font-size:clamp(26px,4.2vw,58px);line-height:.98;letter-spacing:-.055em}
+.page-grid{margin-top:5vw}
+.project-list .project-card img{transition:transform 1.8s cubic-bezier(.22,.72,.18,1)}
+.project-list .project-card{overflow:hidden}
+.project-list .project-card:hover img{transform:scale(1.025)}
+@media(max-width:760px){
+ .site-header{height:60px}
+ .hero{min-height:88svh;padding:100px var(--pad) 22px}
+ .hero-copy p{font-size:clamp(22px,6vw,30px);max-width:100%}
+ .hero-index{display:block;margin-top:16px}
+ .logo-stage{padding:8vh 0}
+ .big-logo{width:100%;max-height:none}
+ .home-image-section{padding:0 var(--pad) 18vw}
+ .home-image-link img{height:65vw;min-height:260px}
+ .image-caption,.home-section-label{font-size:8px}
+ .home-custom{padding-bottom:18vw}
+ .custom-feature-image{height:72vw;margin-bottom:22px}
+ .home-custom h2,.home-about>h2{font-size:clamp(66px,16vw,112px)}
+ .home-projects{grid-template-columns:1fr;gap:34px}
+ .home-project-b{margin-top:0;width:86%;margin-left:auto}
+ .home-project img{height:78vw}
+ .home-about{padding-bottom:18vw}
+ .about-split{grid-template-columns:1fr;gap:28px}
+ .about-split>img{width:78%;max-height:470px}
+ .about-copy{font-size:21px}
+ .home-contact{display:block;padding:16vw var(--pad) 12vw}
+ .home-contact h2{font-size:clamp(64px,15vw,105px)}
+ .home-contact>div{text-align:left;margin-top:35px}
+ .site-footer{grid-template-columns:1fr 1fr;gap:28px 16px}
+ .footer-logo{grid-column:1/-1}
+ .page-title{font-size:clamp(68px,17vw,118px)}
+}
