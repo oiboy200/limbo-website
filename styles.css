@@ -96,9 +96,9 @@ button{font:inherit}
 .custom-project-hero{margin:0;width:100%;aspect-ratio:16/9;overflow:hidden;background:#e4e2dc}
 .custom-project-hero img,.custom-project-hero .custom-project-hero-image{width:100%;height:100%;object-fit:cover;object-position:center}
 .custom-project-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,28px);margin-top:clamp(18px,2.5vw,36px);align-items:start}
-.custom-project-detail{margin:0;min-width:0}
-.custom-project-detail img{width:100%;height:auto;object-fit:contain}
-.custom-project-detail:nth-child(even){margin-top:clamp(24px,5vw,72px)}
+.custom-project-detail{margin:0;min-width:0;overflow:hidden}
+.custom-project-detail img{width:100%;height:auto;object-fit:contain;transition:transform 1.6s cubic-bezier(.22,.72,.18,1);will-change:transform}\n.custom-project-detail:hover img{transform:scale(1.035)}\n.custom-project-hero img,.custom-project-hero .custom-project-hero-image{transition:transform 1.8s cubic-bezier(.22,.72,.18,1);will-change:transform}\n.custom-project-hero:hover img,.custom-project-hero:hover .custom-project-hero-image{transform:scale(1.045)}
+.custom-project-detail:nth-child(even){margin-top:0}
 .custom-end{display:flex;justify-content:space-between;align-items:center;margin-top:100px;padding-top:22px;border-top:1px solid var(--line)}
 .custom-end a{font-size:clamp(22px,3vw,38px);font-weight:700;letter-spacing:-.035em}
 @media(max-width:760px){
@@ -155,7 +155,7 @@ button{font:inherit}
  .custom-project-heading{padding:10px 0 15px;margin-bottom:15px}
  .custom-project-hero{aspect-ratio:4/3}
  .custom-project-details{gap:10px;margin-top:14px}
- .custom-project-detail:nth-child(even){margin-top:20px}
+ .custom-project-detail:nth-child(even){margin-top:0}
  .custom-end{align-items:flex-start;gap:20px;flex-direction:column;margin-top:65px}
 }
 @media(min-width:761px) and (max-width:1100px){
