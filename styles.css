@@ -152,3 +152,20 @@
  .custom-item:nth-child(5n+1){grid-column:span 6!important}
  .custom-end{display:flex;align-items:flex-start;gap:20px;flex-direction:column;margin-top:65px}
 }
+
+
+/* CUSTOM — layout based on the real image orientation */
+.custom-gallery{grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(14px,2vw,28px);align-items:start}
+.custom-item{grid-column:span 6!important;margin:0!important;min-width:0}
+.custom-item.is-landscape{grid-column:1/-1!important;margin:0!important}
+.custom-item img{display:block;width:100%;height:auto}
+.custom-item.is-landscape img{width:100%;max-height:88vh;object-fit:cover}
+.custom-item.is-portrait img{width:100%;height:auto;object-fit:contain}
+.custom-item figcaption{margin-top:9px}
+@media(max-width:760px){
+  .custom-gallery{display:flex;flex-direction:column;gap:26px}
+  .custom-item,.custom-item.is-landscape,.custom-item.is-portrait{width:100%;margin:0!important}
+  .custom-item.is-landscape img{width:100%;max-height:none}
+  .custom-item.is-portrait{width:78%;align-self:flex-start}
+  .custom-item.is-portrait:nth-child(even){align-self:flex-end}
+}
