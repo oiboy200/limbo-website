@@ -100,9 +100,17 @@ document.addEventListener('DOMContentLoaded',()=>{
         const number=document.createElement('span');number.textContent=String(collections.indexOf(collections.find(c=>c[0]===label))+1).padStart(2,'0');
         heading.append(title,number);section.append(heading);
         const images=await Promise.all(Array.from({length:count},(_,i)=>loadImage(base+String(i+1).padStart(2,'0')+'.webp',label)));
-        const heroIndex=images.findIndex(x=>x.landscape);
-        const hero=images.splice(heroIndex>=0?heroIndex:0,1)[0];
-        const heroFigure=document.createElement('figure');heroFigure.className='custom-project-hero';heroFigure.append(hero.im);section.append(heroFigure);
+        // Choose a landscape image when available; otherwise use the largest source
+        // and crop it consistently inside a wide editorial frame.
+        const landscapeIndex=images.findIndex(x=>x.landscape);
+        const heroIndex=landscapeIndex>=0?landscapeIndex:images.reduce((best,item,i)=>(
+          item.im.naturalWidth*item.im.naturalHeight>
+          images[best].im.naturalWidth*images[best].im.naturalHeight?i:best
+        ),0);
+        const hero=images.splice(heroIndex,1)[0];
+        const heroFigure=document.createElement('figure');heroFigure.className='custom-project-hero';
+        hero.im.classList.add('custom-project-hero-image');
+        heroFigure.append(hero.im);section.append(heroFigure);
         const details=document.createElement('div');details.className='custom-project-details';
         images.forEach(({im})=>{const figure=document.createElement('figure');figure.className='custom-project-detail';figure.append(im);details.append(figure);});
         if(images.length)section.append(details);
