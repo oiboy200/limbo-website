@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
-:root{--paper:#f4f3ef;--ink:#171715;--muted:#77766f;--line:rgba(23,23,21,.22);--pad:clamp(20px,4vw,64px);--ease:cubic-bezier(.22,.72,.18,1)}
+:root{--yellow:#ffd21a;--paper:#f2f0e9;--ink:#171715;--muted:#77766f;--line:rgba(23,23,21,.22);--pad:clamp(20px,4vw,64px);--ease:cubic-bezier(.22,.72,.18,1)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--yellow);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 button{font:inherit}
-.site-header{height:72px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;position:fixed;inset:0 0 auto;z-index:50;background:rgba(244,243,239,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.site-header{height:72px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;position:fixed;inset:0 0 auto;z-index:50;background:var(--yellow);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .mini-logo{display:flex;width:76px;align-items:center;line-height:0;position:relative;z-index:2}
 .mini-logo img{width:100%;height:auto}
 .site-header nav{display:flex;gap:clamp(20px,3vw,48px);margin-left:auto;margin-right:5vw}
@@ -17,7 +17,7 @@ button{font:inherit}
 .language-option{border:0;background:none;color:inherit;padding:8px 0;font:inherit;cursor:pointer;opacity:.45}
 .language-option.active,.language-option:hover{opacity:1}
 .menu-toggle{display:none;border:0;background:none;font-size:24px;cursor:pointer}
-.hero{min-height:100svh;padding:clamp(120px,17vh,180px) var(--pad) 30px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.hero{background:var(--yellow);min-height:100svh;padding:clamp(120px,17vh,180px) var(--pad) 30px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
 .hero-copy{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;position:relative;z-index:2}
 .hero-copy p{font-size:clamp(25px,4.1vw,58px);line-height:.98;font-weight:500;letter-spacing:-.065em;max-width:850px;margin:0}
 .hero-index,.eyebrow,.scroll-note,.project-meta,.site-footer small{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
@@ -26,12 +26,12 @@ button{font:inherit}
 .big-logo{width:min(82vw,1180px);height:auto;display:block;position:relative;z-index:3}
 .scroll-note{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:13px}
 .scroll-note span{font-size:18px}
-.intro{padding:100px var(--pad) 125px;display:grid;grid-template-columns:1fr 2fr 1fr;gap:28px;align-items:start;border-top:1px solid var(--line)}
+.intro{background:var(--paper);padding:100px var(--pad) 125px;display:grid;grid-template-columns:1fr 2fr 1fr;gap:28px;align-items:start;border-top:1px solid var(--line)}
 .eyebrow{margin:0;color:var(--muted)}
 .intro h1{font-size:clamp(54px,8.2vw,124px);line-height:.88;letter-spacing:-.085em;margin:0;font-weight:500}
 .intro h1 em,.manifesto h2 em{font-family:Georgia,serif;font-weight:400}
 .intro-text{font-size:14px;line-height:1.55;max-width:260px;align-self:end;margin:0}
-.featured{padding:0 var(--pad) 130px}
+.featured{background:var(--yellow);padding:0 var(--pad) 130px}
 .section-heading{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:13px 0 30px;margin-bottom:0}
 .text-link{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid;padding-bottom:5px}
 .project-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:8vw;align-items:start}
@@ -105,7 +105,7 @@ button{font:inherit}
  :root{--pad:21px}
  .site-header{height:62px;padding-inline:var(--pad)}
  .mini-logo{width:70px}
- .site-header nav{display:none;position:absolute;top:62px;left:0;right:0;background:var(--paper);padding:22px var(--pad) 27px;flex-direction:column;gap:20px;border-bottom:1px solid var(--line)}
+ .site-header nav{display:none;position:absolute;top:62px;left:0;right:0;background:var(--yellow);padding:22px var(--pad) 27px;flex-direction:column;gap:20px;border-bottom:1px solid var(--line)}
  .site-header nav.open{display:flex}
  .menu-toggle{display:block;margin-left:auto;margin-right:16px}
  .site-header nav a{font-size:13px}
