@@ -297,3 +297,17 @@ em{font-style:normal;font-family:'Inter',Arial,sans-serif;font-weight:700}
  .footer-logo{grid-column:1/-1}
  .page-title{font-size:clamp(68px,17vw,118px)}
 }
+
+/* Typography refinement: stronger navigation/section labels, calmer display headings */
+.site-header nav a,.language-switch,.language-option{font-size:13px;letter-spacing:-.02em}
+.image-caption,.home-section-label{font-size:13px;letter-spacing:-.015em;padding:14px 0}
+.hero-index,.eyebrow,.scroll-note,.project-meta{font-size:12px}
+.home-custom h2,.home-about>h2{font-size:clamp(62px,9.5vw,148px);line-height:.84;letter-spacing:-.075em}
+.home-contact h2{font-size:clamp(62px,9vw,140px);line-height:.84;letter-spacing:-.075em}
+@media(max-width:760px){
+ .site-header nav a,.language-switch,.language-option{font-size:12px}
+ .image-caption,.home-section-label{font-size:10px;padding:11px 0}
+ .hero-index,.eyebrow,.scroll-note,.project-meta{font-size:10px}
+ .home-custom h2,.home-about>h2{font-size:clamp(58px,13vw,96px)}
+ .home-contact h2{font-size:clamp(58px,13vw,96px)}
+}
