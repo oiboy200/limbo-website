@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const page=location.pathname.split('/').pop().replace('.html','')||'index';
   const lang=localStorage.getItem('limbo-language')||'en';
   document.documentElement.lang=lang;
-  document.querySelectorAll('.language-toggle').forEach(b=>{b.textContent=lang.toUpperCase();b.addEventListener('click',()=>{localStorage.setItem('limbo-language',lang==='en'?'it':'en');location.reload();});});
+  document.querySelectorAll('.language-option').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);b.setAttribute('aria-pressed',String(b.dataset.lang===lang));b.addEventListener('click',()=>{if(b.dataset.lang!==lang){localStorage.setItem('limbo-language',b.dataset.lang);location.reload();}});});
   const field=(obj,key)=>obj?.[lang==='it'?key+'_it':key]||obj?.[key]||'';
   const home=await get('/content/pages/home.json');
   const pages={};
