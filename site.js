@@ -24,36 +24,66 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 (async function(){
   const get=async(path)=>{try{const r=await fetch(path);return r.ok?await r.json():null;}catch(e){return null;}};
-  const txt=(s,v)=>{const e=document.querySelector(s);if(e&&v!==undefined)e.textContent=v;};
-  const html=(s,v)=>{const e=document.querySelector(s);if(e&&v!==undefined)e.innerHTML=v;};
+  const setText=(selector,value)=>{const el=document.querySelector(selector);if(el&&value!==undefined&&value!==null)el.textContent=value;};
+  const setHTML=(selector,value)=>{const el=document.querySelector(selector);if(el&&value!==undefined&&value!==null)el.innerHTML=value;};
   const page=location.pathname.split('/').pop().replace('.html','')||'index';
+  const lang=localStorage.getItem('limbo-language')||'en';
+  document.documentElement.lang=lang;
+  document.querySelectorAll('.language-toggle').forEach(b=>{b.textContent=lang.toUpperCase();b.addEventListener('click',()=>{localStorage.setItem('limbo-language',lang==='en'?'it':'en');location.reload();});});
+  const field=(obj,key)=>obj?.[lang==='it'?key+'_it':key]||obj?.[key]||'';
   const home=await get('/content/pages/home.json');
-  if(home){txt('.hero-copy > p',home.hero_intro);txt('.intro .eyebrow',home.workshop_eyebrow);txt('.intro h1',home.workshop_title);txt('.intro-text',home.workshop_text);txt('.contact-strip > p',home.contact_cta);}
+  const pages={};
+  for(const name of ['about','custom','contact'])pages[name]=await get('/content/pages/'+name+'.json');
   const projectData=await get('/content/projects.json'),projects=projectData?.projects||[];
-  if(page==='projects'){const grid=document.querySelector('.page-main .page-grid');if(grid&&projects.length){grid.innerHTML='';projects.forEach(d=>{const a=document.createElement('a');a.href='project-japan.html?project='+encodeURIComponent(d.slug);const im=document.createElement('img');im.src=d.cover;im.alt=d.title;a.append(im);const meta=document.createElement('p');meta.className='project-meta';meta.innerHTML='<span>'+d.title.toUpperCase()+'</span><span>'+d.category+' ↗</span>';a.append(meta);grid.append(a);});}}
-  if(page==='project-japan'){const slug=new URLSearchParams(location.search).get('project')||'japan-series',d=projects.find(x=>x.slug===slug)||projects[0];if(d){txt('.page-main .page-title',d.title+'.');txt('.page-main .page-lead',d.description);const imgs=document.querySelectorAll('.detail-grid img');if(imgs[0])imgs[0].src=d.cover;if(imgs[1]&&d.gallery?.[0])imgs[1].src=d.gallery[0];}}
-  const translations={
-    index:{nav:['Progetti','Studio','Su misura','Contatti'],hero:'Realizziamo cornici e specchi rifiniti a mano, per trasformare ricordi e spazi in qualcosa di speciale.',eyebrow:'01 / IL LABORATORIO',title:'Cornici che danno<br>alle cose <em>un posto.</em>',intro:'Una cornice non è mai soltanto una cornice. È un modo per guardare più da vicino, dare valore a un’immagine, a un oggetto, a un ricordo. Progettata e realizzata a mano a Vicenza.',featured:'02 / PROGETTI SELEZIONATI',all:'Vedi tutti i progetti ↗',manifesto:'03 / SU MISURA',manifestotitle:'Ogni cornice<br>ha la <em>sua storia.</em>',cta:'Hai qualcosa<br>da incorniciare?',talk:'Parliamone'},
-    about:{nav:['Progetti','Studio','Su misura','Contatti'],eyebrow:'02 / IL LABORATORIO',title:'Lo studio<br>Limbo.',lead:'Una cornice è un confine, ma anche un invito a guardare più da vicino.',body:'<p>Limbo Cornici è un laboratorio indipendente con sede a Vicenza. Unisce uno sguardo attento alle immagini, la passione per i materiali e la precisione del lavoro rifinito a mano.</p><p>Da una singola opera a uno spazio completo, ogni progetto nasce dall’ascolto. Studiamo proporzioni, colori, finiture e dettagli per creare una cornice che appartenga a ciò che custodisce.</p><p>Sono i piccoli dettagli a fare la differenza. Crediamo nel tempo necessario per curarli al meglio.</p>'},
-    custom:{nav:['Progetti','Studio','Su misura','Contatti'],eyebrow:'03 / SU MISURA',title:'Cornici<br>su misura.',lead:'Una consulenza personale, una scelta attenta dei materiali, una cornice costruita intorno alla tua opera — mai il contrario.',body:'<p><strong>Per la tua casa.</strong><br>Cornici e specchi su misura, pensati per inserirsi naturalmente nel tuo spazio e valorizzare ciò che custodiscono.</p><p><strong>Per artisti e aziende.</strong><br>Soluzioni su misura per gallerie, studi, spazi ricettivi, uffici e progetti creativi.</p><p><strong>Fatte con cura.</strong><br>Lavoriamo con diverse essenze di legno, colori, profili e finiture. Ogni scelta viene condivisa, in relazione all’opera e al suo contesto.</p>'},
-    contact:{nav:['Progetti','Studio','Su misura','Contatti'],eyebrow:'04 / CONTATTI',title:'Parliamone.',lead:'Hai un’opera, un’idea o uno spazio in mente? Raccontaci cosa stai immaginando. Saremo felici di ascoltarti.',contact:'Iniziamo una conversazione.',body:'<p>Limbo Cornici<br>Vicenza, Italia</p><p>Per cornici su misura, specchi, collaborazioni e richieste professionali.</p>'},
-    projects:{nav:['Progetti','Studio','Su misura','Contatti'],eyebrow:'01 / PROGETTI SELEZIONATI',title:'Progetti',lead:'Una raccolta di cornici, oggetti e spazi. Ogni progetto è realizzato su misura, con attenzione all’immagine e alla materia.'},
-    'project-japan':{nav:['Progetti','Studio','Su misura','Contatti'],eyebrow:'PROGETTO 001 / CORNICI SU MISURA',title:'Japan<br>Series.',lead:'Uno studio sul legno naturale, sul colore e sulla presenza discreta di una cornice progettata con cura.',body:'<p>Cornici su misura — Vicenza, Italia</p><p><a href="projects.html">← Torna a tutti i progetti</a></p>'}
-  };
-  const dict=translations[page]||translations.index;
-  function apply(lang){
-    document.documentElement.lang=lang;
-    document.querySelectorAll('.language-toggle').forEach(b=>{b.textContent=lang.toUpperCase();b.setAttribute('aria-label','Change language');});
-    const nav=document.querySelectorAll('.site-header nav a');dict.nav.forEach((v,i)=>{if(nav[i])nav[i].textContent=v;});
-    if(lang==='it'){
-      if(page==='index'){txt('.hero-copy > p',dict.hero);txt('.intro .eyebrow',dict.eyebrow);html('.intro h1',dict.title);txt('.intro-text',dict.intro);txt('.featured .eyebrow',dict.featured);txt('.section-heading .text-link',dict.all);txt('.manifesto .eyebrow',dict.manifesto);html('.manifesto h2',dict.manifestotitle);html('.contact-strip > p',dict.cta);const a=document.querySelector('.contact-strip a');if(a)a.innerHTML=dict.talk+' <span>↗</span>';}
-      else {txt('.page-main .eyebrow',dict.eyebrow);html('.page-main .page-title',dict.title);txt('.page-main .page-lead',dict.lead);if(dict.body)html(page==='project-japan'?'.page-copy':'.page-main .page-copy',dict.body);if(dict.contact)txt('.contact-email',dict.contact);}
-      if(page==='projects'){const cards=document.querySelectorAll('.page-main .project-meta span');cards.forEach((el,i)=>{if(i%2===1)el.textContent=(i===1?'Cornice su misura ↗':'Studio dei materiali ↗');});}
-      document.querySelectorAll('.site-footer > div:first-of-type span').forEach((el,i)=>el.textContent=i?'Cornici e specchi su misura':'Vicenza, Italia');
-      document.querySelectorAll('.footer-links a').forEach((el,i)=>el.textContent=dict.nav[i]);
-    } else {location.reload();}
+  const navLabels=lang==='it'?['Progetti','Studio','Su misura','Contatti']:['Projects','About','Custom','Contact'];
+  document.querySelectorAll('.site-header nav a,.footer-links a').forEach((a,i)=>{if(navLabels[i])a.textContent=navLabels[i];});
+  document.querySelectorAll('.site-footer > div:first-of-type span').forEach((el,i)=>el.textContent=lang==='it'?(i?'Cornici e specchi su misura':'Vicenza, Italia'):(i?'Custom frames & mirrors':'Vicenza, Italy'));
+  if(home&&page==='index'){
+    setText('.hero-copy > p',field(home,'hero_intro'));
+    setText('.intro .eyebrow',field(home,'workshop_eyebrow'));
+    setText('.intro h1',field(home,'workshop_title'));
+    setText('.intro-text',field(home,'workshop_text'));
+    setText('.manifesto .eyebrow',lang==='it'?'03 / SU MISURA':'03 / MADE TO MEASURE');
+    setText('.manifesto h2',field(home,'manifesto_title'));
+    setText('.contact-strip > p',field(home,'contact_cta'));
+    const cta=document.querySelector('.contact-strip a');if(cta)cta.innerHTML=(lang==='it'?'Parliamone':'Let’s talk')+' <span>↗</span>';
+    setText('.featured .eyebrow',lang==='it'?'02 / PROGETTI SELEZIONATI':'02 / SELECTED WORK');
+    setText('.section-heading .text-link',lang==='it'?'Vedi tutti i progetti ↗':'View all projects ↗');
   }
-  let lang=localStorage.getItem('limbo-language')||'en';
-  document.querySelectorAll('.language-toggle').forEach(b=>b.addEventListener('click',()=>{lang=lang==='en'?'it':'en';localStorage.setItem('limbo-language',lang);if(lang==='en')location.reload();else apply(lang);}));
-  if(lang==='it')apply('it');
+  if(['about','custom','contact'].includes(page)){
+    const d=pages[page];
+    if(d){
+      setText('.page-main .eyebrow',field(d,'eyebrow'));
+      setText('.page-main .page-title',field(d,'title'));
+      setText('.page-main .page-lead',field(d,'lead'));
+      setHTML('.page-main .page-copy',field(d,'body'));
+      const im=document.querySelector('.page-main .page-grid img');if(im&&d.image)im.src=d.image;
+      const email=document.querySelector('.contact-email');
+      if(email&&d.email)email.innerHTML='<a href="mailto:'+d.email+'">'+d.email+'</a>';
+      if(page==='contact'&&!d.email)setText('.contact-email',lang==='it'?'Iniziamo una conversazione.':'Let’s start a conversation.');
+    }
+  }
+  if(page==='projects'){
+    setText('.page-main .eyebrow',lang==='it'?'01 / PROGETTI SELEZIONATI':'01 / SELECTED WORK');
+    setText('.page-main .page-lead',lang==='it'?'Una raccolta di cornici, oggetti e spazi. Ogni progetto è realizzato su misura, con attenzione all’immagine e alla materia.':'A collection of frames, objects and spaces. Each one made to measure, with care for the image and the material.');
+    const grid=document.querySelector('.page-main .page-grid');
+    if(grid&&projects.length){grid.innerHTML='';projects.forEach(d=>{
+      const title=field(d,'title'),category=field(d,'category');
+      const a=document.createElement('a');a.href='project-japan.html?project='+encodeURIComponent(d.slug);
+      const im=document.createElement('img');im.src=d.cover;im.alt=title;a.append(im);
+      const meta=document.createElement('p');meta.className='project-meta';
+      const left=document.createElement('span'),right=document.createElement('span');
+      left.textContent=title.toUpperCase();right.textContent=category+' ↗';meta.append(left,right);a.append(meta);grid.append(a);
+    });}
+  }
+  if(page==='project-japan'){
+    const slug=new URLSearchParams(location.search).get('project')||'japan-series',d=projects.find(x=>x.slug===slug)||projects[0];
+    if(d){setText('.page-main .page-title',field(d,'title')+'.');setText('.page-main .page-lead',field(d,'description'));const imgs=document.querySelectorAll('.detail-grid img');if(imgs[0])imgs[0].src=d.cover;if(imgs[1]&&d.gallery?.[0])imgs[1].src=d.gallery[0];}
+    setText('.page-main .eyebrow',lang==='it'?'PROGETTO 001 / CORNICI SU MISURA':'PROJECT 001 / CUSTOM FRAMING');
+    const back=document.querySelector('.page-copy a');if(back)back.textContent=lang==='it'?'← Torna a tutti i progetti':'← Back to all projects';
+  }
+  if(lang==='it'){
+    document.querySelectorAll('.site-footer small').forEach(el=>el.textContent='© LIMBO 2026');
+    const round=document.querySelector('.round-link');if(round)round.innerHTML='Scopri le<br>cornici su misura <span>↗</span>';
+  }
 })();
