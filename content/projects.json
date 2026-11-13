@@ -1,0 +1,16 @@
+{
+  "projects": [
+    {
+      "slug": "japan-series",
+      "title": "Japan Series",
+      "category": "Custom framing",
+      "year": "2026",
+      "cover": "/assets/frame-detail-02.png",
+      "gallery": [
+        "/assets/frame-detail-01.png"
+      ],
+      "description": "A study of framing, material and detail. Replace this text with the final project description.",
+      "featured": true
+    }
+  ]
+}

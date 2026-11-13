@@ -1,0 +1,79 @@
+backend:
+  name: github
+  repo: oiboy200/limbo-website
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+site_url: "https://YOUR-NETLIFY-SITE.netlify.app"
+display_url: "https://YOUR-NETLIFY-SITE.netlify.app"
+logo_url: "/assets/limbo-logo-original.png"
+
+collections:
+  - name: pages
+    label: Pagine
+    files:
+      - name: home
+        label: Homepage
+        file: content/pages/home.json
+        format: json
+        fields:
+          - { label: Testo introduttivo, name: hero_intro, widget: text }
+          - { label: Eyebrow workshop, name: workshop_eyebrow, widget: string }
+          - { label: Titolo workshop, name: workshop_title, widget: string }
+          - { label: Testo workshop, name: workshop_text, widget: text }
+          - { label: Titolo manifesto, name: manifesto_title, widget: string }
+          - { label: Testo CTA, name: contact_cta, widget: string }
+      - name: about
+        label: About
+        file: content/pages/about.json
+        format: json
+        fields:
+          - { label: Etichetta sezione, name: eyebrow, widget: string }
+          - { label: Titolo, name: title, widget: string }
+          - { label: Introduzione, name: lead, widget: text }
+          - { label: Immagine, name: image, widget: image }
+          - { label: Testo, name: body, widget: markdown }
+      - name: custom
+        label: Custom Frames
+        file: content/pages/custom.json
+        format: json
+        fields:
+          - { label: Etichetta sezione, name: eyebrow, widget: string }
+          - { label: Titolo, name: title, widget: string }
+          - { label: Introduzione, name: lead, widget: text }
+          - { label: Immagine, name: image, widget: image }
+          - { label: Testo, name: body, widget: markdown }
+      - name: contact
+        label: Contatti
+        file: content/pages/contact.json
+        format: json
+        fields:
+          - { label: Etichetta sezione, name: eyebrow, widget: string }
+          - { label: Titolo, name: title, widget: string }
+          - { label: Introduzione, name: lead, widget: text }
+          - { label: Email, name: email, widget: string, required: false }
+          - { label: Instagram, name: instagram, widget: string, required: false }
+          - { label: Testo, name: body, widget: markdown }
+  - name: projects
+    label: Progetti
+    files:
+      - name: projects
+        label: Elenco progetti
+        file: content/projects.json
+        format: json
+        fields:
+          - label: Progetti
+            name: projects
+            widget: list
+            summary: "{{fields.title}} — {{fields.category}}"
+            fields:
+              - { label: Slug (indirizzo breve), name: slug, widget: string }
+              - { label: Titolo progetto, name: title, widget: string }
+              - { label: Categoria, name: category, widget: string }
+              - { label: Anno, name: year, widget: string, required: false }
+              - { label: Immagine copertina, name: cover, widget: image }
+              - { label: Galleria immagini, name: gallery, widget: list, required: false, field: { label: Immagine, name: image, widget: image } }
+              - { label: Descrizione, name: description, widget: markdown }
+              - { label: In evidenza in homepage, name: featured, widget: boolean, default: false }
