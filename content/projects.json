@@ -1,19 +1,24 @@
 {
   "projects": [
     {
-      "slug": "japan-series",
-      "title": "Japan Series",
-      "category": "Custom framing",
+      "slug": "caffe-nazionale",
+      "title": "Caffè Nazionale",
+      "title_it": "Caffè Nazionale",
+      "category": "Interior / Custom framing",
+      "category_it": "Interior / Cornici su misura",
       "year": "2026",
-      "cover": "/assets/frame-detail-02.png",
+      "cover": "/limbo_web_assets/caffe-nazionale/01.webp",
       "gallery": [
-        "/assets/frame-detail-01.png"
+        "/limbo_web_assets/caffe-nazionale/01.webp",
+        "/limbo_web_assets/caffe-nazionale/02.webp",
+        "/limbo_web_assets/caffe-nazionale/03.webp",
+        "/limbo_web_assets/caffe-nazionale/04.webp",
+        "/limbo_web_assets/caffe-nazionale/05.webp",
+        "/limbo_web_assets/caffe-nazionale/06.webp"
       ],
-      "description": "A study of framing, material and detail. Replace this text with the final project description.",
-      "featured": true,
-      "title_it": "Serie Giappone",
-      "category_it": "Cornici su misura",
-      "description_it": "Uno studio sulle cornici, sui materiali e sui dettagli. Testo da sostituire con la descrizione definitiva del progetto."
+      "description": "A framing project for Caffè Nazionale in Arzignano, Italy. A considered dialogue between images, frames and the character of the space.",
+      "description_it": "Un progetto di incorniciatura per il Caffè Nazionale di Arzignano. Un dialogo tra immagini, cornici e carattere dello spazio.",
+      "featured": true
     }
   ]
 }
