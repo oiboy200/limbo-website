@@ -1,3 +1,33 @@
+
+function initScrollMotion(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+  const revealSelector='.home-image-section,.home-custom,.home-featured,.home-about,.home-contact,.custom-project,.project-list .project-card,.case-topline,.case-title,.case-deck,.case-image,.page-grid,.page-main>.page-copy';
+  const scaleSelector='.home-image-link,.custom-feature-image,.home-project,.project-list .project-card,.custom-project-hero,.custom-project-detail,.case-image';
+  const reveals=[...document.querySelectorAll(revealSelector)];
+  const scales=[...document.querySelectorAll(scaleSelector)];
+  reveals.forEach((el,i)=>{el.classList.add('motion-reveal');el.style.setProperty('--motion-delay',Math.min(i%3,2)*90+'ms');});
+  scales.forEach(el=>el.classList.add('motion-scale'));
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -7% 0px'});
+  reveals.forEach(el=>observer.observe(el));
+  let ticking=false;
+  const update=()=>{
+    const vh=window.innerHeight;
+    scales.forEach(el=>{
+      const rect=el.getBoundingClientRect();
+      const progress=Math.max(0,Math.min(1,(vh-rect.top)/(vh*.82)));
+      const scale=.94+progress*.06;
+      el.style.setProperty('--scroll-scale',scale.toFixed(3));
+    });
+    ticking=false;
+  };
+  const requestUpdate=()=>{if(!ticking){ticking=true;requestAnimationFrame(update);}};
+  window.addEventListener('scroll',requestUpdate,{passive:true});
+  window.addEventListener('resize',requestUpdate);
+  requestUpdate();
+}
 document.addEventListener('DOMContentLoaded',()=>{
   const toggle=document.querySelector('.menu-toggle');
   const nav=document.querySelector('.site-header nav');
@@ -161,6 +191,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     setText('.page-main .eyebrow',lang==='it'?'PROGETTO 001 / CORNICI SU MISURA':'PROJECT 001 / CUSTOM FRAMING');
     const back=document.querySelector('.page-copy a');if(back)back.textContent=lang==='it'?'← Torna a tutti i progetti':'← Back to all projects';
   }
+  initScrollMotion();
   if(lang==='it'){
     document.querySelectorAll('.site-footer small').forEach(el=>el.textContent='© LIMBO 2026');
     const round=document.querySelector('.round-link');if(round)round.innerHTML='Scopri le<br>cornici su misura <span>↗</span>';
