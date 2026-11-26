@@ -99,8 +99,12 @@ collections:
           - { label: Instagram, name: instagram, widget: string, i18n: sync, required: false }
           - { label: Testo, name: body, widget: markdown, i18n: true }
 
+  - name: projects
+    label: "02 — PROGETTI"
+    i18n: true
+    files:
       - name: projects
-        label: "02 — PROGETTI"
+        label: Elenco progetti
         file: content/{{locale}}/projects.json
         i18n: true
         format: json
@@ -120,8 +124,12 @@ collections:
               - { label: Descrizione, name: description, widget: markdown, i18n: true }
               - { label: In evidenza, name: featured, widget: boolean, i18n: duplicate }
 
+- name: custom_gallery
+    label: "03 — ARCHIVIO SU MISURA"
+    i18n: true
+    files:
       - name: custom_gallery
-        label: "02 — Archivio su misura"
+        label: Archivio immagini
         file: content/{{locale}}/custom-gallery.json
         i18n: true
         format: json
