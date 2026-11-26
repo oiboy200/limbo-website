@@ -59,7 +59,7 @@ function initImageScrollMotion(){
     const section=firstWorkshop.closest('.home-image-section');
     const rect=section.getBoundingClientRect();
     /* Strong centered oversize on entry; settles to the exact grid width as the image reaches the viewport. */
-    const p=Math.max(0,Math.min(1,(window.innerHeight*.88-rect.top)/(window.innerHeight*.78)));
+    const p=Math.max(0,Math.min(1,(window.innerHeight*.82-rect.top)/(window.innerHeight*.62)));
     firstWorkshop.style.setProperty('--workshop-frame-scale',(1.42-.42*p).toFixed(3));
   };
   const onScroll=()=>{if(!busy){busy=true;requestAnimationFrame(()=>{update();updateWorkshopFrame();});}};
