@@ -1,11 +1,5 @@
 {
-  "page": {
-    "eyebrow": "03 / SU MISURA",
-    "title": "Cornici su misura.",
-    "lead": "Una consulenza personale, una scelta attenta dei materiali, una cornice costruita intorno alla tua opera — mai il contrario.",
-    "body": "<p><strong>Per la tua casa.</strong><br>Cornici e specchi su misura, pensati per inserirsi naturalmente nel tuo spazio e valorizzare ciò che custodiscono.</p><p><strong>Per artisti e aziende.</strong><br>Soluzioni su misura per gallerie, studi, spazi ricettivi, uffici e progetti creativi.</p><p><strong>Fatte con cura.</strong><br>Lavoriamo con diverse essenze di legno, colori, profili e finiture. Ogni scelta viene condivisa, in relazione all’opera e al suo contesto.</p>",
-    "image": "/assets/frame-detail-02.png"
-  },
+  "page": {},
   "gallery": [
     {
       "title": "VERDE",
