@@ -18,7 +18,7 @@ logo_url: "/assets/limbo-logo-original.png"
 
 collections:
   - name: settings
-    label: "03 — IDENTITÀ"
+    label: "05 — IDENTITÀ"
     files:
       - name: media
         label: Immagini del sito (uguali in IT e EN)
@@ -124,8 +124,8 @@ collections:
               - { label: Descrizione, name: description, widget: markdown, i18n: true }
               - { label: In evidenza, name: featured, widget: boolean, i18n: duplicate }
 
-- name: custom_gallery
-    label: "03 — ARCHIVIO SU MISURA"
+  - name: custom_gallery
+    label: "04 — ARCHIVIO SU MISURA"
     i18n: true
     files:
       - name: custom_gallery
