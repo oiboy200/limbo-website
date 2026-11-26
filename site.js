@@ -1,57 +1,4 @@
 
-function initScrollMotion(){
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce)return;
-  const revealSelector='.home-image-section,.home-custom,.home-featured,.home-about,.home-contact,.custom-project,.project-list .project-card,.case-topline,.case-title,.case-deck,.case-image,.page-grid,.page-main>.page-copy';
-  const scaleSelector='.home-image-link,.custom-feature-image,.home-project,.project-list .project-card,.custom-project-hero,.custom-project-detail,.case-image';
-  const reveals=[...document.querySelectorAll(revealSelector)];
-  const scales=[...document.querySelectorAll(scaleSelector)];
-  reveals.forEach((el,i)=>{el.classList.add('motion-reveal');el.style.setProperty('--motion-delay',Math.min(i%3,2)*90+'ms');});
-  scales.forEach(el=>el.classList.add('motion-scale'));
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});
-  },{threshold:.12,rootMargin:'0px 0px -7% 0px'});
-  reveals.forEach(el=>observer.observe(el));
-  let ticking=false;
-  const update=()=>{
-    const vh=window.innerHeight;
-    scales.forEach(el=>{
-      const rect=el.getBoundingClientRect();
-      const progress=Math.max(0,Math.min(1,(vh-rect.top)/(vh*.82)));
-      const scale=.94+progress*.06;
-      el.style.setProperty('--scroll-scale',scale.toFixed(3));
-    });
-    ticking=false;
-  };
-  const requestUpdate=()=>{if(!ticking){ticking=true;requestAnimationFrame(update);}};
-  window.addEventListener('scroll',requestUpdate,{passive:true});
-  window.addEventListener('resize',requestUpdate);
-  requestUpdate();
-}
-document.addEventListener('DOMContentLoaded',()=>{
-  const toggle=document.querySelector('.menu-toggle');
-  const nav=document.querySelector('.site-header nav');
-  if(toggle&&nav){
-    toggle.setAttribute('aria-expanded','false');
-    toggle.addEventListener('click',()=>{
-      const open=nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded',String(open));
-      toggle.setAttribute('aria-label',open?'Close menu':'Open menu');
-      toggle.textContent=open?'×':'☰';
-    });
-  }
-  const source=document.querySelector('.big-logo'),target=document.querySelector('.mini-logo'),hero=document.querySelector('.hero');
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(source&&target&&hero&&!reduce){
-    const flight=document.createElement('img');flight.className='logo-flight';flight.src=source.currentSrc||source.src;flight.alt='';document.body.appendChild(flight);source.style.visibility='hidden';target.style.visibility='hidden';
-    let start=null,end=null,travel=0;
-    const measure=()=>{const a=source.getBoundingClientRect(),b=target.getBoundingClientRect();start={left:a.left,top:a.top,width:a.width};end={left:b.left,top:b.top,width:b.width};travel=Math.max(360,window.innerHeight*.78);render();};
-    const render=()=>{if(!start||!end)return;const p=Math.max(0,Math.min(1,window.scrollY/travel)),e=p*p*(3-2*p),lerp=(a,b)=>a+(b-a)*e;flight.style.left=lerp(start.left,end.left)+'px';flight.style.top=lerp(start.top,end.top)+'px';flight.style.width=lerp(start.width,end.width)+'px';};
-    if(source.complete)measure();else source.addEventListener('load',measure,{once:true});window.addEventListener('scroll',render,{passive:true});window.addEventListener('resize',()=>{measure();render()});
-  }
-  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const el=document.querySelector(a.getAttribute('href'));if(el){e.preventDefault();el.scrollIntoView({behavior:reduce?'auto':'smooth'});}}));
-});
-
 (async function(){
   const get=async(path)=>{try{const r=await fetch(path);return r.ok?await r.json():null;}catch(e){return null;}};
   const setText=(selector,value)=>{const el=document.querySelector(selector);if(el&&value!==undefined&&value!==null)el.textContent=value;};
@@ -191,7 +138,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     setText('.page-main .eyebrow',lang==='it'?'PROGETTO 001 / CORNICI SU MISURA':'PROJECT 001 / CUSTOM FRAMING');
     const back=document.querySelector('.page-copy a');if(back)back.textContent=lang==='it'?'← Torna a tutti i progetti':'← Back to all projects';
   }
-  initScrollMotion();
   if(lang==='it'){
     document.querySelectorAll('.site-footer small').forEach(el=>el.textContent='© LIMBO 2026');
     const round=document.querySelector('.round-link');if(round)round.innerHTML='Scopri le<br>cornici su misura <span>↗</span>';
