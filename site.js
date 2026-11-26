@@ -58,13 +58,9 @@ function initImageScrollMotion(){
     if(!firstWorkshop)return;
     const section=firstWorkshop.closest('.home-image-section');
     const rect=section.getBoundingClientRect();
-    const p=Math.max(0,Math.min(1,(window.innerHeight-rect.top)/(window.innerHeight*.9)));
-    const pad=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad'))||24;
-    /* Starts edge-to-edge with an enlarged/cropped photo, then settles into the content grid. */
-    firstWorkshop.style.width=(window.innerWidth-2*pad*p)+'px';
-    firstWorkshop.style.marginLeft=(-pad+pad*p)+'px';
-    firstWorkshop.style.setProperty('--workshop-zoom',(1.18-.18*p).toFixed(3));
-    firstWorkshop.classList.toggle('workshop-visible',rect.top<window.innerHeight*.98);
+    /* Strong centered oversize on entry; settles to the exact grid width as the image reaches the viewport. */
+    const p=Math.max(0,Math.min(1,(window.innerHeight*.88-rect.top)/(window.innerHeight*.78)));
+    firstWorkshop.style.setProperty('--workshop-frame-scale',(1.42-.42*p).toFixed(3));
   };
   const onScroll=()=>{if(!busy){busy=true;requestAnimationFrame(()=>{update();updateWorkshopFrame();});}};
   window.addEventListener('scroll',onScroll,{passive:true});
