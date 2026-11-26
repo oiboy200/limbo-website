@@ -487,3 +487,8 @@ html.lenis.lenis-stopped{overflow:hidden}
 .home-image-section .home-image-link{
   transform-origin:center top!important;
 }
+
+/* Yellow safety margin below the viewport hero, matching the page's side margins */
+.hero{
+  padding-bottom:var(--pad)!important;
+}
