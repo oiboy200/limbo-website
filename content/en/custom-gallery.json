@@ -1,8 +1,7 @@
 {
   "collections": [
     {
-      "title": "VERDE",
-      "title_it": "VERDE",
+      "title": "GREEN",
       "hero": "/limbo_web_assets/green/hero.webp",
       "images": [
         "/limbo_web_assets/green/01.webp",
@@ -13,8 +12,7 @@
       ]
     },
     {
-      "title": "VERDE / ARANCIO",
-      "title_it": "VERDE / ARANCIO",
+      "title": "GREEN / ORANGE",
       "hero": "/limbo_web_assets/green-orange/01.webp",
       "images": [
         "/limbo_web_assets/green-orange/02.webp",
@@ -24,7 +22,6 @@
     },
     {
       "title": "JACK",
-      "title_it": "JACK",
       "hero": "/limbo_web_assets/jack/01.webp",
       "images": [
         "/limbo_web_assets/jack/02.webp",
@@ -34,8 +31,7 @@
       ]
     },
     {
-      "title": "ROSSO",
-      "title_it": "ROSSO",
+      "title": "RED",
       "hero": "/limbo_web_assets/red/01.webp",
       "images": [
         "/limbo_web_assets/red/02.webp",
@@ -47,7 +43,6 @@
     },
     {
       "title": "NIC FRAMES",
-      "title_it": "NIC FRAMES",
       "hero": "/limbo_web_assets/nic-frames/01.webp",
       "images": [
         "/limbo_web_assets/nic-frames/02.webp",
@@ -60,8 +55,7 @@
       ]
     },
     {
-      "title": "BLU / ARANCIO",
-      "title_it": "BLU / ARANCIO",
+      "title": "BLUE / ORANGE",
       "hero": "/limbo_web_assets/blue-orange/01.webp",
       "images": [
         "/limbo_web_assets/blue-orange/02.webp",
@@ -71,8 +65,7 @@
       ]
     },
     {
-      "title": "BICICLETTA",
-      "title_it": "BICICLETTA",
+      "title": "BICYCLE",
       "hero": "/limbo_web_assets/bicycle/01.webp",
       "images": [
         "/limbo_web_assets/bicycle/02.webp",
@@ -80,8 +73,7 @@
       ]
     },
     {
-      "title": "CASA ROSA",
-      "title_it": "CASA ROSA",
+      "title": "PINK HOUSE",
       "hero": "/limbo_web_assets/pink-house/01.webp",
       "images": [
         "/limbo_web_assets/pink-house/02.webp",
@@ -91,8 +83,7 @@
       ]
     },
     {
-      "title": "STUDI DI COLORE",
-      "title_it": "STUDI DI COLORE",
+      "title": "COLOUR STUDIES",
       "hero": "/limbo_web_assets/colour-studies/01.webp",
       "images": [
         "/limbo_web_assets/colour-studies/02.webp",
@@ -105,8 +96,7 @@
       ]
     },
     {
-      "title": "STAMPE GIAPPONESI",
-      "title_it": "STAMPE GIAPPONESI",
+      "title": "JAPAN PRINTS",
       "hero": "/limbo_web_assets/japan-prints/01.webp",
       "images": [
         "/limbo_web_assets/japan-prints/02.webp",
@@ -120,8 +110,7 @@
       ]
     },
     {
-      "title": "ARCHIVIO TURCHESE",
-      "title_it": "ARCHIVIO TURCHESE",
+      "title": "TURQUOISE ARCHIVE",
       "hero": "/limbo_web_assets/turquoise-archive/01.webp",
       "images": [
         "/limbo_web_assets/turquoise-archive/02.webp",
