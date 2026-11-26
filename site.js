@@ -18,10 +18,20 @@ function initImageScrollMotion(){
     });
     busy=false;
   };
-  const onScroll=()=>{if(!busy){busy=true;requestAnimationFrame(update);}};
+  const firstWorkshop=document.querySelector('.home-image-section .home-image-link');
+  const updateWorkshopFrame=()=>{
+    if(!firstWorkshop)return;
+    const section=firstWorkshop.closest('.home-image-section');
+    const rect=section.getBoundingClientRect();
+    const p=Math.max(0,Math.min(1,(window.innerHeight-rect.top)/(window.innerHeight*.9)));
+    const pad=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad'))||24;
+    firstWorkshop.style.width=(window.innerWidth+2*pad-2*pad*p)+'px';
+    firstWorkshop.style.marginLeft=(-pad+pad*p)+'px';
+  };
+  const onScroll=()=>{if(!busy){busy=true;requestAnimationFrame(()=>{update();updateWorkshopFrame();});}};
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll);
-  update();
+  update();updateWorkshopFrame();
 }
 
 (async function(){
