@@ -482,3 +482,8 @@ html.lenis.lenis-stopped{overflow:hidden}
 @media(max-width:760px){
   .home-image-section{padding-top:0!important}
 }
+
+/* Workshop image zooms downward from its top edge, never underneath the hero wordmark */
+.home-image-section .home-image-link{
+  transform-origin:center top!important;
+}
