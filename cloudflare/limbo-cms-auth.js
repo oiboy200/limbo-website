@@ -45,7 +45,7 @@ export default {
       const code = url.searchParams.get("code");
       const returnedState = url.searchParams.get("state");
       const cookie = request.headers.get("cookie") || "";
-      const match = cookie.match(/(?:^|;\\s*)limbo_oauth_state=([a-f0-9]+)/);
+      const match = cookie.match(/(?:^|;\s*)limbo_oauth_state=([a-f0-9]+)/);
       const savedState = match?.[1];
       if (!code || !returnedState || !savedState || returnedState !== savedState) {
         return html("<h2>Autenticazione non valida</h2><p>Chiudi questa finestra e riprova dal CMS.</p>", 400);
