@@ -1,18 +1,19 @@
 {
-  "hero_intro": "We craft high-quality hand-finished frames and mirrors that turn memories and spaces into art.",
+  "hero_intro": "Realizziamo cornici e specchi rifiniti a mano, per trasformare ricordi e spazi in qualcosa di speciale.",
   "workshop_image": "/uploads/immagine-chatgpt-26-nov-2026-16_25_31.jpg",
-  "custom_image": "/uploads/japan_0001_8.png",
-  "about_image": "/uploads/japan_0006_3.png",
-  "workshop_title": "Frames that give things a place.",
-  "workshop_text": "A frame is never just a frame. It is a way to look closer, to give value to an image, an object, a memory. Designed and made by hand in Vicenza.",
-  "manifesto_title": "Every frame has its own story.",
-  "contact_cta": "Have something worth framing?",
+  "custom_image": "/assets/frame-detail-02.png",
+  "about_image": "/assets/frame-detail-01.png",
+  "workshop_eyebrow": "01 / IL LABORATORIO",
+  "workshop_title": "Cornici che danno alle cose un posto.",
+  "workshop_text": "Una cornice non è mai soltanto una cornice. È un modo per guardare più da vicino, dare valore a un’immagine, a un oggetto, a un ricordo. Progettata e realizzata a mano a Vicenza.",
+  "manifesto_title": "Ogni cornice ha la sua storia.",
+  "contact_cta": "Hai qualcosa da incorniciare?",
   "section_visibility": {
-    "workshop": true,
+    "about": true,
+    "contact": true,
     "custom": true,
     "featured": true,
-    "about": true,
-    "contact": true
+    "workshop": true
   },
   "section_order": [
     "workshop",
@@ -20,31 +21,5 @@
     "featured",
     "about",
     "contact"
-  ],
-  "en": {
-    "about_image": "/uploads/immagine-chatgpt-26-nov-2026-16_25_31.jpg",
-    "contact_cta": "Hai qualcosa da incorniciare?",
-    "custom_image": "/assets/frame-detail-02.png",
-    "hero_intro": "Realizziamo cornici e specchi rifiniti a mano, per trasformare ricordi e spazi in qualcosa di speciale.",
-    "manifesto_title": "Ogni cornice ha la sua storia.",
-    "section_order": [
-      "workshop",
-      "custom",
-      "featured",
-      "about",
-      "contact"
-    ],
-    "section_visibility": {
-      "about": true,
-      "contact": true,
-      "custom": true,
-      "featured": true,
-      "workshop": true
-    },
-    "workshop_eyebrow": "01 / IL LABORATORIO",
-    "workshop_image": "/uploads/immagine-chatgpt-26-nov-2026-16_25_31.jpg",
-    "workshop_text": "Una cornice non è mai soltanto una cornice. È un modo per guardare più da vicino, dare valore a un’immagine, a un oggetto, a un ricordo. Progettata e realizzata a mano a Vicenza.",
-    "workshop_title": "Cornici che danno alle cose un posto."
-  },
-  "workshop_eyebrow": "01 / THE WORKSHOP"
+  ]
 }
