@@ -14,7 +14,8 @@ const pages=[
 ];
 let token='',active='home',lang='it',records={},dirty=new Set(),selected=null;
 const $=s=>document.querySelector(s);
-const fields=$('#fields'), notice=$('#notice'), frame=$('#preview-frame');
+let fields=$('#fields');
+const notice=$('#notice'), frame=$('#preview-frame');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const current=()=>pages.find(p=>p.id===active);
 const path=()=>current().files[lang==='it'?0:1];
