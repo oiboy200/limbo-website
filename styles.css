@@ -411,3 +411,9 @@ html,body{overflow-x:clip}
   transform:scale(1);
 }
 .home-project:hover img,.custom-feature-image:hover img,.project-list .project-card:hover img,.custom-project-hero:hover img,.custom-project-detail:hover img,.case-image:hover img{transform:scale(1.035)}
+
+/* Lenis smooth-scroll base styles */
+html.lenis,html.lenis body{height:auto}
+html.lenis.lenis-smooth{scroll-behavior:auto!important}
+html.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+html.lenis.lenis-stopped{overflow:hidden}
