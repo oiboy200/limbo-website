@@ -1,3 +1,8 @@
+i18n:
+  structure: multiple_folders
+  locales: [it, en]
+  default_locale: it
+
 backend:
   name: github
   repo: oiboy200/limbo-website
@@ -26,175 +31,107 @@ collections:
           - { label: Homepage — About, name: home_about, widget: image }
           - { label: Pagina About, name: about_page, widget: image }
           - { label: Pagina Su misura, name: custom_page, widget: image }
-  - name: italian
-    label: "01 — ITALIANO"
+
+  - name: content
+    label: "01 — CONTENUTI"
+    i18n: true
     files:
-      - name: home_it
+      - name: home
         label: Homepage
-        file: content/it/pages/home.json
+        file: content/{{locale}}/pages/home.json
+        i18n: true
         format: json
         fields:
-          - { label: Intro, name: hero_intro, widget: text }
-          - { label: Titolo Workshop, name: workshop_title, widget: string }
-          - { label: Testo Workshop, name: workshop_text, widget: text }
-          - { label: Titolo Manifesto, name: manifesto_title, widget: string }
-          - { label: CTA Contatti, name: contact_cta, widget: string }
+          - { label: Intro, name: hero_intro, widget: text, i18n: true }
+          - { label: Titolo Workshop, name: workshop_title, widget: string, i18n: true }
+          - { label: Testo Workshop, name: workshop_text, widget: text, i18n: true }
+          - { label: Titolo Manifesto, name: manifesto_title, widget: string, i18n: true }
+          - { label: CTA Contatti, name: contact_cta, widget: string, i18n: true }
+          - { label: Etichetta Workshop, name: workshop_eyebrow, widget: string, i18n: true, required: false }
           - label: Visibilità sezioni
             name: section_visibility
             widget: object
+            i18n: duplicate
             fields:
-              - { label: Workshop, name: workshop, widget: boolean, default: true }
-              - { label: Su misura, name: custom, widget: boolean, default: true }
-              - { label: Progetti in evidenza, name: featured, widget: boolean, default: true }
-              - { label: About, name: about, widget: boolean, default: true }
-              - { label: Contatti, name: contact, widget: boolean, default: true }
+              - { label: Workshop, name: workshop, widget: boolean }
+              - { label: Su misura, name: custom, widget: boolean }
+              - { label: Progetti in evidenza, name: featured, widget: boolean }
+              - { label: About, name: about, widget: boolean }
+              - { label: Contatti, name: contact, widget: boolean }
           - label: Ordine sezioni
             name: section_order
             widget: list
+            i18n: duplicate
             field: { label: Sezione, name: section, widget: select, options: ["workshop", "custom", "featured", "about", "contact"] }
-      - name: about_it
+
+      - name: about
         label: About / Studio
-        file: content/it/pages/about.json
+        file: content/{{locale}}/pages/about.json
+        i18n: true
         format: json
         fields:
-          - { label: Etichetta, name: eyebrow, widget: string }
-          - { label: Titolo, name: title, widget: string }
-          - { label: Introduzione, name: lead, widget: text }
-          - { label: Testo, name: body, widget: markdown }
-      - name: custom_it
+          - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
+          - { label: Titolo, name: title, widget: string, i18n: true }
+          - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Testo, name: body, widget: markdown, i18n: true }
+
+      - name: custom
         label: Su misura
-        file: content/it/pages/custom.json
+        file: content/{{locale}}/pages/custom.json
+        i18n: true
         format: json
         fields:
-          - { label: Etichetta, name: eyebrow, widget: string }
-          - { label: Titolo, name: title, widget: string }
-          - { label: Introduzione, name: lead, widget: text }
-          - { label: Testo, name: body, widget: markdown }
-      - name: contact_it
+          - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
+          - { label: Titolo, name: title, widget: string, i18n: true }
+          - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Testo, name: body, widget: markdown, i18n: true }
+
+      - name: contact
         label: Contatti
-        file: content/it/pages/contact.json
+        file: content/{{locale}}/pages/contact.json
+        i18n: true
         format: json
         fields:
-          - { label: Etichetta, name: eyebrow, widget: string }
-          - { label: Titolo, name: title, widget: string }
-          - { label: Introduzione, name: lead, widget: text }
-          - { label: Email, name: email, widget: string, required: false }
-          - { label: Instagram, name: instagram, widget: string, required: false }
-          - { label: Testo, name: body, widget: markdown }
-      - name: projects_it
+          - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
+          - { label: Titolo, name: title, widget: string, i18n: true }
+          - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Email, name: email, widget: string, i18n: duplicate, required: false }
+          - { label: Instagram, name: instagram, widget: string, i18n: duplicate, required: false }
+          - { label: Testo, name: body, widget: markdown, i18n: true }
+
+      - name: projects
         label: Progetti
-        file: content/it/projects.json
+        file: content/{{locale}}/projects.json
+        i18n: true
         format: json
         fields:
           - label: Progetti
             name: projects
             widget: list
+            i18n: true
             summary: "{{fields.title}}"
             fields:
-              - { label: Slug URL, name: slug, widget: string }
-              - { label: Titolo, name: title, widget: string }
-              - { label: Categoria, name: category, widget: string }
-              - { label: Anno, name: year, widget: string, required: false }
-              - { label: Copertina, name: cover, widget: image }
-              - { label: Galleria, name: gallery, widget: list, field: { label: Immagine, name: image, widget: image } }
-              - { label: Descrizione, name: description, widget: markdown }
-              - { label: In evidenza, name: featured, widget: boolean, default: false }
-      - name: custom_gallery_it
+              - { label: Slug URL, name: slug, widget: string, i18n: duplicate }
+              - { label: Titolo, name: title, widget: string, i18n: true }
+              - { label: Categoria, name: category, widget: string, i18n: true }
+              - { label: Anno, name: year, widget: string, i18n: duplicate, required: false }
+              - { label: Copertina, name: cover, widget: image, i18n: duplicate }
+              - { label: Galleria, name: gallery, widget: list, i18n: duplicate, field: { label: Immagine, name: image, widget: image } }
+              - { label: Descrizione, name: description, widget: markdown, i18n: true }
+              - { label: In evidenza, name: featured, widget: boolean, i18n: duplicate }
+
+      - name: custom_gallery
         label: Archivio Su misura
-        file: content/it/custom-gallery.json
+        file: content/{{locale}}/custom-gallery.json
+        i18n: true
         format: json
         fields:
           - label: Categorie
             name: collections
             widget: list
+            i18n: true
             summary: "{{fields.title}}"
             fields:
-              - { label: Nome, name: title, widget: string }
-              - { label: Immagine principale, name: hero, widget: image }
-              - { label: Altre immagini, name: images, widget: list, field: { label: Immagine, name: image, widget: image } }
-  - name: english
-    label: "02 — ENGLISH"
-    files:
-      - name: home_en
-        label: Homepage
-        file: content/en/pages/home.json
-        format: json
-        fields:
-          - { label: Intro, name: hero_intro, widget: text }
-          - { label: Workshop title, name: workshop_title, widget: string }
-          - { label: Workshop text, name: workshop_text, widget: text }
-          - { label: Manifesto title, name: manifesto_title, widget: string }
-          - { label: Contact CTA, name: contact_cta, widget: string }
-          - label: Section visibility
-            name: section_visibility
-            widget: object
-            fields:
-              - { label: Workshop, name: workshop, widget: boolean, default: true }
-              - { label: Custom, name: custom, widget: boolean, default: true }
-              - { label: Featured projects, name: featured, widget: boolean, default: true }
-              - { label: About, name: about, widget: boolean, default: true }
-              - { label: Contact, name: contact, widget: boolean, default: true }
-          - label: Section order
-            name: section_order
-            widget: list
-            field: { label: Section, name: section, widget: select, options: ["workshop", "custom", "featured", "about", "contact"] }
-      - name: about_en
-        label: About / Studio
-        file: content/en/pages/about.json
-        format: json
-        fields:
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Title, name: title, widget: string }
-          - { label: Introduction, name: lead, widget: text }
-          - { label: Text, name: body, widget: markdown }
-      - name: custom_en
-        label: Custom frames
-        file: content/en/pages/custom.json
-        format: json
-        fields:
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Title, name: title, widget: string }
-          - { label: Introduction, name: lead, widget: text }
-          - { label: Text, name: body, widget: markdown }
-      - name: contact_en
-        label: Contact
-        file: content/en/pages/contact.json
-        format: json
-        fields:
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Title, name: title, widget: string }
-          - { label: Introduction, name: lead, widget: text }
-          - { label: Email, name: email, widget: string, required: false }
-          - { label: Instagram, name: instagram, widget: string, required: false }
-          - { label: Text, name: body, widget: markdown }
-      - name: projects_en
-        label: Projects
-        file: content/en/projects.json
-        format: json
-        fields:
-          - label: Projects
-            name: projects
-            widget: list
-            summary: "{{fields.title}}"
-            fields:
-              - { label: URL slug, name: slug, widget: string }
-              - { label: Title, name: title, widget: string }
-              - { label: Category, name: category, widget: string }
-              - { label: Year, name: year, widget: string, required: false }
-              - { label: Cover image, name: cover, widget: image }
-              - { label: Gallery, name: gallery, widget: list, field: { label: Image, name: image, widget: image } }
-              - { label: Description, name: description, widget: markdown }
-              - { label: Featured, name: featured, widget: boolean, default: false }
-      - name: custom_gallery_en
-        label: Custom gallery
-        file: content/en/custom-gallery.json
-        format: json
-        fields:
-          - label: Collections
-            name: collections
-            widget: list
-            summary: "{{fields.title}}"
-            fields:
-              - { label: Collection name, name: title, widget: string }
-              - { label: Hero image, name: hero, widget: image }
-              - { label: Other images, name: images, widget: list, field: { label: Image, name: image, widget: image } }
+              - { label: Nome, name: title, widget: string, i18n: true }
+              - { label: Immagine principale, name: hero, widget: image, i18n: duplicate }
+              - { label: Altre immagini, name: images, widget: list, i18n: duplicate, field: { label: Immagine, name: image, widget: image } }
