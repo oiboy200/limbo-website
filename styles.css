@@ -560,5 +560,5 @@ html.lenis.lenis-stopped{overflow:hidden}
 
 /* Heavier hero statement on desktop only */
 @media(min-width:761px){
-  .hero .hero-copy p{font-weight:900}
+  .hero .hero-copy p{font-size:clamp(32px,4.8vw,68px);font-weight:700}
 }
