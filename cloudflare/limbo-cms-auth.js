@@ -70,9 +70,25 @@ export default {
         return html("<h2>Accesso GitHub non riuscito</h2><p>Chiudi questa finestra e riprova.</p>", 502);
       }
 
-      const payload = JSON.stringify({ token: tokenData.access_token, provider: "github" });
-      const message = "authorization:github:success:" + payload;
-      return new Response(`<!doctype html><html><head><meta charset="utf-8"><title>LIMBO CMS</title></head><body><p>Accesso completato. Puoi tornare al CMS.</p><script>if(window.opener){window.opener.postMessage(${JSON.stringify(message)}, ${JSON.stringify(ORIGIN)});window.close();}</script></body></html>`, {
+      const payload = JSON.stringify({ token: tokenData.access_token });
+      return new Response(`<!doctype html><html><head><meta charset="utf-8"><title>LIMBO CMS</title></head><body><p>Accesso completato. Attendo il CMS…</p><script>
+        (function () {
+          if (!window.opener) {
+            document.body.innerHTML = "<p>Accesso completato. Chiudi questa finestra e torna al CMS.</p>";
+            return;
+          }
+          const tokenMessage = "authorization:github:success:" + ${JSON.stringify(payload)};
+          function receiveMessage(event) {
+            if (event.source !== window.opener) return;
+            if (typeof event.data !== "string" || !event.data.startsWith("authorizing:github")) return;
+            window.opener.postMessage(tokenMessage, event.origin);
+            window.removeEventListener("message", receiveMessage);
+            setTimeout(function () { window.close(); }, 150);
+          }
+          window.addEventListener("message", receiveMessage);
+          window.opener.postMessage("authorizing:github", "*");
+        })();
+      </script></body></html>`, {
         headers: {
           "content-type": "text/html; charset=utf-8",
           "cache-control": "no-store",
