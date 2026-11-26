@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
   const setText=(selector,value)=>{const el=document.querySelector(selector);if(el&&value!==undefined&&value!==null)el.textContent=value;};
   const setHTML=(selector,value)=>{const el=document.querySelector(selector);if(el&&value!==undefined&&value!==null)el.innerHTML=value;};
   const page=location.pathname.split('/').pop().replace('.html','')||'index';
-  const lang=localStorage.getItem('limbo-language')||'en';
+  const lang=localStorage.getItem('limbo-language')||'it';
   document.documentElement.lang=lang;
   document.querySelectorAll('.language-option').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);b.setAttribute('aria-pressed',String(b.dataset.lang===lang));b.addEventListener('click',()=>{if(b.dataset.lang!==lang){localStorage.setItem('limbo-language',b.dataset.lang);location.reload();}});});
   const field=(obj,key)=>obj?.[key]??'';
