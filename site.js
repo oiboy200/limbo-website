@@ -17,7 +17,7 @@
   };
   if(typeof window.Lenis==='function'){start();return;}
   const script=document.createElement('script');
-  script.src='https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js';
+  script.src='https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js';
   script.onload=start;
   document.head.appendChild(script);
 })();
