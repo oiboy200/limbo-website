@@ -18,7 +18,7 @@ logo_url: "/assets/limbo-logo-original.png"
 
 collections:
   - name: settings
-    label: "00 — IDENTITÀ"
+    label: "03 — IDENTITÀ"
     files:
       - name: media
         label: Immagini del sito (uguali in IT e EN)
@@ -28,19 +28,19 @@ collections:
           - { label: Logo LIMBO, name: logo, widget: image }
 
   - name: content
-    label: "01 — PAGINE E CONTENUTI"
+    label: "01 — PAGINE"
     i18n: true
     files:
       - name: home
-        label: Homepage
+        label: "01 — Homepage"
         file: content/{{locale}}/pages/home.json
         i18n: true
         format: json
         fields:
           - { label: Intro, name: hero_intro, widget: text, i18n: true }
-          - { label: Immagine Workshop, name: workshop_image, widget: image, i18n: duplicate }
-          - { label: Immagine Su misura, name: custom_image, widget: image, i18n: duplicate }
-          - { label: Immagine About, name: about_image, widget: image, i18n: duplicate }
+          - { label: Immagine Workshop, name: workshop_image, widget: image, i18n: sync }
+          - { label: Immagine Su misura, name: custom_image, widget: image, i18n: sync }
+          - { label: Immagine About, name: about_image, widget: image, i18n: sync }
           - { label: Titolo Workshop, name: workshop_title, widget: string, i18n: true }
           - { label: Testo Workshop, name: workshop_text, widget: text, i18n: true }
           - { label: Titolo Manifesto, name: manifesto_title, widget: string, i18n: true }
@@ -63,7 +63,7 @@ collections:
             field: { label: Sezione, name: section, widget: select, options: ["workshop", "custom", "featured", "about", "contact"] }
 
       - name: about
-        label: About / Studio
+        label: "02 — Studio"
         file: content/{{locale}}/pages/about.json
         i18n: true
         format: json
@@ -71,11 +71,11 @@ collections:
           - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
           - { label: Titolo, name: title, widget: string, i18n: true }
           - { label: Introduzione, name: lead, widget: text, i18n: true }
-          - { label: Immagine pagina, name: image, widget: image, i18n: duplicate }
+          - { label: Immagine pagina, name: image, widget: image, i18n: sync }
           - { label: Testo, name: body, widget: markdown, i18n: true }
 
       - name: custom
-        label: Su misura
+        label: "03 — Su misura"
         file: content/{{locale}}/pages/custom.json
         i18n: true
         format: json
@@ -83,11 +83,11 @@ collections:
           - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
           - { label: Titolo, name: title, widget: string, i18n: true }
           - { label: Introduzione, name: lead, widget: text, i18n: true }
-          - { label: Immagine pagina, name: image, widget: image, i18n: duplicate }
+          - { label: Immagine pagina, name: image, widget: image, i18n: sync }
           - { label: Testo, name: body, widget: markdown, i18n: true }
 
       - name: contact
-        label: Contatti
+        label: "04 — Contatti"
         file: content/{{locale}}/pages/contact.json
         i18n: true
         format: json
@@ -95,12 +95,12 @@ collections:
           - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
           - { label: Titolo, name: title, widget: string, i18n: true }
           - { label: Introduzione, name: lead, widget: text, i18n: true }
-          - { label: Email, name: email, widget: string, i18n: duplicate, required: false }
-          - { label: Instagram, name: instagram, widget: string, i18n: duplicate, required: false }
+          - { label: Email, name: email, widget: string, i18n: sync, required: false }
+          - { label: Instagram, name: instagram, widget: string, i18n: sync, required: false }
           - { label: Testo, name: body, widget: markdown, i18n: true }
 
       - name: projects
-        label: Progetti
+        label: "02 — PROGETTI"
         file: content/{{locale}}/projects.json
         i18n: true
         format: json
@@ -115,13 +115,13 @@ collections:
               - { label: Titolo, name: title, widget: string, i18n: true }
               - { label: Categoria, name: category, widget: string, i18n: true }
               - { label: Anno, name: year, widget: string, i18n: duplicate, required: false }
-              - { label: Copertina, name: cover, widget: image, i18n: duplicate }
-              - { label: Galleria, name: gallery, widget: list, i18n: duplicate, field: { label: Immagine, name: image, widget: image } }
+              - { label: Copertina, name: cover, widget: image, i18n: sync }
+              - { label: Galleria, name: gallery, widget: list, i18n: sync, field: { label: Immagine, name: image, widget: image, i18n: sync } }
               - { label: Descrizione, name: description, widget: markdown, i18n: true }
               - { label: In evidenza, name: featured, widget: boolean, i18n: duplicate }
 
       - name: custom_gallery
-        label: Archivio Su misura
+        label: "02 — Archivio su misura"
         file: content/{{locale}}/custom-gallery.json
         i18n: true
         format: json
@@ -133,5 +133,5 @@ collections:
             summary: "{{fields.title}}"
             fields:
               - { label: Nome, name: title, widget: string, i18n: true }
-              - { label: Immagine principale, name: hero, widget: image, i18n: duplicate }
-              - { label: Altre immagini, name: images, widget: list, i18n: duplicate, field: { label: Immagine, name: image, widget: image } }
+              - { label: Immagine principale, name: hero, widget: image, i18n: sync }
+              - { label: Altre immagini, name: images, widget: list, i18n: sync, field: { label: Immagine, name: image, widget: image, i18n: sync } }
