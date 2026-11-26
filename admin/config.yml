@@ -18,7 +18,7 @@ logo_url: "/assets/limbo-logo-original.png"
 
 collections:
   - name: settings
-    label: "00 — MEDIA CONDIVISI"
+    label: "00 — IDENTITÀ"
     files:
       - name: media
         label: Immagini del sito (uguali in IT e EN)
@@ -28,7 +28,7 @@ collections:
           - { label: Logo LIMBO, name: logo, widget: image }
 
   - name: content
-    label: "01 — CONTENUTI"
+    label: "01 — PAGINE E CONTENUTI"
     i18n: true
     files:
       - name: home
@@ -83,6 +83,7 @@ collections:
           - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
           - { label: Titolo, name: title, widget: string, i18n: true }
           - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Immagine pagina, name: image, widget: image, i18n: duplicate }
           - { label: Testo, name: body, widget: markdown, i18n: true }
 
       - name: contact
