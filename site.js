@@ -103,6 +103,18 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
     const order=Array.isArray(home.section_order)?home.section_order:['workshop','custom','featured','about','contact'];
     const main=document.querySelector('.limbo-home');
     if(main)order.forEach(key=>{if(sections[key])main.appendChild(sections[key]);});
+    const featuredGrid=document.querySelector('.home-projects');
+    const featuredProjects=projects.filter(project=>project.featured);
+    if(featuredGrid&&featuredProjects.length){
+      featuredGrid.innerHTML='';
+      featuredProjects.forEach((project,index)=>{
+        const a=document.createElement('a');a.className='home-project '+(index%2===0?'home-project-a':'home-project-b');
+        a.href='project-japan.html?project='+encodeURIComponent(project.slug);
+        const im=document.createElement('img');im.src=project.cover;im.alt=field(project,'title');im.loading='lazy';a.append(im);
+        const meta=document.createElement('div'),name=document.createElement('b'),year=document.createElement('span');
+        name.textContent=field(project,'title');year.textContent=project.year||'';meta.append(name,year);a.append(meta);featuredGrid.append(a);
+      });
+    }
     setText('.hero-copy > p',field(home,'hero_intro'));
     setText('.intro .eyebrow',field(home,'workshop_eyebrow'));
     setText('.intro h1',field(home,'workshop_title'));
