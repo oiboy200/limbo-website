@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
     setText('.manifesto .eyebrow',lang==='it'?'03 / SU MISURA':'03 / MADE TO MEASURE');
     setText('.manifesto h2',field(home,'manifesto_title'));
     setText('.contact-strip > p',field(home,'contact_cta'));
+    setText('.home-about h2',field(home,'about_title')||'About LIMBO');
     const cta=document.querySelector('.contact-strip a');if(cta)cta.innerHTML=(lang==='it'?'Parliamone':'Let’s talk')+' <span>↗</span>';
     setText('.featured .eyebrow',lang==='it'?'02 / PROGETTI SELEZIONATI':'02 / SELECTED WORK');
     setText('.section-heading .text-link',lang==='it'?'Vedi tutti i progetti ↗':'View all projects ↗');
