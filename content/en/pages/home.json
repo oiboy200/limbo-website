@@ -1,25 +1,37 @@
 {
-  "hero_intro": "We craft high-quality hand-finished frames and mirrors that turn memories and spaces into art.",
-  "workshop_image": "/uploads/immagine-chatgpt-26-nov-2026-16_25_31.jpg",
-  "custom_image": "/uploads/japan_0001_8.png",
-  "about_image": "/uploads/japan_0006_3.png",
-  "workshop_title": "Frames that give things a place.",
-  "workshop_text": "A frame is never just a frame. It is a way to look closer, to give value to an image, an object, a memory. Designed and made by hand in Vicenza.",
-  "manifesto_title": "Every frame has its story.",
-  "contact_cta": "Have something worth framing?",
-  "workshop_eyebrow": "01 / THE WORKSHOP",
-  "section_visibility": {
-    "workshop": true,
-    "custom": true,
-    "featured": true,
-    "about": true,
-    "contact": true
+  "hero": {
+    "intro": "We craft high-quality hand-finished frames and mirrors that turn memories and spaces into art."
   },
-  "section_order": [
-    "workshop",
-    "custom",
-    "featured",
-    "about",
-    "contact"
-  ]
+  "workshop": {
+    "eyebrow": "01 / THE WORKSHOP",
+    "title": "Frames that give things a place.",
+    "text": "A frame is never just a frame. It is a way to look closer, to give value to an image, an object, a memory. Designed and made by hand in Vicenza.",
+    "image": "/uploads/immagine-chatgpt-26-nov-2026-16_25_31.jpg"
+  },
+  "custom": {
+    "image": "/uploads/japan_0001_8.png",
+    "manifesto_title": "Every frame has its story."
+  },
+  "about": {
+    "image": "/uploads/japan_0006_3.png"
+  },
+  "contact": {
+    "cta": "Have something worth framing?"
+  },
+  "layout": {
+    "visibility": {
+      "workshop": true,
+      "custom": true,
+      "featured": true,
+      "about": true,
+      "contact": true
+    },
+    "order": [
+      "workshop",
+      "custom",
+      "featured",
+      "about",
+      "contact"
+    ]
+  }
 }
