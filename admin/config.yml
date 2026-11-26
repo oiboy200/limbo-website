@@ -44,20 +44,14 @@ collections:
         format: json
         fields:
           - { label: "Intro — EN", name: hero_intro, widget: text, i18n: true }
-          - { label: "Intro — IT", name: hero_intro_it, widget: text, i18n: true }
           - { label: "Immagine Workshop", name: workshop_image, widget: image, i18n: true }
           - { label: "Immagine Custom", name: custom_image, widget: image, i18n: true }
           - { label: "Immagine About", name: about_image, widget: image, i18n: true }
           - { label: "Eyebrow Workshop — EN", name: workshop_eyebrow, widget: string, i18n: true }
-          - { label: "Eyebrow Workshop — IT", name: workshop_eyebrow_it, widget: string, i18n: true }
           - { label: "Titolo Workshop — EN", name: workshop_title, widget: string, i18n: true }
-          - { label: "Titolo Workshop — IT", name: workshop_title_it, widget: string, i18n: true }
           - { label: "Testo Workshop — EN", name: workshop_text, widget: text, i18n: true }
-          - { label: "Testo Workshop — IT", name: workshop_text_it, widget: text, i18n: true }
           - { label: "Titolo Manifesto — EN", name: manifesto_title, widget: string, i18n: true }
-          - { label: "Titolo Manifesto — IT", name: manifesto_title_it, widget: string, i18n: true }
           - { label: "CTA — EN", name: contact_cta, widget: string, i18n: true }
-          - { label: "CTA — IT", name: contact_cta_it, widget: string, i18n: true }
           - label: "Visibilità sezioni"
             name: section_visibility
             widget: object
@@ -79,14 +73,10 @@ collections:
         format: json
         fields:
           - { label: "Etichetta — EN", name: eyebrow, widget: string, i18n: true }
-          - { label: "Etichetta — IT", name: eyebrow_it, widget: string, i18n: true }
           - { label: "Titolo — EN", name: title, widget: string, i18n: true }
-          - { label: "Titolo — IT", name: title_it, widget: string, i18n: true }
           - { label: "Introduzione — EN", name: lead, widget: text, i18n: true }
-          - { label: "Introduzione — IT", name: lead_it, widget: text, i18n: true }
           - { label: "Immagine pagina", name: image, widget: image, i18n: true }
           - { label: "Testo — EN", name: body, widget: markdown, i18n: true }
-          - { label: "Testo — IT", name: body_it, widget: markdown, i18n: true }
       - name: custom
         label: "03 — Su misura"
         i18n: true
@@ -94,14 +84,10 @@ collections:
         format: json
         fields:
           - { label: "Etichetta — EN", name: eyebrow, widget: string, i18n: true }
-          - { label: "Etichetta — IT", name: eyebrow_it, widget: string, i18n: true }
           - { label: "Titolo — EN", name: title, widget: string, i18n: true }
-          - { label: "Titolo — IT", name: title_it, widget: string, i18n: true }
           - { label: "Introduzione — EN", name: lead, widget: text, i18n: true }
-          - { label: "Introduzione — IT", name: lead_it, widget: text, i18n: true }
           - { label: "Immagine pagina", name: image, widget: image, i18n: true }
           - { label: "Testo — EN", name: body, widget: markdown, i18n: true }
-          - { label: "Testo — IT", name: body_it, widget: markdown, i18n: true }
       - name: contact
         label: "04 — Contatti"
         i18n: true
@@ -109,15 +95,11 @@ collections:
         format: json
         fields:
           - { label: "Etichetta — EN", name: eyebrow, widget: string, i18n: true }
-          - { label: "Etichetta — IT", name: eyebrow_it, widget: string, i18n: true }
           - { label: "Titolo — EN", name: title, widget: string, i18n: true }
-          - { label: "Titolo — IT", name: title_it, widget: string, i18n: true }
           - { label: "Introduzione — EN", name: lead, widget: text, i18n: true }
-          - { label: "Introduzione — IT", name: lead_it, widget: text, i18n: true }
           - { label: "Email", name: email, widget: string, i18n: true, required: false }
           - { label: "Instagram", name: instagram, widget: string, i18n: true, required: false }
           - { label: "Testo — EN", name: body, widget: markdown, i18n: true }
-          - { label: "Testo — IT", name: body_it, widget: markdown, i18n: true }
 
   - name: projects
     label: "05 — Progetti"
@@ -135,14 +117,11 @@ collections:
             fields:
               - { label: "Slug URL (non modificare se già online)", name: slug, widget: string, i18n: true }
               - { label: "Titolo — EN", name: title, widget: string, i18n: true }
-              - { label: "Titolo — IT", name: title_it, widget: string, i18n: true }
               - { label: "Categoria — EN", name: category, widget: string, i18n: true }
-              - { label: "Categoria — IT", name: category_it, widget: string, i18n: true }
               - { label: Anno, name: year, widget: string, i18n: true, required: false }
               - { label: "Immagine copertina", name: cover, widget: image, i18n: true }
               - { label: "Galleria immagini", name: gallery, widget: list, i18n: true, required: false, field: { label: Immagine, name: image, widget: image } }
               - { label: "Descrizione — EN", name: description, widget: markdown, i18n: true }
-              - { label: "Descrizione — IT", name: description_it, widget: markdown, i18n: true }
               - { label: "In evidenza in homepage", name: featured, widget: boolean, i18n: true, default: false }
 
   - name: custom_gallery
@@ -160,6 +139,5 @@ collections:
             summary: "{{fields.title}}"
             fields:
               - { label: "Nome — EN", name: title, widget: string, i18n: true }
-              - { label: "Nome — IT", name: title_it, widget: string, i18n: true }
               - { label: "Immagine principale", name: hero, widget: image, i18n: true }
               - { label: "Altre immagini", name: images, widget: list, i18n: true, required: false, field: { label: Immagine, name: image, widget: image } }
