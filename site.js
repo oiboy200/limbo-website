@@ -85,13 +85,13 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
   const lang=localStorage.getItem('limbo-language')||'en';
   document.documentElement.lang=lang;
   document.querySelectorAll('.language-option').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);b.setAttribute('aria-pressed',String(b.dataset.lang===lang));b.addEventListener('click',()=>{if(b.dataset.lang!==lang){localStorage.setItem('limbo-language',b.dataset.lang);location.reload();}});});
-  const field=(obj,key)=>obj?.[lang==='it'?key+'_it':key]||obj?.[key]||'';
+  const field=(obj,key)=>lang==='en'?(obj?.en?.[key]??obj?.[key]??''):(obj?.[key]??'');
   const settings=await get('/content/site-settings.json');
   if(settings?.logo)document.querySelectorAll('.mini-logo img,.footer-logo img,.big-logo').forEach(img=>img.src=settings.logo);
   const home=await get('/content/pages/home.json');
   const pages={};
   for(const name of ['about','custom','contact'])pages[name]=await get('/content/pages/'+name+'.json');
-  const projectData=await get('/content/projects.json'),projects=projectData?.projects||[];
+  const projectData=await get('/content/projects.json'),projects=(lang==='en'?projectData?.en?.projects:projectData?.projects)||projectData?.projects||[];
   const navLabels=lang==='it'?['Progetti','Studio','Su misura','Contatti']:['Projects','About','Custom','Contact'];
   document.querySelectorAll('.site-header nav a,.footer-links a').forEach((a,i)=>{if(navLabels[i])a.textContent=navLabels[i];});
   document.querySelectorAll('.site-footer > div:first-of-type span').forEach((el,i)=>el.textContent=lang==='it'?(i?'Cornici e specchi su misura':'Vicenza, Italia'):(i?'Custom frames & mirrors':'Vicenza, Italy'));
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
   if(page==='custom'){
     const gallery=document.querySelector('#custom-gallery');
     const galleryData=await get('/content/custom-gallery.json');
-    const collections=galleryData?.collections||[];
+    const collections=(lang==='en'?galleryData?.en?.collections:galleryData?.collections)||galleryData?.collections||[];
     if(gallery){
       gallery.classList.add('custom-projects');
       for(const [index,item] of collections.entries()){
