@@ -94,6 +94,15 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
   document.querySelectorAll('.site-header nav a,.footer-links a').forEach((a,i)=>{if(navLabels[i])a.textContent=navLabels[i];});
   document.querySelectorAll('.site-footer > div:first-of-type span').forEach((el,i)=>el.textContent=lang==='it'?(i?'Cornici e specchi su misura':'Vicenza, Italia'):(i?'Custom frames & mirrors':'Vicenza, Italy'));
   if(home&&page==='index'){
+    const image=(selector,path,alt)=>{const el=document.querySelector(selector);if(el&&path){el.src=path; if(alt)el.alt=alt;}};
+    image('.home-image-section img',home.workshop_image,'LIMBO — workshop, hand-finished frames');
+    image('.custom-feature-image img',home.custom_image,'LIMBO — custom framing');
+    image('.home-about .about-split img',home.about_image,'LIMBO — the workshop');
+    const sections={workshop:document.querySelector('.workshop-image'),custom:document.querySelector('.home-custom'),featured:document.querySelector('.home-featured'),about:document.querySelector('.home-about'),contact:document.querySelector('.home-contact')};
+    Object.entries(home.section_visibility||{}).forEach(([key,visible])=>{if(sections[key])sections[key].hidden=visible===false;});
+    const order=Array.isArray(home.section_order)?home.section_order:['workshop','custom','featured','about','contact'];
+    const main=document.querySelector('.limbo-home');
+    if(main)order.forEach(key=>{if(sections[key])main.appendChild(sections[key]);});
     setText('.hero-copy > p',field(home,'hero_intro'));
     setText('.intro .eyebrow',field(home,'workshop_eyebrow'));
     setText('.intro h1',field(home,'workshop_title'));
@@ -133,48 +142,25 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
   }
   if(page==='custom'){
     const gallery=document.querySelector('#custom-gallery');
-    const collections=[
-      ['GREEN','/limbo_web_assets/green/',5],['GREEN / ORANGE','/limbo_web_assets/green-orange/',4],
-      ['JACK','/limbo_web_assets/jack/',5],['RED','/limbo_web_assets/red/',6],
-      ['NIC FRAMES','/limbo_web_assets/nic-frames/',8],['BLUE / ORANGE','/limbo_web_assets/blue-orange/',5],
-      ['BICYCLE','/limbo_web_assets/bicycle/',3],['PINK HOUSE','/limbo_web_assets/pink-house/',5],
-      ['COLOUR STUDIES','/limbo_web_assets/colour-studies/',8],['JAPAN PRINTS','/limbo_web_assets/japan-prints/',9],
-      ['TURQUOISE ARCHIVE','/limbo_web_assets/turquoise-archive/',5]
-    ];
+    const galleryData=await get('/content/custom-gallery.json');
+    const collections=galleryData?.collections||[];
     if(gallery){
       gallery.classList.add('custom-projects');
-      const loadImage=(src,label)=>new Promise(resolve=>{
-        const im=new Image();im.src=src;im.alt=label+' — custom framing';
-        const done=()=>resolve({im,landscape:im.naturalWidth>im.naturalHeight,ok:im.naturalWidth>0});
-        if(im.complete)done();else{im.onload=done;im.onerror=()=>resolve({im,landscape:false,ok:false});}
-      });
-      for(const [label,base,count] of collections){
+      for(const [index,item] of collections.entries()){
+        const label=lang==='it'?(item.title_it||item.title):(item.title||item.title_it);
         const section=document.createElement('section');section.className='custom-project';
         const heading=document.createElement('div');heading.className='custom-project-heading';
         const title=document.createElement('h2');title.textContent=label;
-        const number=document.createElement('span');number.textContent=String(collections.indexOf(collections.find(c=>c[0]===label))+1).padStart(2,'0');
+        const number=document.createElement('span');number.textContent=String(index+1).padStart(2,'0');
         heading.append(title,number);section.append(heading);
-        const images=await Promise.all(Array.from({length:count},(_,i)=>loadImage(base+String(i+1).padStart(2,'0')+'.webp',label)));
-        // A manually uploaded hero.webp takes priority for this project.
-        // If it is missing, automatically choose the best available image.
-        const manualHero=await loadImage(base+'hero.webp',label);
-        let hero;
-        if(manualHero.ok){
-          hero=manualHero;
-        }else{
-          const landscapeIndex=images.findIndex(x=>x.landscape);
-          const heroIndex=landscapeIndex>=0?landscapeIndex:images.reduce((best,item,i)=>(
-            item.im.naturalWidth*item.im.naturalHeight>
-            images[best].im.naturalWidth*images[best].im.naturalHeight?i:best
-          ),0);
-          hero=images.splice(heroIndex,1)[0];
-        }
         const heroFigure=document.createElement('figure');heroFigure.className='custom-project-hero';
-        hero.im.classList.add('custom-project-hero-image');
-        heroFigure.append(hero.im);section.append(heroFigure);
+        const heroImage=document.createElement('img');heroImage.className='custom-project-hero-image';heroImage.src=item.hero||item.images?.[0]||'';heroImage.alt=label+' — custom framing';heroFigure.append(heroImage);section.append(heroFigure);
         const details=document.createElement('div');details.className='custom-project-details';
-        images.forEach(({im})=>{const figure=document.createElement('figure');figure.className='custom-project-detail';figure.append(im);details.append(figure);});
-        if(images.length)section.append(details);
+        (item.images||[]).filter(src=>src&&src!==item.hero).forEach(src=>{
+          const figure=document.createElement('figure');figure.className='custom-project-detail';
+          const im=document.createElement('img');im.src=src;im.alt=label+' — custom framing detail';im.loading='lazy';figure.append(im);details.append(figure);
+        });
+        if(details.children.length)section.append(details);
         gallery.append(section);
       }
     }
