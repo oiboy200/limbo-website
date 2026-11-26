@@ -25,6 +25,7 @@ slug:
 
 collections:
   - name: settings
+    i18n: true
     label: "00 — Identità del sito"
     files:
       - name: site
@@ -35,6 +36,7 @@ collections:
           - { label: "Logo LIMBO", name: logo, widget: image }
           - { label: "Immagine predefinita / fallback", name: fallback_image, widget: image, required: false }
   - name: pages
+    i18n: true
     label: Pagine
     files:
       - name: home
@@ -102,6 +104,7 @@ collections:
           - { label: "Testo — EN", name: body, widget: markdown, i18n: true }
 
   - name: projects
+    i18n: true
     label: "05 — Progetti"
     files:
       - name: projects
@@ -125,6 +128,7 @@ collections:
               - { label: "In evidenza in homepage", name: featured, widget: boolean, i18n: true, default: false }
 
   - name: custom_gallery
+    i18n: true
     label: "06 — Archivio Su misura"
     files:
       - name: custom_gallery
