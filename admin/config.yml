@@ -12,72 +12,96 @@ site_url: "https://limbo-website.pages.dev"
 display_url: "https://limbo-website.pages.dev"
 logo_url: "/assets/limbo-logo-original.png"
 
+locale: it
+slug:
+  encoding: unicode
+  clean_accents: true
+  sanitize_replacement: "-"
+
 collections:
   - name: pages
     label: Pagine
     files:
       - name: home
-        label: Homepage
+        label: "01 — Homepage"
         file: content/pages/home.json
         format: json
         fields:
-          - { label: Intro — EN, name: hero_intro, widget: text }
-          - { label: Intro — IT, name: hero_intro_it, widget: text }
-          - { label: Eyebrow workshop — EN, name: workshop_eyebrow, widget: string }
-          - { label: Eyebrow workshop — IT, name: workshop_eyebrow_it, widget: string }
-          - { label: Titolo workshop — EN, name: workshop_title, widget: string }
-          - { label: Titolo workshop — IT, name: workshop_title_it, widget: string }
-          - { label: Testo workshop — EN, name: workshop_text, widget: text }
-          - { label: Testo workshop — IT, name: workshop_text_it, widget: text }
-          - { label: Titolo manifesto — EN, name: manifesto_title, widget: string }
-          - { label: Titolo manifesto — IT, name: manifesto_title_it, widget: string }
-          - { label: CTA — EN, name: contact_cta, widget: string }
-          - { label: CTA — IT, name: contact_cta_it, widget: string }
+          - { label: "Intro — EN", name: hero_intro, widget: text }
+          - { label: "Intro — IT", name: hero_intro_it, widget: text }
+          - { label: "Immagine Workshop", name: workshop_image, widget: image }
+          - { label: "Immagine Custom", name: custom_image, widget: image }
+          - { label: "Immagine About", name: about_image, widget: image }
+          - { label: "Eyebrow Workshop — EN", name: workshop_eyebrow, widget: string }
+          - { label: "Eyebrow Workshop — IT", name: workshop_eyebrow_it, widget: string }
+          - { label: "Titolo Workshop — EN", name: workshop_title, widget: string }
+          - { label: "Titolo Workshop — IT", name: workshop_title_it, widget: string }
+          - { label: "Testo Workshop — EN", name: workshop_text, widget: text }
+          - { label: "Testo Workshop — IT", name: workshop_text_it, widget: text }
+          - { label: "Titolo Manifesto — EN", name: manifesto_title, widget: string }
+          - { label: "Titolo Manifesto — IT", name: manifesto_title_it, widget: string }
+          - { label: "CTA — EN", name: contact_cta, widget: string }
+          - { label: "CTA — IT", name: contact_cta_it, widget: string }
+          - label: "Visibilità sezioni"
+            name: section_visibility
+            widget: object
+            fields:
+              - { label: "Workshop", name: workshop, widget: boolean, default: true }
+              - { label: "Custom Frames", name: custom, widget: boolean, default: true }
+              - { label: "Progetti in evidenza", name: featured, widget: boolean, default: true }
+              - { label: "About", name: about, widget: boolean, default: true }
+              - { label: "Contatti", name: contact, widget: boolean, default: true }
+          - label: "Ordine delle sezioni"
+            name: section_order
+            widget: list
+            hint: "Trascina le voci per cambiare l'ordine delle sezioni in homepage."
+            field: { label: "Sezione", name: section, widget: select, options: ["workshop", "custom", "featured", "about", "contact"] }
       - name: about
-        label: About / Studio
+        label: "02 — About / Studio"
         file: content/pages/about.json
         format: json
         fields:
-          - { label: Etichetta — EN, name: eyebrow, widget: string }
-          - { label: Etichetta — IT, name: eyebrow_it, widget: string }
-          - { label: Titolo — EN, name: title, widget: string }
-          - { label: Titolo — IT, name: title_it, widget: string }
-          - { label: Introduzione — EN, name: lead, widget: text }
-          - { label: Introduzione — IT, name: lead_it, widget: text }
-          - { label: Immagine, name: image, widget: image }
-          - { label: Testo — EN, name: body, widget: markdown }
-          - { label: Testo — IT, name: body_it, widget: markdown }
+          - { label: "Etichetta — EN", name: eyebrow, widget: string }
+          - { label: "Etichetta — IT", name: eyebrow_it, widget: string }
+          - { label: "Titolo — EN", name: title, widget: string }
+          - { label: "Titolo — IT", name: title_it, widget: string }
+          - { label: "Introduzione — EN", name: lead, widget: text }
+          - { label: "Introduzione — IT", name: lead_it, widget: text }
+          - { label: "Immagine pagina", name: image, widget: image }
+          - { label: "Testo — EN", name: body, widget: markdown }
+          - { label: "Testo — IT", name: body_it, widget: markdown }
       - name: custom
-        label: Custom Frames / Su misura
+        label: "03 — Su misura"
         file: content/pages/custom.json
         format: json
         fields:
-          - { label: Etichetta — EN, name: eyebrow, widget: string }
-          - { label: Etichetta — IT, name: eyebrow_it, widget: string }
-          - { label: Titolo — EN, name: title, widget: string }
-          - { label: Titolo — IT, name: title_it, widget: string }
-          - { label: Introduzione — EN, name: lead, widget: text }
-          - { label: Introduzione — IT, name: lead_it, widget: text }
-          - { label: Immagine, name: image, widget: image }
-          - { label: Testo — EN, name: body, widget: markdown }
-          - { label: Testo — IT, name: body_it, widget: markdown }
+          - { label: "Etichetta — EN", name: eyebrow, widget: string }
+          - { label: "Etichetta — IT", name: eyebrow_it, widget: string }
+          - { label: "Titolo — EN", name: title, widget: string }
+          - { label: "Titolo — IT", name: title_it, widget: string }
+          - { label: "Introduzione — EN", name: lead, widget: text }
+          - { label: "Introduzione — IT", name: lead_it, widget: text }
+          - { label: "Immagine pagina", name: image, widget: image }
+          - { label: "Testo — EN", name: body, widget: markdown }
+          - { label: "Testo — IT", name: body_it, widget: markdown }
       - name: contact
-        label: Contatti
+        label: "04 — Contatti"
         file: content/pages/contact.json
         format: json
         fields:
-          - { label: Etichetta — EN, name: eyebrow, widget: string }
-          - { label: Etichetta — IT, name: eyebrow_it, widget: string }
-          - { label: Titolo — EN, name: title, widget: string }
-          - { label: Titolo — IT, name: title_it, widget: string }
-          - { label: Introduzione — EN, name: lead, widget: text }
-          - { label: Introduzione — IT, name: lead_it, widget: text }
-          - { label: Email, name: email, widget: string, required: false }
-          - { label: Instagram, name: instagram, widget: string, required: false }
-          - { label: Testo — EN, name: body, widget: markdown }
-          - { label: Testo — IT, name: body_it, widget: markdown }
+          - { label: "Etichetta — EN", name: eyebrow, widget: string }
+          - { label: "Etichetta — IT", name: eyebrow_it, widget: string }
+          - { label: "Titolo — EN", name: title, widget: string }
+          - { label: "Titolo — IT", name: title_it, widget: string }
+          - { label: "Introduzione — EN", name: lead, widget: text }
+          - { label: "Introduzione — IT", name: lead_it, widget: text }
+          - { label: "Email", name: email, widget: string, required: false }
+          - { label: "Instagram", name: instagram, widget: string, required: false }
+          - { label: "Testo — EN", name: body, widget: markdown }
+          - { label: "Testo — IT", name: body_it, widget: markdown }
+
   - name: projects
-    label: Progetti
+    label: "05 — Progetti"
     files:
       - name: projects
         label: Elenco progetti
@@ -89,14 +113,32 @@ collections:
             widget: list
             summary: "{{fields.title}} — {{fields.category}}"
             fields:
-              - { label: Slug (indirizzo breve), name: slug, widget: string }
-              - { label: Titolo — EN, name: title, widget: string }
-              - { label: Titolo — IT, name: title_it, widget: string }
-              - { label: Categoria — EN, name: category, widget: string }
-              - { label: Categoria — IT, name: category_it, widget: string }
+              - { label: "Slug URL (non modificare se già online)", name: slug, widget: string }
+              - { label: "Titolo — EN", name: title, widget: string }
+              - { label: "Titolo — IT", name: title_it, widget: string }
+              - { label: "Categoria — EN", name: category, widget: string }
+              - { label: "Categoria — IT", name: category_it, widget: string }
               - { label: Anno, name: year, widget: string, required: false }
-              - { label: Immagine copertina, name: cover, widget: image }
-              - { label: Galleria immagini, name: gallery, widget: list, required: false, field: { label: Immagine, name: image, widget: image } }
-              - { label: Descrizione — EN, name: description, widget: markdown }
-              - { label: Descrizione — IT, name: description_it, widget: markdown }
-              - { label: In evidenza in homepage, name: featured, widget: boolean, default: false }
+              - { label: "Immagine copertina", name: cover, widget: image }
+              - { label: "Galleria immagini", name: gallery, widget: list, required: false, field: { label: Immagine, name: image, widget: image } }
+              - { label: "Descrizione — EN", name: description, widget: markdown }
+              - { label: "Descrizione — IT", name: description_it, widget: markdown }
+              - { label: "In evidenza in homepage", name: featured, widget: boolean, default: false }
+
+  - name: custom_gallery
+    label: "06 — Archivio Su misura"
+    files:
+      - name: custom_gallery
+        label: "Categorie e gallerie"
+        file: content/custom-gallery.json
+        format: json
+        fields:
+          - label: Categorie
+            name: collections
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Nome — EN", name: title, widget: string }
+              - { label: "Nome — IT", name: title_it, widget: string }
+              - { label: "Immagine principale", name: hero, widget: image }
+              - { label: "Altre immagini", name: images, widget: list, required: false, field: { label: Immagine, name: image, widget: image } }
