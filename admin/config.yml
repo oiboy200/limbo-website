@@ -27,72 +27,38 @@ collections:
         i18n: true
         format: json
         fields:
-          - label: "00 — Hero"
-            name: hero
-            widget: object
-            i18n: true
-            fields:
-              - { label: Testo principale, name: intro, widget: text, i18n: true }
-          - label: "01 — Workshop"
-            name: workshop
-            widget: object
-            i18n: true
-            fields:
-              - { label: Immagine, name: image, widget: image, i18n: sync }
-              - { label: Titolo, name: title, widget: string, i18n: true }
-              - { label: Testo, name: text, widget: text, i18n: true }
-              - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
-          - label: "02 — Custom Frames / Su misura"
-            name: custom
-            widget: object
-            i18n: true
-            fields:
-              - { label: Immagine, name: image, widget: image, i18n: sync }
-              - { label: Titolo manifesto, name: manifesto_title, widget: string, i18n: true }
-          - label: "03 — Progetti in evidenza"
-            name: featured
-            widget: object
-            i18n: true
-            fields:
-              - { label: Nota, name: help, widget: string, default: "Gestisci i progetti e attiva 'Mostra in homepage' nella pagina Projects.", i18n: duplicate }
-          - label: "04 — About"
-            name: about
-            widget: object
-            i18n: true
-            fields:
-              - { label: Immagine, name: image, widget: image, i18n: sync }
-          - label: "05 — Contact"
-            name: contact
-            widget: object
-            i18n: true
-            fields:
-              - { label: Testo principale, name: cta, widget: string, i18n: true }
-          - label: "Impostazioni layout"
-            name: layout
+          - { label: Testo principale (hero), name: hero_intro, widget: text, i18n: true }
+          - { label: Immagine 01 — Workshop, name: workshop_image, widget: image, i18n: sync }
+          - { label: Titolo Workshop, name: workshop_title, widget: string, i18n: true }
+          - { label: Testo Workshop, name: workshop_text, widget: text, i18n: true }
+          - { label: Immagine 02 — Su misura, name: custom_image, widget: image, i18n: sync }
+          - { label: Titolo Manifesto, name: manifesto_title, widget: string, i18n: true }
+          - { label: Immagine 04 — About, name: about_image, widget: image, i18n: sync }
+          - { label: Testo pulsante Contatti, name: contact_cta, widget: string, i18n: true }
+          - { label: Etichetta Workshop, name: workshop_eyebrow, widget: string, i18n: true, required: false }
+          - label: Visibilità sezioni
+            name: section_visibility
             widget: object
             i18n: duplicate
             fields:
-              - label: Mostra/nascondi sezioni
-                name: visibility
-                widget: object
-                fields:
-                  - { label: Workshop, name: workshop, widget: boolean }
-                  - { label: Su misura, name: custom, widget: boolean }
-                  - { label: Progetti in evidenza, name: featured, widget: boolean }
-                  - { label: About, name: about, widget: boolean }
-                  - { label: Contatti, name: contact, widget: boolean }
-              - label: Ordine sezioni
-                name: order
-                widget: list
-                field: { label: Sezione, name: section, widget: select, options: ["workshop", "custom", "featured", "about", "contact"] }
+              - { label: Workshop, name: workshop, widget: boolean }
+              - { label: Su misura, name: custom, widget: boolean }
+              - { label: Progetti in evidenza, name: featured, widget: boolean }
+              - { label: About, name: about, widget: boolean }
+              - { label: Contatti, name: contact, widget: boolean }
+          - label: Ordine sezioni
+            name: section_order
+            widget: list
+            i18n: duplicate
+            field: { label: Sezione, name: section, widget: select, options: ["workshop", "custom", "featured", "about", "contact"] }
 
       - name: projects
-        label: "02 — Projects"
+        label: "02 — Projects / Progetti"
         file: content/{{locale}}/projects.json
         i18n: true
         format: json
         fields:
-          - label: Elenco progetti
+          - label: Progetti
             name: projects
             widget: list
             i18n: sync
@@ -102,10 +68,10 @@ collections:
               - { label: Categoria, name: category, widget: string, i18n: true }
               - { label: Descrizione, name: description, widget: markdown, i18n: true }
               - { label: Copertina, name: cover, widget: image, i18n: sync }
-              - { label: Galleria immagini, name: gallery, widget: list, i18n: sync, field: { label: Immagine, name: image, widget: image, i18n: sync } }
-              - { label: Anno, name: year, widget: string, i18n: duplicate }
-              - { label: Mostra in homepage, name: featured, widget: boolean, i18n: duplicate }
+              - { label: Immagini progetto, name: gallery, widget: list, i18n: sync, field: { label: Immagine, name: image, widget: image, i18n: sync } }
               - { label: Slug URL (non modificare), name: slug, widget: string, i18n: duplicate }
+              - { label: Anno, name: year, widget: string, i18n: duplicate, required: false }
+              - { label: Mostra in homepage, name: featured, widget: boolean, i18n: duplicate }
 
       - name: about
         label: "03 — About / Studio"
@@ -113,16 +79,11 @@ collections:
         i18n: true
         format: json
         fields:
-          - label: Contenuti pagina
-            name: page
-            widget: object
-            i18n: true
-            fields:
-              - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
-              - { label: Titolo, name: title, widget: string, i18n: true }
-              - { label: Introduzione, name: lead, widget: text, i18n: true }
-              - { label: Immagine, name: image, widget: image, i18n: sync }
-              - { label: Testo, name: body, widget: markdown, i18n: true }
+          - { label: Titolo piccolo, name: eyebrow, widget: string, i18n: true }
+          - { label: Titolo pagina, name: title, widget: string, i18n: true }
+          - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Immagine pagina, name: image, widget: image, i18n: sync }
+          - { label: Testo pagina, name: body, widget: markdown, i18n: true }
 
       - name: custom
         label: "04 — Custom / Su misura"
@@ -130,46 +91,43 @@ collections:
         i18n: true
         format: json
         fields:
-          - label: Contenuti pagina
-            name: page
-            widget: object
-            i18n: true
-            fields:
-              - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
-              - { label: Titolo, name: title, widget: string, i18n: true }
-              - { label: Introduzione, name: lead, widget: text, i18n: true }
-              - { label: Immagine, name: image, widget: image, i18n: sync }
-              - { label: Testo, name: body, widget: markdown, i18n: true }
-          - label: Archivio immagini della pagina
-            name: gallery
+          - { label: Titolo piccolo, name: eyebrow, widget: string, i18n: true }
+          - { label: Titolo pagina, name: title, widget: string, i18n: true }
+          - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Immagine pagina, name: image, widget: image, i18n: sync }
+          - { label: Testo pagina, name: body, widget: markdown, i18n: true }
+
+      - name: custom_gallery
+        label: "04b — Archivio immagini della pagina Custom"
+        file: content/{{locale}}/custom-gallery.json
+        i18n: true
+        format: json
+        fields:
+          - label: Categorie / Sezioni dell'archivio
+            name: collections
             widget: list
             i18n: sync
             summary: "{{fields.title}}"
             fields:
-              - { label: Nome sezione, name: title, widget: string, i18n: true }
+              - { label: Nome categoria, name: title, widget: string, i18n: true }
               - { label: Immagine principale, name: hero, widget: image, i18n: sync }
               - { label: Altre immagini, name: images, widget: list, i18n: sync, field: { label: Immagine, name: image, widget: image, i18n: sync } }
 
       - name: contact
-        label: "05 — Contact"
+        label: "05 — Contact / Contatti"
         file: content/{{locale}}/pages/contact.json
         i18n: true
         format: json
         fields:
-          - label: Contenuti pagina
-            name: page
-            widget: object
-            i18n: true
-            fields:
-              - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
-              - { label: Titolo, name: title, widget: string, i18n: true }
-              - { label: Introduzione, name: lead, widget: text, i18n: true }
-              - { label: Testo, name: body, widget: markdown, i18n: true }
-              - { label: Email, name: email, widget: string, i18n: sync, required: false }
-              - { label: Instagram, name: instagram, widget: string, i18n: sync, required: false }
+          - { label: Titolo piccolo, name: eyebrow, widget: string, i18n: true }
+          - { label: Titolo pagina, name: title, widget: string, i18n: true }
+          - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Email, name: email, widget: string, i18n: sync, required: false }
+          - { label: Instagram, name: instagram, widget: string, i18n: sync, required: false }
+          - { label: Testo pagina, name: body, widget: markdown, i18n: true }
 
   - name: settings
-    label: IMPOSTAZIONI GENERALI
+    label: "IMPOSTAZIONI GENERALI"
     files:
       - name: media
         label: Logo
