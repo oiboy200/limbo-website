@@ -1,16 +1,8 @@
 {
-  "eyebrow": "04 / SAY HELLO",
-  "title": "Get in touch.",
-  "lead": "Have an artwork, an idea or a space in mind? Tell us what you are thinking. We would love to hear about it.",
+  "eyebrow": "04 / CONTATTI",
+  "title": "Parliamone.",
+  "lead": "Hai un’opera, un’idea o uno spazio in mente? Raccontaci cosa stai immaginando. Saremo felici di ascoltarti.",
+  "body": "<p>Limbo Cornici<br>Vicenza, Italia</p><p>Per cornici su misura, specchi, collaborazioni e richieste professionali.</p>",
   "email": "",
-  "instagram": "",
-  "body": "<p>Limbo Cornici<br>Vicenza, Italy</p><p>For custom frames, mirrors, collaborations and business enquiries.</p>",
-  "en": {
-    "eyebrow": "04 / CONTATTI",
-    "title": "Parliamone.",
-    "lead": "Hai un’opera, un’idea o uno spazio in mente? Raccontaci cosa stai immaginando. Saremo felici di ascoltarti.",
-    "email": "",
-    "instagram": "",
-    "body": "<p>Limbo Cornici<br>Vicenza, Italia</p><p>Per cornici su misura, specchi, collaborazioni e richieste professionali.</p>"
-  }
+  "instagram": ""
 }
