@@ -1,7 +1,7 @@
 // LIMBO CMS OAuth Worker. Keep the /auth flow for the existing Decap fallback.
 // Configure Worker secrets GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET.
 // GitHub OAuth callback: https://limbo-cms-auth.giovanniongaro86.workers.dev/callback
-const ALLOWED=new Set(["https://limbo-website.pages.dev","https://limbo-cornici.it","https://www.limbocornici.it"]);
+const ALLOWED=new Set(["https://limbo-website.pages.dev","https://limbo-cornici.it","https://www.limbocornici.it","https://feature-limbo-visual-cms.limbo-website.pages.dev"]);
 const html=(body,status=200)=>new Response(body,{status,headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store"}});
 export default {async fetch(request,env){const u=new URL(request.url);if(request.method!=="GET")return new Response("Method not allowed",{status:405});
 if(u.pathname==="/login"){if(!env.GITHUB_CLIENT_ID||!env.GITHUB_CLIENT_SECRET)return new Response("OAuth secrets are not configured.",{status:503});const origin=u.searchParams.get("origin")||"";if(!ALLOWED.has(origin))return new Response("Origin not allowed",{status:403});const state=crypto.randomUUID(),to=new URL("https://github.com/login/oauth/authorize");to.searchParams.set("client_id",env.GITHUB_CLIENT_ID);to.searchParams.set("redirect_uri",u.origin+"/callback");to.searchParams.set("scope","repo");to.searchParams.set("state",state);const h=new Headers({Location:to.toString(),"Cache-Control":"no-store"});h.append("Set-Cookie","limbo_state="+state+"; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=600");h.append("Set-Cookie","limbo_origin="+encodeURIComponent(origin)+"; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=600");return new Response(null,{status:302,headers:h})}
