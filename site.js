@@ -230,7 +230,7 @@ if(lang==='it'){
   const page=location.pathname.split('/').pop().replace('.html','')||'index';
   const home=await get('/content/'+lang+'/pages/home.json');
   const waitFor=async selector=>{for(let i=0;i<50;i++){if(document.querySelector(selector))return true;await new Promise(resolve=>requestAnimationFrame(resolve));}return false;};
-  const attr=(el,path,kind='text',label='')=>{if(!el)return;el.dataset.cmsPath=path;el.dataset.cmsKind=kind;if(label)el.dataset.cmsLabel=label};
+  const attr=(el,path,kind='text',label='',file='')=>{if(!el)return;el.dataset.cmsPath=path;el.dataset.cmsKind=kind;if(label)el.dataset.cmsLabel=label;if(file)el.dataset.cmsFile=file};
   const text=(selector,value,path,label)=>{const el=document.querySelector(selector);if(el&&value!==undefined){el.textContent=value;attr(el,path,'text',label)}};
   const html=(selector,value,path,label)=>{const el=document.querySelector(selector);if(el&&value!==undefined){el.innerHTML=value;attr(el,path,'html',label)}};
   const image=(selector,value,path,label)=>{const el=document.querySelector(selector);if(el&&value){el.src=value;attr(el,path,'image',label)}};
