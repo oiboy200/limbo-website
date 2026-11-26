@@ -498,3 +498,29 @@ html.lenis.lenis-stopped{overflow:hidden}
   padding-bottom:30px!important;
   margin-bottom:var(--pad)!important;
 }
+
+/* Hero copy sits above the LIMBO wordmark, aligned to the site's content margins */
+.hero .hero-copy{
+  width:100%;
+  padding:0;
+  margin:0 0 clamp(28px,4vh,48px);
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:30px;
+}
+.hero .hero-copy p{
+  max-width:850px;
+  margin:0;
+}
+.hero .hero-index{
+  margin:0;
+  padding-top:8px;
+}
+@media(max-width:760px){
+  .hero .hero-copy{
+    display:block;
+    margin-bottom:clamp(22px,4vh,34px);
+  }
+  .hero .hero-index{margin-top:16px;padding-top:0}
+}
