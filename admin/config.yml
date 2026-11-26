@@ -17,16 +17,6 @@ display_url: "https://limbo-website.pages.dev"
 logo_url: "/assets/limbo-logo-original.png"
 
 collections:
-  - name: settings
-    label: "05 — IDENTITÀ"
-    files:
-      - name: media
-        label: Immagini del sito (uguali in IT e EN)
-        file: content/shared-media.json
-        format: json
-        fields:
-          - { label: Logo LIMBO, name: logo, widget: image }
-
   - name: content
     label: "01 — PAGINE"
     i18n: true
@@ -143,3 +133,13 @@ collections:
               - { label: Nome, name: title, widget: string, i18n: true }
               - { label: Immagine principale, name: hero, widget: image, i18n: sync }
               - { label: Altre immagini, name: images, widget: list, i18n: sync, field: { label: Immagine, name: image, widget: image, i18n: sync } }
+
+  - name: settings
+    label: "05 — IDENTITÀ"
+    files:
+      - name: media
+        label: Immagini del sito (uguali in IT e EN)
+        file: content/shared-media.json
+        format: json
+        fields:
+          - { label: Logo LIMBO, name: logo, widget: image }
