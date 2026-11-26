@@ -556,3 +556,9 @@ html.lenis.lenis-stopped{overflow:hidden}
   .hero .hero-index{margin-top:10px}
   .hero .logo-stage{margin-top:0}
 }
+
+
+/* Heavier hero statement on desktop only */
+@media(min-width:761px){
+  .hero .hero-copy p{font-weight:800}
+}
