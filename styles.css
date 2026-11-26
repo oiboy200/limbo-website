@@ -388,3 +388,7 @@ html,body{overflow-x:clip}
 @media(max-width:760px){
  .home-image-section .home-image-link img{height:68vw;min-height:260px}
 }
+
+/* More breathing room after the hero; workshop photo enters only on scroll */
+.home-image-section{padding-top:12vh}
+@media(max-width:760px){.home-image-section{padding-top:9vh}}
