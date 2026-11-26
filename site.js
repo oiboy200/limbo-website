@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const a=source.getBoundingClientRect(),b=target.getBoundingClientRect();
     start={left:a.left,top:a.top,width:a.width};
     end={left:b.left,top:b.top,width:b.width};
-    travel=Math.max(360,window.innerHeight*.78);
+    travel=Math.max(220,window.innerHeight*.42);
     render();
   };
   const render=()=>{
