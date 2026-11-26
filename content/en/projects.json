@@ -3,9 +3,7 @@
     {
       "slug": "caffe-nazionale",
       "title": "Caffè Nazionale",
-      "title_it": "Caffè Nazionale",
-      "category": "Interior / Cornici su misura",
-      "category_it": "Interior / Cornici su misura",
+      "category": "Interior / Custom framing",
       "year": "2026",
       "cover": "/limbo_web_assets/caffe-nazionale/01.webp",
       "gallery": [
@@ -16,8 +14,7 @@
         "/limbo_web_assets/caffe-nazionale/05.webp",
         "/limbo_web_assets/caffe-nazionale/06.webp"
       ],
-      "description": "Un progetto di incorniciatura per il Caffè Nazionale di Arzignano. Un dialogo tra immagini, cornici e carattere dello spazio.",
-      "description_it": "Un progetto di incorniciatura per il Caffè Nazionale di Arzignano. Un dialogo tra immagini, cornici e carattere dello spazio.",
+      "description": "A framing project for Caffè Nazionale in Arzignano, Italy. A considered dialogue between images, frames and the character of the space.",
       "featured": true
     }
   ]
