@@ -466,3 +466,13 @@ html.lenis.lenis-stopped{overflow:hidden}
   .hero .logo-stage{margin-top:auto;padding:0}
   .hero .big-logo{width:100%;max-width:none;max-height:none}
 }
+
+/* Keep a clear yellow breathing space between the hero wordmark and first workshop image */
+.home-image-section{
+  padding-top:clamp(240px,34vh,420px)!important;
+}
+@media(max-width:760px){
+  .home-image-section{
+    padding-top:clamp(150px,25vh,260px)!important;
+  }
+}
