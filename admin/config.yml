@@ -19,6 +19,16 @@ slug:
   sanitize_replacement: "-"
 
 collections:
+  - name: settings
+    label: "00 — Identità del sito"
+    files:
+      - name: site
+        label: Logo e immagini globali
+        file: content/site-settings.json
+        format: json
+        fields:
+          - { label: "Logo LIMBO", name: logo, widget: image }
+          - { label: "Immagine predefinita / fallback", name: fallback_image, widget: image, required: false }
   - name: pages
     label: Pagine
     files:
