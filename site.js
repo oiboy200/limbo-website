@@ -237,7 +237,7 @@ if(lang==='it'){
   if(page==='index'&&home){
     text('.hero-copy > p',home.hero_intro,'hero_intro','Testo principale');
     image('.home-image-section .home-image-link img',home.workshop_image,'workshop_image','Immagine Workshop');
-    text('.home-custom h2',home.custom_title||'Custom Frames','custom_title','Titolo Custom Frames');
+    const customHeading=document.querySelector('.home-custom h2');if(customHeading){customHeading.innerHTML=(home.custom_title||'Custom Frames').replace(/\s+/,'<br>')+'<span>®</span>';attr(customHeading,'custom_title','text','Titolo Custom Frames');}
     image('.custom-feature-image img',home.custom_image,'custom_image','Immagine Custom');
     text('.home-custom .home-section-label a',home.custom_link||'Explore custom ↗','custom_link','Link Custom');
     text('.home-featured .home-section-label span',home.featured_label||'03 / FEATURED PROJECTS','featured_label','Etichetta Progetti');
