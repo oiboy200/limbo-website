@@ -13,15 +13,19 @@ logo_url: "/assets/limbo-logo-original.png"
 
 collections:
   - name: settings
-    label: "00 — Impostazioni condivise"
+    label: "00 — MEDIA CONDIVISI"
     files:
-      - name: site
-        label: Logo e immagini globali
-        file: content/site-settings.json
+      - name: media
+        label: Immagini del sito (uguali in IT e EN)
+        file: content/shared-media.json
         format: json
         fields:
-          - { label: Logo, name: logo, widget: image }
-          - { label: Immagine fallback, name: fallback_image, widget: image, required: false }
+          - { label: Logo LIMBO, name: logo, widget: image }
+          - { label: Homepage — Workshop, name: home_workshop, widget: image }
+          - { label: Homepage — Su misura, name: home_custom, widget: image }
+          - { label: Homepage — About, name: home_about, widget: image }
+          - { label: Pagina About, name: about_page, widget: image }
+          - { label: Pagina Su misura, name: custom_page, widget: image }
   - name: italian
     label: "01 — ITALIANO"
     files:
@@ -31,9 +35,6 @@ collections:
         format: json
         fields:
           - { label: Intro, name: hero_intro, widget: text }
-          - { label: Immagine Workshop, name: workshop_image, widget: image }
-          - { label: Immagine Su misura, name: custom_image, widget: image }
-          - { label: Immagine About, name: about_image, widget: image }
           - { label: Titolo Workshop, name: workshop_title, widget: string }
           - { label: Testo Workshop, name: workshop_text, widget: text }
           - { label: Titolo Manifesto, name: manifesto_title, widget: string }
@@ -59,7 +60,6 @@ collections:
           - { label: Etichetta, name: eyebrow, widget: string }
           - { label: Titolo, name: title, widget: string }
           - { label: Introduzione, name: lead, widget: text }
-          - { label: Immagine, name: image, widget: image }
           - { label: Testo, name: body, widget: markdown }
       - name: custom_it
         label: Su misura
@@ -69,7 +69,6 @@ collections:
           - { label: Etichetta, name: eyebrow, widget: string }
           - { label: Titolo, name: title, widget: string }
           - { label: Introduzione, name: lead, widget: text }
-          - { label: Immagine, name: image, widget: image }
           - { label: Testo, name: body, widget: markdown }
       - name: contact_it
         label: Contatti
@@ -122,9 +121,6 @@ collections:
         format: json
         fields:
           - { label: Intro, name: hero_intro, widget: text }
-          - { label: Workshop image, name: workshop_image, widget: image }
-          - { label: Custom image, name: custom_image, widget: image }
-          - { label: About image, name: about_image, widget: image }
           - { label: Workshop title, name: workshop_title, widget: string }
           - { label: Workshop text, name: workshop_text, widget: text }
           - { label: Manifesto title, name: manifesto_title, widget: string }
@@ -150,7 +146,6 @@ collections:
           - { label: Eyebrow, name: eyebrow, widget: string }
           - { label: Title, name: title, widget: string }
           - { label: Introduction, name: lead, widget: text }
-          - { label: Image, name: image, widget: image }
           - { label: Text, name: body, widget: markdown }
       - name: custom_en
         label: Custom frames
@@ -160,7 +155,6 @@ collections:
           - { label: Eyebrow, name: eyebrow, widget: string }
           - { label: Title, name: title, widget: string }
           - { label: Introduction, name: lead, widget: text }
-          - { label: Image, name: image, widget: image }
           - { label: Text, name: body, widget: markdown }
       - name: contact_en
         label: Contact
