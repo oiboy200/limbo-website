@@ -1,104 +1,12 @@
-const ORIGIN = "https://limbo-website.pages.dev";
-const GITHUB_AUTHORIZE = "https://github.com/login/oauth/authorize";
-const GITHUB_TOKEN = "https://github.com/login/oauth/access_token";
-
-function html(body, status = 200) {
-  return new Response(`<!doctype html><html><head><meta charset="utf-8"><title>LIMBO CMS authentication</title></head><body>${body}</body></html>`, {
-    status,
-    headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" }
-  });
-}
-
-function randomState() {
-  const bytes = new Uint8Array(32);
-  crypto.getRandomValues(bytes);
-  return Array.from(bytes, b => b.toString(16).padStart(2, "0")).join("");
-}
-
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-
-    if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
-
-    if (url.pathname === "/auth") {
-      if (!env.GITHUB_CLIENT_ID || !env.GITHUB_CLIENT_SECRET) {
-        return new Response("OAuth secrets are not configured.", { status: 503 });
-      }
-      const state = randomState();
-      const redirect = new URL(GITHUB_AUTHORIZE);
-      redirect.searchParams.set("client_id", env.GITHUB_CLIENT_ID);
-      redirect.searchParams.set("redirect_uri", new URL("/callback", url.origin).toString());
-      redirect.searchParams.set("scope", "repo");
-      redirect.searchParams.set("state", state);
-      return new Response(null, {
-        status: 302,
-        headers: {
-          "location": redirect.toString(),
-          "set-cookie": `limbo_oauth_state=${state}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=600`,
-          "cache-control": "no-store"
-        }
-      });
-    }
-
-    if (url.pathname === "/callback") {
-      const code = url.searchParams.get("code");
-      const returnedState = url.searchParams.get("state");
-      const cookie = request.headers.get("cookie") || "";
-      const match = cookie.match(/(?:^|;\s*)limbo_oauth_state=([a-f0-9]+)/);
-      const savedState = match?.[1];
-      if (!code || !returnedState || !savedState || returnedState !== savedState) {
-        return html("<h2>Autenticazione non valida</h2><p>Chiudi questa finestra e riprova dal CMS.</p>", 400);
-      }
-
-      const tokenResponse = await fetch(GITHUB_TOKEN, {
-        method: "POST",
-        headers: {
-          "accept": "application/json",
-          "content-type": "application/json",
-          "user-agent": "LIMBO-Decap-CMS"
-        },
-        body: JSON.stringify({
-          client_id: env.GITHUB_CLIENT_ID,
-          client_secret: env.GITHUB_CLIENT_SECRET,
-          code,
-          redirect_uri: new URL("/callback", url.origin).toString()
-        })
-      });
-      const tokenData = await tokenResponse.json();
-      if (!tokenResponse.ok || !tokenData.access_token) {
-        return html("<h2>Accesso GitHub non riuscito</h2><p>Chiudi questa finestra e riprova.</p>", 502);
-      }
-
-      const payload = JSON.stringify({ token: tokenData.access_token });
-      return new Response(`<!doctype html><html><head><meta charset="utf-8"><title>LIMBO CMS</title></head><body><p>Accesso completato. Attendo il CMS…</p><script>
-        (function () {
-          if (!window.opener) {
-            document.body.innerHTML = "<p>Accesso completato. Chiudi questa finestra e torna al CMS.</p>";
-            return;
-          }
-          const tokenMessage = "authorization:github:success:" + ${JSON.stringify(payload)};
-          function receiveMessage(event) {
-            if (event.source !== window.opener) return;
-            if (typeof event.data !== "string" || !event.data.startsWith("authorizing:github")) return;
-            window.opener.postMessage(tokenMessage, event.origin);
-            window.removeEventListener("message", receiveMessage);
-            setTimeout(function () { window.close(); }, 150);
-          }
-          window.addEventListener("message", receiveMessage);
-          window.opener.postMessage("authorizing:github", "*");
-        })();
-      </script></body></html>`, {
-        headers: {
-          "content-type": "text/html; charset=utf-8",
-          "cache-control": "no-store",
-          "set-cookie": "limbo_oauth_state=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0"
-        }
-      });
-    }
-
-    return new Response("LIMBO CMS OAuth service", {
-      headers: { "content-type": "text/plain; charset=utf-8" }
-    });
-  }
-};
+// LIMBO CMS OAuth Worker. Keep the /auth flow for the existing Decap fallback.
+// Configure Worker secrets GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET.
+// GitHub OAuth callback: https://limbo-cms-auth.giovanniongaro86.workers.dev/callback
+const ALLOWED=new Set(["https://limbo-website.pages.dev","https://limbo-cornici.it","https://www.limbocornici.it"]);
+const html=(body,status=200)=>new Response(body,{status,headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store"}});
+export default {async fetch(request,env){const u=new URL(request.url);if(request.method!=="GET")return new Response("Method not allowed",{status:405});
+if(u.pathname==="/login"){if(!env.GITHUB_CLIENT_ID||!env.GITHUB_CLIENT_SECRET)return new Response("OAuth secrets are not configured.",{status:503});const origin=u.searchParams.get("origin")||"";if(!ALLOWED.has(origin))return new Response("Origin not allowed",{status:403});const state=crypto.randomUUID(),to=new URL("https://github.com/login/oauth/authorize");to.searchParams.set("client_id",env.GITHUB_CLIENT_ID);to.searchParams.set("redirect_uri",u.origin+"/callback");to.searchParams.set("scope","repo");to.searchParams.set("state",state);const h=new Headers({Location:to.toString(),"Cache-Control":"no-store"});h.append("Set-Cookie","limbo_state="+state+"; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=600");h.append("Set-Cookie","limbo_origin="+encodeURIComponent(origin)+"; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=600");return new Response(null,{status:302,headers:h})}
+if(u.pathname==="/auth"){const state=crypto.randomUUID(),to=new URL("https://github.com/login/oauth/authorize");to.searchParams.set("client_id",env.GITHUB_CLIENT_ID);to.searchParams.set("redirect_uri",u.origin+"/callback");to.searchParams.set("scope","repo");to.searchParams.set("state",state);return new Response(null,{status:302,headers:{Location:to.toString(),"Set-Cookie":"limbo_state="+state+"; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=600"}})}
+if(u.pathname==="/callback"){const cookies=Object.fromEntries((request.headers.get("Cookie")||"").split(";").map(x=>x.trim().split("=")).filter(x=>x.length>1)),state=u.searchParams.get("state"),code=u.searchParams.get("code"),origin=decodeURIComponent(cookies.limbo_origin||"");if(!code||!state||state!==cookies.limbo_state)return html("<h2>Autenticazione non valida</h2><p>Chiudi questa finestra e riprova.</p>",400);const r=await fetch("https://github.com/login/oauth/access_token",{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({client_id:env.GITHUB_CLIENT_ID,client_secret:env.GITHUB_CLIENT_SECRET,code})}),j=await r.json();if(!j.access_token)return html("<h2>Accesso GitHub non riuscito</h2>",502);
+if(origin&&ALLOWED.has(origin)){const body='<!doctype html><meta charset="utf-8"><title>LIMBO CMS</title><body style="font:14px Arial;background:#f4f1eb;padding:40px">GitHub collegato. Puoi chiudere questa finestra.<script>if(window.opener){window.opener.postMessage({type:"LIMBO_GITHUB_TOKEN",token:'+JSON.stringify(j.access_token)+'},'+JSON.stringify(origin)+');window.close()}</script></body>';const h=new Headers({"Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store"});h.append("Set-Cookie","limbo_state=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0");h.append("Set-Cookie","limbo_origin=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0");return new Response(body,{headers:h})}
+const payload=JSON.stringify({token:j.access_token});return html('<p>Accesso completato. Torna al CMS.</p><script>if(window.opener)window.opener.postMessage("authorization:github:success:"+JSON.stringify('+JSON.stringify(payload)+'),"*");window.close()</script>')}
+return new Response("LIMBO CMS OAuth service",{headers:{"Content-Type":"text/plain"}})}};
