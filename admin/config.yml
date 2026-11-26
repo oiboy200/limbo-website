@@ -2,12 +2,14 @@ backend:
   name: github
   repo: oiboy200/limbo-website
   branch: main
+  base_url: https://limbo-cms-auth.giovanniongaro86.workers.dev
+  auth_endpoint: auth
 
 media_folder: "uploads"
 public_folder: "/uploads"
 
-site_url: "https://limbo-vicenza.netlify.app"
-display_url: "https://limbo-vicenza.netlify.app"
+site_url: "https://limbo-website.pages.dev"
+display_url: "https://limbo-website.pages.dev"
 logo_url: "/assets/limbo-logo-original.png"
 
 collections:
