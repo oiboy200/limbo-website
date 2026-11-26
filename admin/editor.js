@@ -176,12 +176,11 @@ function attachPreview(){
    e.preventDefault();e.stopPropagation();
    doc.querySelectorAll('.cms-selected').forEach(x=>x.classList.remove('cms-selected'));el.classList.add('cms-selected');
    const kind=el.dataset.cmsKind||(el.tagName==='IMG'?'image':'text');
-   const path=el.dataset.cmsPath;
-   const label=el.dataset.cmsLabel||el.textContent?.trim().slice(0,48)||path;
+   const cmsPath=el.dataset.cmsPath;
+   const label=el.dataset.cmsLabel||el.textContent?.trim().slice(0,48)||cmsPath;
    const file=el.dataset.cmsFile||path();
-   const choose=async()=>{try{if(!records[file])await loadRecord(file);selected={path,kind,label,file,element:el};renderSelected();$('#selected-editor')?.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(err){tell('Impossibile caricare il contenuto selezionato: '+err.message,'error')}};
+   const choose=async()=>{try{if(!records[file])await loadRecord(file);selected={path:cmsPath,kind,label,file,element:el};renderSelected();$('#selected-editor')?.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(err){tell('Impossibile caricare il contenuto selezionato: '+err.message,'error')}};
    choose();
-   $('#selected-editor')?.scrollIntoView({behavior:'smooth',block:'nearest'});
   },true);
  }catch(e){tell('Anteprima non accessibile: verifica il dominio di preview Cloudflare.','error')}
 }
