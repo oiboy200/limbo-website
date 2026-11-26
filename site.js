@@ -1,4 +1,27 @@
 
+/* Smooth, inertial desktop wheel scrolling */
+(function initInertialScroll(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const start=()=>{
+    if(typeof window.Lenis!=='function'||window.__limboLenis)return;
+    const lenis=new window.Lenis({
+      lerp:0.085,
+      wheelMultiplier:0.9,
+      smoothWheel:true,
+      syncTouch:false,
+      touchMultiplier:1
+    });
+    window.__limboLenis=lenis;
+    const raf=(time)=>{lenis.raf(time);requestAnimationFrame(raf);};
+    requestAnimationFrame(raf);
+  };
+  if(typeof window.Lenis==='function'){start();return;}
+  const script=document.createElement('script');
+  script.src='https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js';
+  script.onload=start;
+  document.head.appendChild(script);
+})();
+
 document.addEventListener('DOMContentLoaded',()=>{
   const source=document.querySelector('.big-logo');
   const target=document.querySelector('.mini-logo');
