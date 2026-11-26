@@ -117,11 +117,11 @@ function render(){
  fields.querySelectorAll('[data-path]').forEach(el=>el.addEventListener(el.type==='checkbox'?'change':'input',()=>{
   let v=el.type==='checkbox'?el.checked:el.value;
   if(el.dataset.path.endsWith('.gallery')||el.dataset.path.endsWith('.images'))v=v.split('\n').map(x=>x.trim()).filter(Boolean);
-  setAt(record().data,el.dataset.path,v);markDirty();applyToPreview({path:el.dataset.path,kind:'text'},v);
+  setAt(record().data,el.dataset.path,v);markDirty();if(el.dataset.path==='section_order'||el.dataset.path.startsWith('section_visibility.'))refreshPreview();else applyToPreview({path:el.dataset.path,kind:'text'},v);
  }));
  fields.querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>{
   const a=record().data.section_order||['workshop','custom','featured','about','contact'],i=+b.dataset.move,j=i+(+b.dataset.dir);
-  if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];record().data.section_order=a;markDirty();render();
+  if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];record().data.section_order=a;markDirty();render();refreshPreview();
  });
  fields.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{
   const [k,i]=b.dataset.remove.split('.');if(!confirm('Eliminare questo elemento?'))return;
