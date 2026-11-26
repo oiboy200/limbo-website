@@ -401,3 +401,13 @@ html,body{overflow-x:clip}
  .home-image-section{padding-top:clamp(110px,16vh,180px)!important}
  .scroll-note{padding-bottom:10px}
 }
+
+/* Standard gallery images stay fixed in their grid; hover zoom is clipped by each image mask */
+.motion-image{opacity:1!important;transform:none!important;transition:none!important;will-change:auto}
+.home-project,.custom-feature-image,.project-list .project-card,.custom-project-hero,.custom-project-detail,.case-image{overflow:hidden}
+.home-project img,.custom-feature-image img,.project-list .project-card img,.custom-project-hero img,.custom-project-detail img,.case-image img{
+  display:block;
+  transition:transform 1.5s cubic-bezier(.22,.72,.18,1);
+  transform:scale(1);
+}
+.home-project:hover img,.custom-feature-image:hover img,.project-list .project-card:hover img,.custom-project-hero:hover img,.custom-project-detail:hover img,.case-image:hover img{transform:scale(1.035)}
