@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 function initImageScrollMotion(){
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const items=[...document.querySelectorAll('.home-image-link,.custom-feature-image,.home-project,.about-split>img,.custom-project-hero,.custom-project-detail,.project-list .project-card,.case-image')];
+  const items=[...document.querySelectorAll('.custom-feature-image,.home-project,.about-split>img,.custom-project-hero,.custom-project-detail,.project-list .project-card,.case-image')];
   if(!items.length)return;
   items.forEach(el=>el.classList.add('motion-image'));
   const observer=new IntersectionObserver(entries=>{
@@ -60,11 +60,11 @@ function initImageScrollMotion(){
     const rect=section.getBoundingClientRect();
     const p=Math.max(0,Math.min(1,(window.innerHeight-rect.top)/(window.innerHeight*.9)));
     const pad=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad'))||24;
-    const bleed=Math.max(34,pad*1.25);
-    const startWidth=window.innerWidth+2*bleed;
-    const endWidth=window.innerWidth-2*pad;
-    firstWorkshop.style.width=(startWidth+(endWidth-startWidth)*p)+'px';
-    firstWorkshop.style.marginLeft=(-pad-bleed+bleed*p)+'px';
+    /* Starts edge-to-edge with an enlarged/cropped photo, then settles into the content grid. */
+    firstWorkshop.style.width=(window.innerWidth-2*pad*p)+'px';
+    firstWorkshop.style.marginLeft=(-pad+pad*p)+'px';
+    firstWorkshop.style.setProperty('--workshop-zoom',(1.18-.18*p).toFixed(3));
+    firstWorkshop.classList.toggle('workshop-visible',rect.top<window.innerHeight*.98);
   };
   const onScroll=()=>{if(!busy){busy=true;requestAnimationFrame(()=>{update();updateWorkshopFrame();});}};
   window.addEventListener('scroll',onScroll,{passive:true});
