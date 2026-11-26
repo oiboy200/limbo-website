@@ -392,3 +392,12 @@ html,body{overflow-x:clip}
 /* More breathing room after the hero; workshop photo enters only on scroll */
 .home-image-section{padding-top:12vh}
 @media(max-width:760px){.home-image-section{padding-top:9vh}}
+
+/* Final spacing: keep the oversized workshop image below the hero cue */
+.home-image-section{padding-top:clamp(150px,22vh,260px)!important}
+.home-image-section .home-image-link{transform-origin:center center}
+.scroll-note{position:relative;z-index:2;margin-bottom:0;padding-bottom:12px;background:var(--yellow)}
+@media(max-width:760px){
+ .home-image-section{padding-top:clamp(110px,16vh,180px)!important}
+ .scroll-note{padding-bottom:10px}
+}
