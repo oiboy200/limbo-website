@@ -524,3 +524,35 @@ html.lenis.lenis-stopped{overflow:hidden}
   }
   .hero .hero-index{margin-top:16px;padding-top:0}
 }
+
+
+/* Keep the complete hero text block directly above the LIMBO wordmark */
+.hero .hero-copy{
+  display:block;
+  width:100%;
+  margin-top:auto;
+  margin-bottom:var(--pad);
+  padding:0;
+  text-align:left;
+}
+.hero .hero-copy p{
+  max-width:850px;
+  margin:0;
+}
+.hero .hero-index{
+  display:block;
+  margin:10px 0 0;
+  padding:0;
+}
+.hero .logo-stage{
+  margin-top:0;
+}
+@media(max-width:760px){
+  .hero .hero-copy{
+    display:block;
+    margin-top:auto;
+    margin-bottom:var(--pad);
+  }
+  .hero .hero-index{margin-top:10px}
+  .hero .logo-stage{margin-top:0}
+}
