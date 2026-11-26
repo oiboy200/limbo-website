@@ -34,39 +34,25 @@ document.addEventListener('DOMContentLoaded',()=>{
   window.addEventListener('resize',measure);
 });
 
-function initImageScrollMotion(){
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const items=[...document.querySelectorAll('.custom-feature-image,.home-project,.about-split>img,.custom-project-hero,.custom-project-detail,.project-list .project-card,.case-image')];
-  if(!items.length)return;
-  items.forEach(el=>el.classList.add('motion-image'));
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>entry.target.classList.toggle('is-visible',entry.isIntersecting));
-  },{threshold:0.02});
-  items.forEach(el=>observer.observe(el));
-  let busy=false;
-  const update=()=>{
-    const vh=window.innerHeight;
-    items.forEach(el=>{
-      const r=el.getBoundingClientRect();
-      const p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height)));
-      el.style.setProperty('--scroll-scale',(0.92+p*0.10).toFixed(3));
-    });
-    busy=false;
-  };
+function initWorkshopImageMotion(){
   const firstWorkshop=document.querySelector('.home-image-section .home-image-link');
-  const updateWorkshopFrame=()=>{
-    if(!firstWorkshop)return;
-    const section=firstWorkshop.closest('.home-image-section');
+  if(!firstWorkshop)return;
+  const section=firstWorkshop.closest('.home-image-section');
+  let ticking=false;
+  const update=()=>{
     const rect=section.getBoundingClientRect();
-    /* Strong centered oversize on entry; settles to the exact grid width as the image reaches the viewport. */
-    const p=Math.max(0,Math.min(1,(window.innerHeight*.82-rect.top)/(window.innerHeight*.62)));
-    firstWorkshop.style.setProperty('--workshop-frame-scale',(1.42-.42*p).toFixed(3));
+    const vh=window.innerHeight;
+    const progress=Math.max(0,Math.min(1,(vh*.82-rect.top)/(vh*.62)));
+    const scale=1.42-(.42*progress);
+    firstWorkshop.style.setProperty('--workshop-frame-scale',scale.toFixed(3));
+    ticking=false;
   };
-  const onScroll=()=>{if(!busy){busy=true;requestAnimationFrame(()=>{update();updateWorkshopFrame();});}};
+  const onScroll=()=>{if(!ticking){ticking=true;requestAnimationFrame(update);}};
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll);
-  update();updateWorkshopFrame();
+  update();
 }
+document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
 
 (async function(){
   const get=async(path)=>{try{const r=await fetch(path);return r.ok?await r.json():null;}catch(e){return null;}};
