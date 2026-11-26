@@ -1,7 +1,130 @@
 {
-  "eyebrow": "03 / MADE TO MEASURE",
-  "title": "Custom frames.",
-  "lead": "A personal consultation, a careful selection of materials, a frame made around your artwork — never the other way around.",
-  "image": "/assets/frame-detail-02.png",
-  "body": "<p><strong>For your home.</strong><br>Custom frames and mirrors designed to sit naturally in your space and bring out the character of what they contain.</p><p><strong>For artists and businesses.</strong><br>Tailored framing solutions for galleries, studios, hospitality spaces, offices and creative projects.</p><p><strong>Made with care.</strong><br>We work with different woods, colours, profiles and finishes. Every choice is made together, around the work and its context.</p>"
+  "page": {
+    "eyebrow": "03 / MADE TO MEASURE",
+    "title": "Custom frames.",
+    "lead": "A personal consultation, a careful selection of materials, a frame made around your artwork — never the other way around.",
+    "body": "<p><strong>For your home.</strong><br>Custom frames and mirrors designed to sit naturally in your space and bring out the character of what they contain.</p><p><strong>For artists and businesses.</strong><br>Tailored framing solutions for galleries, studios, hospitality spaces, offices and creative projects.</p><p><strong>Made with care.</strong><br>We work with different woods, colours, profiles and finishes. Every choice is made together, around the work and its context.</p>",
+    "image": "/assets/frame-detail-02.png"
+  },
+  "gallery": [
+    {
+      "title": "GREEN",
+      "hero": "/limbo_web_assets/green/hero.webp",
+      "images": [
+        "/limbo_web_assets/green/01.webp",
+        "/limbo_web_assets/green/02.webp",
+        "/limbo_web_assets/green/03.webp",
+        "/limbo_web_assets/green/04.webp",
+        "/limbo_web_assets/green/05.webp"
+      ]
+    },
+    {
+      "title": "GREEN / ORANGE",
+      "hero": "/limbo_web_assets/green-orange/01.webp",
+      "images": [
+        "/limbo_web_assets/green-orange/02.webp",
+        "/limbo_web_assets/green-orange/03.webp",
+        "/limbo_web_assets/green-orange/04.webp"
+      ]
+    },
+    {
+      "title": "JACK",
+      "hero": "/limbo_web_assets/jack/01.webp",
+      "images": [
+        "/limbo_web_assets/jack/02.webp",
+        "/limbo_web_assets/jack/03.webp",
+        "/limbo_web_assets/jack/04.webp",
+        "/limbo_web_assets/jack/05.webp"
+      ]
+    },
+    {
+      "title": "RED",
+      "hero": "/limbo_web_assets/red/01.webp",
+      "images": [
+        "/limbo_web_assets/red/02.webp",
+        "/limbo_web_assets/red/03.webp",
+        "/limbo_web_assets/red/04.webp",
+        "/limbo_web_assets/red/05.webp",
+        "/limbo_web_assets/red/06.webp"
+      ]
+    },
+    {
+      "title": "NIC FRAMES",
+      "hero": "/limbo_web_assets/nic-frames/01.webp",
+      "images": [
+        "/limbo_web_assets/nic-frames/02.webp",
+        "/limbo_web_assets/nic-frames/03.webp",
+        "/limbo_web_assets/nic-frames/04.webp",
+        "/limbo_web_assets/nic-frames/05.webp",
+        "/limbo_web_assets/nic-frames/06.webp",
+        "/limbo_web_assets/nic-frames/07.webp",
+        "/limbo_web_assets/nic-frames/08.webp"
+      ]
+    },
+    {
+      "title": "BLUE / ORANGE",
+      "hero": "/limbo_web_assets/blue-orange/01.webp",
+      "images": [
+        "/limbo_web_assets/blue-orange/02.webp",
+        "/limbo_web_assets/blue-orange/03.webp",
+        "/limbo_web_assets/blue-orange/04.webp",
+        "/limbo_web_assets/blue-orange/05.webp"
+      ]
+    },
+    {
+      "title": "BICYCLE",
+      "hero": "/limbo_web_assets/bicycle/01.webp",
+      "images": [
+        "/limbo_web_assets/bicycle/02.webp",
+        "/limbo_web_assets/bicycle/03.webp"
+      ]
+    },
+    {
+      "title": "PINK HOUSE",
+      "hero": "/limbo_web_assets/pink-house/01.webp",
+      "images": [
+        "/limbo_web_assets/pink-house/02.webp",
+        "/limbo_web_assets/pink-house/03.webp",
+        "/limbo_web_assets/pink-house/04.webp",
+        "/limbo_web_assets/pink-house/05.webp"
+      ]
+    },
+    {
+      "title": "COLOUR STUDIES",
+      "hero": "/limbo_web_assets/colour-studies/01.webp",
+      "images": [
+        "/limbo_web_assets/colour-studies/02.webp",
+        "/limbo_web_assets/colour-studies/03.webp",
+        "/limbo_web_assets/colour-studies/04.webp",
+        "/limbo_web_assets/colour-studies/05.webp",
+        "/limbo_web_assets/colour-studies/06.webp",
+        "/limbo_web_assets/colour-studies/07.webp",
+        "/limbo_web_assets/colour-studies/08.webp"
+      ]
+    },
+    {
+      "title": "JAPAN PRINTS",
+      "hero": "/limbo_web_assets/japan-prints/01.webp",
+      "images": [
+        "/limbo_web_assets/japan-prints/02.webp",
+        "/limbo_web_assets/japan-prints/03.webp",
+        "/limbo_web_assets/japan-prints/04.webp",
+        "/limbo_web_assets/japan-prints/05.webp",
+        "/limbo_web_assets/japan-prints/06.webp",
+        "/limbo_web_assets/japan-prints/07.webp",
+        "/limbo_web_assets/japan-prints/08.webp",
+        "/limbo_web_assets/japan-prints/09.webp"
+      ]
+    },
+    {
+      "title": "TURQUOISE ARCHIVE",
+      "hero": "/limbo_web_assets/turquoise-archive/01.webp",
+      "images": [
+        "/limbo_web_assets/turquoise-archive/02.webp",
+        "/limbo_web_assets/turquoise-archive/03.webp",
+        "/limbo_web_assets/turquoise-archive/04.webp",
+        "/limbo_web_assets/turquoise-archive/05.webp"
+      ]
+    }
+  ]
 }
