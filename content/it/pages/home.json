@@ -1,25 +1,37 @@
 {
-  "hero_intro": "Realizziamo cornici e specchi rifiniti a mano, per trasformare ricordi e spazi in qualcosa di speciale.",
-  "workshop_image": "/uploads/immagine-chatgpt-26-nov-2026-16_25_31.jpg",
-  "custom_image": "/uploads/japan_0001_8.png",
-  "about_image": "/uploads/japan_0006_3.png",
-  "workshop_title": "Cornici che danno alle cose un posto.",
-  "workshop_text": "Una cornice non è mai soltanto una cornice. È un modo per guardare più da vicino, dare valore a un’immagine, a un oggetto, a un ricordo. Progettata e realizzata a mano a Vicenza.",
-  "manifesto_title": "Ogni cornice ha la sua storia.",
-  "contact_cta": "Hai qualcosa da incorniciare?",
-  "workshop_eyebrow": "01 / IL LABORATORIO",
-  "section_visibility": {
-    "workshop": true,
-    "custom": true,
-    "featured": true,
-    "about": true,
-    "contact": true
+  "hero": {
+    "intro": "Realizziamo cornici e specchi rifiniti a mano, per trasformare ricordi e spazi in qualcosa di speciale."
   },
-  "section_order": [
-    "workshop",
-    "custom",
-    "featured",
-    "about",
-    "contact"
-  ]
+  "workshop": {
+    "eyebrow": "01 / IL LABORATORIO",
+    "title": "Cornici che danno alle cose un posto.",
+    "text": "Una cornice non è mai soltanto una cornice. È un modo per guardare più da vicino, dare valore a un’immagine, a un oggetto, a un ricordo. Progettata e realizzata a mano a Vicenza.",
+    "image": "/uploads/immagine-chatgpt-26-nov-2026-16_25_31.jpg"
+  },
+  "custom": {
+    "image": "/uploads/japan_0001_8.png",
+    "manifesto_title": "Ogni cornice ha la sua storia."
+  },
+  "about": {
+    "image": "/uploads/japan_0006_3.png"
+  },
+  "contact": {
+    "cta": "Hai qualcosa da incorniciare?"
+  },
+  "layout": {
+    "visibility": {
+      "workshop": true,
+      "custom": true,
+      "featured": true,
+      "about": true,
+      "contact": true
+    },
+    "order": [
+      "workshop",
+      "custom",
+      "featured",
+      "about",
+      "contact"
+    ]
+  }
 }
