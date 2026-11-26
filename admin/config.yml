@@ -18,7 +18,7 @@ logo_url: "/assets/limbo-logo-original.png"
 
 collections:
   - name: content
-    label: "01 — PAGINE"
+    label: PAGINE DEL SITO
     i18n: true
     files:
       - name: home
@@ -27,14 +27,14 @@ collections:
         i18n: true
         format: json
         fields:
-          - { label: Intro, name: hero_intro, widget: text, i18n: true }
-          - { label: Immagine Workshop, name: workshop_image, widget: image, i18n: sync }
-          - { label: Immagine Su misura, name: custom_image, widget: image, i18n: sync }
-          - { label: Immagine About, name: about_image, widget: image, i18n: sync }
+          - { label: Testo principale (hero), name: hero_intro, widget: text, i18n: true }
+          - { label: Immagine 01 — Workshop, name: workshop_image, widget: image, i18n: sync }
           - { label: Titolo Workshop, name: workshop_title, widget: string, i18n: true }
           - { label: Testo Workshop, name: workshop_text, widget: text, i18n: true }
+          - { label: Immagine 02 — Su misura, name: custom_image, widget: image, i18n: sync }
           - { label: Titolo Manifesto, name: manifesto_title, widget: string, i18n: true }
-          - { label: CTA Contatti, name: contact_cta, widget: string, i18n: true }
+          - { label: Immagine 04 — About, name: about_image, widget: image, i18n: sync }
+          - { label: Testo pulsante Contatti, name: contact_cta, widget: string, i18n: true }
           - { label: Etichetta Workshop, name: workshop_eyebrow, widget: string, i18n: true, required: false }
           - label: Visibilità sezioni
             name: section_visibility
@@ -52,49 +52,8 @@ collections:
             i18n: duplicate
             field: { label: Sezione, name: section, widget: select, options: ["workshop", "custom", "featured", "about", "contact"] }
 
-      - name: about
-        label: "02 — Studio"
-        file: content/{{locale}}/pages/about.json
-        i18n: true
-        format: json
-        fields:
-          - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
-          - { label: Titolo, name: title, widget: string, i18n: true }
-          - { label: Introduzione, name: lead, widget: text, i18n: true }
-          - { label: Immagine pagina, name: image, widget: image, i18n: sync }
-          - { label: Testo, name: body, widget: markdown, i18n: true }
-
-      - name: custom
-        label: "03 — Su misura"
-        file: content/{{locale}}/pages/custom.json
-        i18n: true
-        format: json
-        fields:
-          - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
-          - { label: Titolo, name: title, widget: string, i18n: true }
-          - { label: Introduzione, name: lead, widget: text, i18n: true }
-          - { label: Immagine pagina, name: image, widget: image, i18n: sync }
-          - { label: Testo, name: body, widget: markdown, i18n: true }
-
-      - name: contact
-        label: "04 — Contatti"
-        file: content/{{locale}}/pages/contact.json
-        i18n: true
-        format: json
-        fields:
-          - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
-          - { label: Titolo, name: title, widget: string, i18n: true }
-          - { label: Introduzione, name: lead, widget: text, i18n: true }
-          - { label: Email, name: email, widget: string, i18n: sync, required: false }
-          - { label: Instagram, name: instagram, widget: string, i18n: sync, required: false }
-          - { label: Testo, name: body, widget: markdown, i18n: true }
-
-  - name: projects
-    label: "02 — PROGETTI"
-    i18n: true
-    files:
       - name: projects
-        label: Elenco progetti
+        label: "02 — Projects / Progetti"
         file: content/{{locale}}/projects.json
         i18n: true
         format: json
@@ -105,40 +64,73 @@ collections:
             i18n: sync
             summary: "{{fields.title}}"
             fields:
-              - { label: Slug URL, name: slug, widget: string, i18n: duplicate }
               - { label: Titolo, name: title, widget: string, i18n: true }
               - { label: Categoria, name: category, widget: string, i18n: true }
-              - { label: Anno, name: year, widget: string, i18n: duplicate, required: false }
-              - { label: Copertina, name: cover, widget: image, i18n: sync }
-              - { label: Galleria, name: gallery, widget: list, i18n: sync, field: { label: Immagine, name: image, widget: image, i18n: sync } }
               - { label: Descrizione, name: description, widget: markdown, i18n: true }
-              - { label: In evidenza, name: featured, widget: boolean, i18n: duplicate }
+              - { label: Copertina, name: cover, widget: image, i18n: sync }
+              - { label: Immagini progetto, name: gallery, widget: list, i18n: sync, field: { label: Immagine, name: image, widget: image, i18n: sync } }
+              - { label: Slug URL (non modificare), name: slug, widget: string, i18n: duplicate }
+              - { label: Anno, name: year, widget: string, i18n: duplicate, required: false }
+              - { label: Mostra in homepage, name: featured, widget: boolean, i18n: duplicate }
 
-  - name: custom_gallery
-    label: "04 — ARCHIVIO SU MISURA"
-    i18n: true
-    files:
+      - name: about
+        label: "03 — About / Studio"
+        file: content/{{locale}}/pages/about.json
+        i18n: true
+        format: json
+        fields:
+          - { label: Titolo piccolo, name: eyebrow, widget: string, i18n: true }
+          - { label: Titolo pagina, name: title, widget: string, i18n: true }
+          - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Immagine pagina, name: image, widget: image, i18n: sync }
+          - { label: Testo pagina, name: body, widget: markdown, i18n: true }
+
+      - name: custom
+        label: "04 — Custom / Su misura"
+        file: content/{{locale}}/pages/custom.json
+        i18n: true
+        format: json
+        fields:
+          - { label: Titolo piccolo, name: eyebrow, widget: string, i18n: true }
+          - { label: Titolo pagina, name: title, widget: string, i18n: true }
+          - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Immagine pagina, name: image, widget: image, i18n: sync }
+          - { label: Testo pagina, name: body, widget: markdown, i18n: true }
+
       - name: custom_gallery
-        label: Archivio immagini
+        label: "04b — Archivio immagini della pagina Custom"
         file: content/{{locale}}/custom-gallery.json
         i18n: true
         format: json
         fields:
-          - label: Categorie
+          - label: Categorie / Sezioni dell'archivio
             name: collections
             widget: list
             i18n: sync
             summary: "{{fields.title}}"
             fields:
-              - { label: Nome, name: title, widget: string, i18n: true }
+              - { label: Nome categoria, name: title, widget: string, i18n: true }
               - { label: Immagine principale, name: hero, widget: image, i18n: sync }
               - { label: Altre immagini, name: images, widget: list, i18n: sync, field: { label: Immagine, name: image, widget: image, i18n: sync } }
 
+      - name: contact
+        label: "05 — Contact / Contatti"
+        file: content/{{locale}}/pages/contact.json
+        i18n: true
+        format: json
+        fields:
+          - { label: Titolo piccolo, name: eyebrow, widget: string, i18n: true }
+          - { label: Titolo pagina, name: title, widget: string, i18n: true }
+          - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Email, name: email, widget: string, i18n: sync, required: false }
+          - { label: Instagram, name: instagram, widget: string, i18n: sync, required: false }
+          - { label: Testo pagina, name: body, widget: markdown, i18n: true }
+
   - name: settings
-    label: "05 — IDENTITÀ"
+    label: "IMPOSTAZIONI GENERALI"
     files:
       - name: media
-        label: Immagini del sito (uguali in IT e EN)
+        label: Logo
         file: content/shared-media.json
         format: json
         fields:
