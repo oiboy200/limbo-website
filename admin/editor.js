@@ -26,7 +26,8 @@ function tell(s,t=''){notice.textContent=s;notice.className='notice '+t}
 function status(s){$('#save-status').textContent=s;$('#save').disabled=!token||!dirty.size}
 function getAt(o,p){return p.split('.').reduce((v,k)=>v==null?undefined:v[k],o)}
 function setAt(o,p,v){const a=p.split('.'),k=a.pop();const parent=a.reduce((x,y)=>x[y],o);parent[k]=v}
-function markDirty(){dirty.add(path());status('Modifiche da pubblicare');}
+function markDirty(file=path()){dirty.add(file);status('Modifiche da pubblicare');}
+function selectedRecord(){return records[selected?.file||path()];}
 function nav(){
  $('#pages').innerHTML=pages.map(p=>'<button class="page-link '+(p.id===active?'active':'')+'" data-page="'+p.id+'"><span>'+p.label+'</span><small>'+p.num+'</small></button>').join('');
  document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>loadPage(b.dataset.page));
@@ -96,15 +97,15 @@ function renderPage(d){
 function renderSelected(){
  const box=$('#selected-editor');if(!box)return;
  if(!selected){box.innerHTML='<div class="selected-empty">Seleziona un testo o un’immagine nell’anteprima per modificarlo qui.</div>';return}
- const val=getAt(record().data,selected.path);
+ const val=getAt(selectedRecord().data,selected.path);
  const isImage=selected.kind==='image';
  box.innerHTML='<div class="selected-top"><div><small>ELEMENTO SELEZIONATO</small><strong>'+esc(selected.label||selected.path)+'</strong></div><button type="button" id="clear-selection">×</button></div>'+
  (isImage?'<label class="selected-label">Percorso immagine<input id="selected-value" value="'+esc(val||'')+'"></label><label class="selected-upload">Sostituisci immagine<input id="selected-file" type="file" accept="image/*"></label>':
  '<label class="selected-label">'+(selected.kind==='html'?'Contenuto HTML':'Testo')+(selected.kind==='html'?'<textarea id="selected-value">'+esc(val||'')+'</textarea>':'<textarea id="selected-value">'+esc(val||'')+'</textarea>')+'</label>')+
  '<div class="selected-help">Le modifiche si vedono subito nell’anteprima. Premi “Pubblica modifiche” per salvarle.</div>';
  $('#clear-selection').onclick=()=>{selected=null;renderSelected();};
- $('#selected-value').oninput=e=>{setAt(record().data,selected.path,e.target.value);markDirty();applyToPreview(selected,e.target.value);};
- const file=$('#selected-file');if(file)file.onchange=()=>upload(file.files?.[0],selected.path,selected);
+ $('#selected-value').oninput=e=>{setAt(selectedRecord().data,selected.path,e.target.value);markDirty(selected.file||path());applyToPreview(selected,e.target.value);};
+ const file=$('#selected-file');if(file)file.onchange=()=>upload(file.files?.[0],selected.path,selected,selected.file||path());
 }
 function render(){
  fields.innerHTML='';
@@ -177,15 +178,14 @@ function attachPreview(){
    const kind=el.dataset.cmsKind||(el.tagName==='IMG'?'image':'text');
    const path=el.dataset.cmsPath;
    const label=el.dataset.cmsLabel||el.textContent?.trim().slice(0,48)||path;
-   const file=el.dataset.cmsFile;
-   if(file&&file!==path()){tell('Questo elemento appartiene a un altro contenuto. Apri la pagina corrispondente nel menu.');return}
-   selected={path,kind,label,element:el};
-   renderSelected();
+   const file=el.dataset.cmsFile||path();
+   const choose=async()=>{try{if(!records[file])await loadRecord(file);selected={path,kind,label,file,element:el};renderSelected();$('#selected-editor')?.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(err){tell('Impossibile caricare il contenuto selezionato: '+err.message,'error')}};
+   choose();
    $('#selected-editor')?.scrollIntoView({behavior:'smooth',block:'nearest'});
   },true);
  }catch(e){tell('Anteprima non accessibile: verifica il dominio di preview Cloudflare.','error')}
 }
-function upload(file,p,sel=null){
+function upload(file,p,sel=null,sourceFile=path()){
  if(!file)return;
  (async()=>{
   try{
@@ -196,7 +196,7 @@ function upload(file,p,sel=null){
    for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,i+0x8000));
    const response=await fetch(API+'/repos/'+REPO+'/contents/'+dest,{method:'PUT',headers:headers(),body:JSON.stringify({message:'Upload '+file.name,branch:BRANCH,content:btoa(binary)})});
    if(!response.ok)throw Error(await response.text());
-   const url='/'+dest;setAt(record().data,p,url);markDirty();
+   const url='/'+dest;setAt(records[sourceFile].data,p,url);markDirty(sourceFile);
    if(sel)applyToPreview({...sel,kind:'image'},url);else applyToPreview({path:p,kind:'image'},url);
    render();tell('Immagine caricata. Pubblica per salvare i contenuti.','good');
   }catch(e){tell('Errore upload: '+e.message,'error')}
