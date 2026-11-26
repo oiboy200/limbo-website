@@ -317,3 +317,10 @@ em{font-style:normal;font-family:'Inter',Arial,sans-serif;font-weight:700}
 @media(max-width:760px){
  .site-header .mini-logo{width:clamp(94px,25vw,112px)}
 }
+
+/* Framer-inspired image transitions; keep the original logo morph untouched */
+.motion-image{opacity:0;transform:scale(var(--scroll-scale,.92));transform-origin:center center;transition:opacity .85s cubic-bezier(.22,.72,.18,1);will-change:opacity,transform}
+.motion-image.is-visible{opacity:1}
+.home-image-link.motion-image,.custom-feature-image.motion-image,.home-project.motion-image,.custom-project-hero.motion-image,.custom-project-detail.motion-image,.project-list .project-card.motion-image,.case-image.motion-image{overflow:hidden}
+.motion-image img{display:block}
+@media(prefers-reduced-motion:reduce){.motion-image{opacity:1!important;transform:none!important;transition:none!important}}
