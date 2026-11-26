@@ -1,4 +1,3 @@
-# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 backend:
   name: github
   repo: oiboy200/limbo-website
@@ -6,135 +5,104 @@ backend:
   base_url: https://limbo-cms-auth.giovanniongaro86.workers.dev
   auth_endpoint: auth
   auth_methods: [oauth]
-
 media_folder: "uploads"
 public_folder: "/uploads"
-
 site_url: "https://limbo-website.pages.dev"
 display_url: "https://limbo-website.pages.dev"
 logo_url: "/assets/limbo-logo-original.png"
 
-i18n:
-  structure: single_file_default_root
-  locales: [it, en]
-  default_locale: it
-slug:
-  encoding: unicode
-  clean_accents: true
-  sanitize_replacement: "-"
-
 collections:
   - name: settings
-    i18n: true
-    label: "00 — Identità del sito"
+    label: "00 — Impostazioni condivise"
     files:
       - name: site
         label: Logo e immagini globali
         file: content/site-settings.json
         format: json
         fields:
-          - { label: "Logo LIMBO", name: logo, widget: image }
-          - { label: "Immagine predefinita / fallback", name: fallback_image, widget: image, required: false }
-  - name: pages
-    i18n: true
-    label: Pagine
+          - { label: Logo, name: logo, widget: image }
+          - { label: Immagine fallback, name: fallback_image, widget: image, required: false }
+  - name: italian
+    label: "01 — ITALIANO"
     files:
-      - name: home
-        label: "01 — Homepage"
-        i18n: true
-        file: content/pages/home.json
+      - name: home_it
+        label: Homepage
+        file: content/it/pages/home.json
         format: json
         fields:
-          - { label: "Intro — EN", name: hero_intro, widget: text, i18n: true }
-          - { label: "Immagine Workshop", name: workshop_image, widget: image, i18n: true }
-          - { label: "Immagine Custom", name: custom_image, widget: image, i18n: true }
-          - { label: "Immagine About", name: about_image, widget: image, i18n: true }
-          - { label: "Eyebrow Workshop — EN", name: workshop_eyebrow, widget: string, i18n: true }
-          - { label: "Titolo Workshop — EN", name: workshop_title, widget: string, i18n: true }
-          - { label: "Testo Workshop — EN", name: workshop_text, widget: text, i18n: true }
-          - { label: "Titolo Manifesto — EN", name: manifesto_title, widget: string, i18n: true }
-          - { label: "CTA — EN", name: contact_cta, widget: string, i18n: true }
-          - label: "Visibilità sezioni"
+          - { label: Intro, name: hero_intro, widget: text }
+          - { label: Immagine Workshop, name: workshop_image, widget: image }
+          - { label: Immagine Su misura, name: custom_image, widget: image }
+          - { label: Immagine About, name: about_image, widget: image }
+          - { label: Titolo Workshop, name: workshop_title, widget: string }
+          - { label: Testo Workshop, name: workshop_text, widget: text }
+          - { label: Titolo Manifesto, name: manifesto_title, widget: string }
+          - { label: CTA Contatti, name: contact_cta, widget: string }
+          - label: Visibilità sezioni
             name: section_visibility
             widget: object
             fields:
-              - { label: "Workshop", name: workshop, widget: boolean, i18n: true, default: true }
-              - { label: "Custom Frames", name: custom, widget: boolean, i18n: true, default: true }
-              - { label: "Progetti in evidenza", name: featured, widget: boolean, i18n: true, default: true }
-              - { label: "About", name: about, widget: boolean, i18n: true, default: true }
-              - { label: "Contatti", name: contact, widget: boolean, i18n: true, default: true }
-          - label: "Ordine delle sezioni"
+              - { label: Workshop, name: workshop, widget: boolean, default: true }
+              - { label: Su misura, name: custom, widget: boolean, default: true }
+              - { label: Progetti in evidenza, name: featured, widget: boolean, default: true }
+              - { label: About, name: about, widget: boolean, default: true }
+              - { label: Contatti, name: contact, widget: boolean, default: true }
+          - label: Ordine sezioni
             name: section_order
             widget: list
-            hint: "Trascina le voci per cambiare l'ordine delle sezioni in homepage."
-            field: { label: "Sezione", name: section, widget: select, i18n: true, options: ["workshop", "custom", "featured", "about", "contact"] }
-      - name: about
-        label: "02 — About / Studio"
-        i18n: true
-        file: content/pages/about.json
+            field: { label: Sezione, name: section, widget: select, options: ["workshop", "custom", "featured", "about", "contact"] }
+      - name: about_it
+        label: About / Studio
+        file: content/it/pages/about.json
         format: json
         fields:
-          - { label: "Etichetta — EN", name: eyebrow, widget: string, i18n: true }
-          - { label: "Titolo — EN", name: title, widget: string, i18n: true }
-          - { label: "Introduzione — EN", name: lead, widget: text, i18n: true }
-          - { label: "Immagine pagina", name: image, widget: image, i18n: true }
-          - { label: "Testo — EN", name: body, widget: markdown, i18n: true }
-      - name: custom
-        label: "03 — Su misura"
-        i18n: true
-        file: content/pages/custom.json
+          - { label: Etichetta, name: eyebrow, widget: string }
+          - { label: Titolo, name: title, widget: string }
+          - { label: Introduzione, name: lead, widget: text }
+          - { label: Immagine, name: image, widget: image }
+          - { label: Testo, name: body, widget: markdown }
+      - name: custom_it
+        label: Su misura
+        file: content/it/pages/custom.json
         format: json
         fields:
-          - { label: "Etichetta — EN", name: eyebrow, widget: string, i18n: true }
-          - { label: "Titolo — EN", name: title, widget: string, i18n: true }
-          - { label: "Introduzione — EN", name: lead, widget: text, i18n: true }
-          - { label: "Immagine pagina", name: image, widget: image, i18n: true }
-          - { label: "Testo — EN", name: body, widget: markdown, i18n: true }
-      - name: contact
-        label: "04 — Contatti"
-        i18n: true
-        file: content/pages/contact.json
+          - { label: Etichetta, name: eyebrow, widget: string }
+          - { label: Titolo, name: title, widget: string }
+          - { label: Introduzione, name: lead, widget: text }
+          - { label: Immagine, name: image, widget: image }
+          - { label: Testo, name: body, widget: markdown }
+      - name: contact_it
+        label: Contatti
+        file: content/it/pages/contact.json
         format: json
         fields:
-          - { label: "Etichetta — EN", name: eyebrow, widget: string, i18n: true }
-          - { label: "Titolo — EN", name: title, widget: string, i18n: true }
-          - { label: "Introduzione — EN", name: lead, widget: text, i18n: true }
-          - { label: "Email", name: email, widget: string, i18n: true, required: false }
-          - { label: "Instagram", name: instagram, widget: string, i18n: true, required: false }
-          - { label: "Testo — EN", name: body, widget: markdown, i18n: true }
-
-  - name: projects
-    i18n: true
-    label: "05 — Progetti"
-    files:
-      - name: projects
-        label: Elenco progetti
-        file: content/projects.json
-        i18n: true
+          - { label: Etichetta, name: eyebrow, widget: string }
+          - { label: Titolo, name: title, widget: string }
+          - { label: Introduzione, name: lead, widget: text }
+          - { label: Email, name: email, widget: string, required: false }
+          - { label: Instagram, name: instagram, widget: string, required: false }
+          - { label: Testo, name: body, widget: markdown }
+      - name: projects_it
+        label: Progetti
+        file: content/it/projects.json
         format: json
         fields:
           - label: Progetti
             name: projects
             widget: list
-            summary: "{{fields.title}} — {{fields.category}}"
+            summary: "{{fields.title}}"
             fields:
-              - { label: "Slug URL (non modificare se già online)", name: slug, widget: string, i18n: true }
-              - { label: "Titolo — EN", name: title, widget: string, i18n: true }
-              - { label: "Categoria — EN", name: category, widget: string, i18n: true }
-              - { label: Anno, name: year, widget: string, i18n: true, required: false }
-              - { label: "Immagine copertina", name: cover, widget: image, i18n: true }
-              - { label: "Galleria immagini", name: gallery, widget: list, i18n: true, required: false, field: { label: Immagine, name: image, widget: image } }
-              - { label: "Descrizione — EN", name: description, widget: markdown, i18n: true }
-              - { label: "In evidenza in homepage", name: featured, widget: boolean, i18n: true, default: false }
-
-  - name: custom_gallery
-    i18n: true
-    label: "06 — Archivio Su misura"
-    files:
-      - name: custom_gallery
-        label: "Categorie e gallerie"
-        file: content/custom-gallery.json
-        i18n: true
+              - { label: Slug URL, name: slug, widget: string }
+              - { label: Titolo, name: title, widget: string }
+              - { label: Categoria, name: category, widget: string }
+              - { label: Anno, name: year, widget: string, required: false }
+              - { label: Copertina, name: cover, widget: image }
+              - { label: Galleria, name: gallery, widget: list, field: { label: Immagine, name: image, widget: image } }
+              - { label: Descrizione, name: description, widget: markdown }
+              - { label: In evidenza, name: featured, widget: boolean, default: false }
+      - name: custom_gallery_it
+        label: Archivio Su misura
+        file: content/it/custom-gallery.json
         format: json
         fields:
           - label: Categorie
@@ -142,6 +110,97 @@ collections:
             widget: list
             summary: "{{fields.title}}"
             fields:
-              - { label: "Nome — EN", name: title, widget: string, i18n: true }
-              - { label: "Immagine principale", name: hero, widget: image, i18n: true }
-              - { label: "Altre immagini", name: images, widget: list, i18n: true, required: false, field: { label: Immagine, name: image, widget: image } }
+              - { label: Nome, name: title, widget: string }
+              - { label: Immagine principale, name: hero, widget: image }
+              - { label: Altre immagini, name: images, widget: list, field: { label: Immagine, name: image, widget: image } }
+  - name: english
+    label: "02 — ENGLISH"
+    files:
+      - name: home_en
+        label: Homepage
+        file: content/en/pages/home.json
+        format: json
+        fields:
+          - { label: Intro, name: hero_intro, widget: text }
+          - { label: Workshop image, name: workshop_image, widget: image }
+          - { label: Custom image, name: custom_image, widget: image }
+          - { label: About image, name: about_image, widget: image }
+          - { label: Workshop title, name: workshop_title, widget: string }
+          - { label: Workshop text, name: workshop_text, widget: text }
+          - { label: Manifesto title, name: manifesto_title, widget: string }
+          - { label: Contact CTA, name: contact_cta, widget: string }
+          - label: Section visibility
+            name: section_visibility
+            widget: object
+            fields:
+              - { label: Workshop, name: workshop, widget: boolean, default: true }
+              - { label: Custom, name: custom, widget: boolean, default: true }
+              - { label: Featured projects, name: featured, widget: boolean, default: true }
+              - { label: About, name: about, widget: boolean, default: true }
+              - { label: Contact, name: contact, widget: boolean, default: true }
+          - label: Section order
+            name: section_order
+            widget: list
+            field: { label: Section, name: section, widget: select, options: ["workshop", "custom", "featured", "about", "contact"] }
+      - name: about_en
+        label: About / Studio
+        file: content/en/pages/about.json
+        format: json
+        fields:
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Introduction, name: lead, widget: text }
+          - { label: Image, name: image, widget: image }
+          - { label: Text, name: body, widget: markdown }
+      - name: custom_en
+        label: Custom frames
+        file: content/en/pages/custom.json
+        format: json
+        fields:
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Introduction, name: lead, widget: text }
+          - { label: Image, name: image, widget: image }
+          - { label: Text, name: body, widget: markdown }
+      - name: contact_en
+        label: Contact
+        file: content/en/pages/contact.json
+        format: json
+        fields:
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Introduction, name: lead, widget: text }
+          - { label: Email, name: email, widget: string, required: false }
+          - { label: Instagram, name: instagram, widget: string, required: false }
+          - { label: Text, name: body, widget: markdown }
+      - name: projects_en
+        label: Projects
+        file: content/en/projects.json
+        format: json
+        fields:
+          - label: Projects
+            name: projects
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: URL slug, name: slug, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Category, name: category, widget: string }
+              - { label: Year, name: year, widget: string, required: false }
+              - { label: Cover image, name: cover, widget: image }
+              - { label: Gallery, name: gallery, widget: list, field: { label: Image, name: image, widget: image } }
+              - { label: Description, name: description, widget: markdown }
+              - { label: Featured, name: featured, widget: boolean, default: false }
+      - name: custom_gallery_en
+        label: Custom gallery
+        file: content/en/custom-gallery.json
+        format: json
+        fields:
+          - label: Collections
+            name: collections
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Collection name, name: title, widget: string }
+              - { label: Hero image, name: hero, widget: image }
+              - { label: Other images, name: images, widget: list, field: { label: Image, name: image, widget: image } }
