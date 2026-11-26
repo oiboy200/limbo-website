@@ -108,7 +108,7 @@ collections:
           - label: Progetti
             name: projects
             widget: list
-            i18n: true
+            i18n: sync
             summary: "{{fields.title}}"
             fields:
               - { label: Slug URL, name: slug, widget: string, i18n: duplicate }
@@ -129,7 +129,7 @@ collections:
           - label: Categorie
             name: collections
             widget: list
-            i18n: true
+            i18n: sync
             summary: "{{fields.title}}"
             fields:
               - { label: Nome, name: title, widget: string, i18n: true }
