@@ -492,3 +492,9 @@ html.lenis.lenis-stopped{overflow:hidden}
 .hero{
   padding-bottom:var(--pad)!important;
 }
+
+/* Real yellow gap AFTER the full viewport hero, matching the horizontal page margins */
+.hero{
+  padding-bottom:30px!important;
+  margin-bottom:var(--pad)!important;
+}
