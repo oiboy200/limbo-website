@@ -275,10 +275,10 @@ if(lang==='it'){
       const project=projects.find(x=>x.slug===new URL(card.href).searchParams.get('project'))||projects[i];
       if(!project)return;
       const prefix='projects.'+projects.indexOf(project)+'.';
-      const img=card.querySelector('img');if(img)attr(img,prefix+'cover','image','Copertina progetto');
-      const title=card.querySelector('b,.project-meta span:first-child');if(title)attr(title,prefix+'title','text','Titolo progetto');
-      const year=card.querySelector('div span');if(year)attr(year,prefix+'year','text','Anno progetto');
-      const category=card.querySelector('.project-meta span:last-child');if(category)attr(category,prefix+'category','text','Categoria progetto');
+      const img=card.querySelector('img');if(img)attr(img,prefix+'cover','image','Copertina progetto','/content/'+lang+'/projects.json');
+      const title=card.querySelector('b,.project-meta span:first-child');if(title)attr(title,prefix+'title','text','Titolo progetto','/content/'+lang+'/projects.json');
+      const year=card.querySelector('div span');if(year)attr(year,prefix+'year','text','Anno progetto','/content/'+lang+'/projects.json');
+      const category=card.querySelector('.project-meta span:last-child');if(category)attr(category,prefix+'category','text','Categoria progetto','/content/'+lang+'/projects.json');
     });
   }
   if(page==='custom'){
@@ -286,18 +286,20 @@ if(lang==='it'){
     const d=await get('/content/'+lang+'/custom-gallery.json');
     document.querySelectorAll('.custom-project').forEach((section,i)=>{
       const item=d?.collections?.[i];if(!item)return;
-      const title=section.querySelector('.custom-project-heading h2');attr(title,'collections.'+i+'.title','text','Nome collezione');
-      const hero=section.querySelector('.custom-project-hero-image');attr(hero,'collections.'+i+'.hero','image','Immagine principale collezione');
-      section.querySelectorAll('.custom-project-detail img').forEach((img,j)=>attr(img,'collections.'+i+'.images.'+j,'image','Immagine collezione '+(j+1)));
+      const title=section.querySelector('.custom-project-heading h2');attr(title,'collections.'+i+'.title','text','Nome collezione','/content/'+lang+'/custom-gallery.json');
+      const hero=section.querySelector('.custom-project-hero-image');attr(hero,'collections.'+i+'.hero','image','Immagine principale collezione','/content/'+lang+'/custom-gallery.json');
+      section.querySelectorAll('.custom-project-detail img').forEach((img,j)=>attr(img,'collections.'+i+'.images.'+j,'image','Immagine collezione '+(j+1),'/content/'+lang+'/custom-gallery.json'));
     });
   }
   if(page==='project-japan'){
     const data=await get('/content/'+lang+'/projects.json'),projects=data?.projects||[];
     const slug=new URLSearchParams(location.search).get('project'),i=projects.findIndex(x=>x.slug===slug),p=projects[i];
     if(p){
+      attr(document.querySelector('.case-title'),'projects.'+i+'.title','text','Titolo progetto','/content/'+lang+'/projects.json');
       text('.case-title',p.title,'projects.'+i+'.title','Titolo progetto');
+      attr(document.querySelector('.case-deck > p'),'projects.'+i+'.description','text','Descrizione progetto','/content/'+lang+'/projects.json');
       text('.case-deck > p',p.description,'projects.'+i+'.description','Descrizione progetto');
-      document.querySelectorAll('.case-image img').forEach((img,j)=>attr(img,'projects.'+i+'.gallery.'+j,'image','Immagine galleria '+(j+1)));
+      document.querySelectorAll('.case-image img').forEach((img,j)=>attr(img,'projects.'+i+'.gallery.'+j,'image','Immagine galleria '+(j+1),'/content/'+lang+'/projects.json'));
     }
   }
 })();
