@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4f1eb">
+<title>LIMBO — Traduttore IT / EN</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f1eb;color:#171717;font-family:Arial,sans-serif}
+header{padding:24px 5vw;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #d8d5ce}
+header img{width:78px;height:auto}header a{color:inherit;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+main{max-width:1100px;margin:8vh auto;padding:0 28px}.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#686860}
+h1{font-size:clamp(38px,7vw,76px);line-height:.95;letter-spacing:-.06em;margin:18px 0 20px;max-width:800px}
+.intro{font-size:15px;line-height:1.6;max-width:620px;color:#555;margin-bottom:42px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px}
+textarea{width:100%;min-height:300px;resize:vertical;border:1px solid #d1cec6;background:#fffdf8;padding:18px;font:15px/1.6 Arial,sans-serif;color:#171717;border-radius:0;outline:none}
+textarea:focus{border-color:#171717}
+.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:22px 0}
+button{border:0;background:#d4fa36;color:#171717;padding:15px 22px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:11px;cursor:pointer}
+button.secondary{background:transparent;border:1px solid #171717}
+button:disabled{opacity:.45;cursor:wait}
+.note{font-size:12px;color:#666;line-height:1.5}.status{font-size:13px;min-height:20px;margin-top:12px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}main{margin:45px auto}textarea{min-height:220px}}
+</style>
+</head>
+<body>
+<header><a href="/admin/"><img src="/assets/limbo-logo-original.png" alt="LIMBO"></a><a href="/admin/">← Torna al CMS</a></header>
+<main>
+<div class="eyebrow">LIMBO / STRUMENTI</div>
+<h1>Traduci.<br>Rivedi. Pubblica.</h1>
+<p class="intro">Traduci un testo dall’italiano all’inglese, correggi liberamente il risultato e copialo nella sezione EN del CMS. La traduzione non viene mai salvata o pubblicata automaticamente.</p>
+<div class="grid">
+<div><label for="source">01 — Testo italiano</label><textarea id="source" placeholder="Incolla qui il testo in italiano…"></textarea></div>
+<div><label for="result">02 — English (puoi modificarlo)</label><textarea id="result" placeholder="La traduzione apparirà qui. Potrai modificarla prima di copiarla…"></textarea></div>
+</div>
+<div class="actions"><button id="translate">Traduci in inglese ↗</button><button class="secondary" id="copy" type="button">Copia testo inglese</button><button class="secondary" id="clear" type="button">Pulisci</button></div>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+<p class="note">Servizio gratuito MyMemory: limite anonimo indicativo di 5.000 caratteri al giorno. Testi lunghi vengono suddivisi in segmenti. La qualità può variare: rileggi sempre il risultato, soprattutto per i testi istituzionali e di brand.</p>
+</main>
+<script>
+const source=document.getElementById('source'),result=document.getElementById('result'),status=document.getElementById('status'),translate=document.getElementById('translate');
+function splitText(text,max=350){
+ const chunks=[];let current='';
+ const paragraphs=text.split(/\n+/);
+ for(const para of paragraphs){
+  if(!para.trim()){chunks.push('');continue;}
+  const sentences=para.match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[para];
+  for(let sentence of sentences){
+   sentence=sentence.trim();if(!sentence)continue;
+   if(new TextEncoder().encode(sentence).length>max){
+    const words=sentence.split(/\s+/);let part='';
+    for(const word of words){const next=part?part+' '+word:word;if(new TextEncoder().encode(next).length>max&&part){if(current){chunks.push(current);current='';}chunks.push(part);part=word;}else part=next;}
+    if(part){if(current){chunks.push(current);current='';}chunks.push(part);}continue;
+   }
+   const next=current?current+' '+sentence:sentence;
+   if(new TextEncoder().encode(next).length>max){chunks.push(current);current=sentence;}else current=next;
+  }
+  if(current){chunks.push(current);current='';}
+  chunks.push('');
+ }
+ while(chunks.length&&chunks[chunks.length-1]==='')chunks.pop();
+ return chunks;
+}
+translate.addEventListener('click',async()=>{
+ const text=source.value.trim();if(!text){status.textContent='Inserisci prima un testo in italiano.';return;}
+ if(new TextEncoder().encode(text).length>5000){status.textContent='Il testo supera il limite giornaliero anonimo di 5.000 caratteri: prova con un testo più breve.';return;}
+ translate.disabled=true;status.textContent='Traduzione in corso…';result.value='';
+ try{
+  const chunks=splitText(text);const translated=[];
+  for(let i=0;i<chunks.length;i++){
+   if(!chunks[i]){translated.push('');continue;}
+   const params=new URLSearchParams({q:chunks[i],langpair:'it|en',mt:'1'});
+   const response=await fetch('https://api.mymemory.translated.net/get?'+params.toString(),{headers:{Accept:'application/json'}});
+   if(!response.ok)throw new Error(response.status===429?'Limite di richieste raggiunto. Riprova più tardi.':'Servizio di traduzione non disponibile ('+response.status+').');
+   const data=await response.json();
+   if(Number(data.responseStatus)!==200||!data.responseData?.translatedText)throw new Error(data.responseDetails||'Non è stato possibile tradurre il testo.');
+   translated.push(data.responseData.translatedText.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+   status.textContent='Traduzione in corso… '+(i+1)+' / '+chunks.filter(Boolean).length;
+  }
+  result.value=translated.join('\n').trim();status.textContent='Traduzione pronta. Rileggila, correggila e copiala nel CMS.';
+ }catch(error){status.textContent=error.message||'Errore durante la traduzione.';}
+ finally{translate.disabled=false;}
+});
+document.getElementById('copy').addEventListener('click',async()=>{if(!result.value.trim()){status.textContent='Non c’è ancora un testo da copiare.';return;}try{await navigator.clipboard.writeText(result.value);status.textContent='Testo inglese copiato.';}catch(e){result.select();status.textContent='Seleziona e copia il testo manualmente.';}});
+document.getElementById('clear').addEventListener('click',()=>{source.value='';result.value='';status.textContent='';});
+</script>
+</body></html>
