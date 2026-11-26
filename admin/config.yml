@@ -1,9 +1,11 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 backend:
   name: github
   repo: oiboy200/limbo-website
   branch: main
   base_url: https://limbo-cms-auth.giovanniongaro86.workers.dev
   auth_endpoint: auth
+  auth_methods: [oauth]
 
 media_folder: "uploads"
 public_folder: "/uploads"
