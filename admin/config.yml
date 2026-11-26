@@ -26,11 +26,6 @@ collections:
         format: json
         fields:
           - { label: Logo LIMBO, name: logo, widget: image }
-          - { label: Homepage — Workshop, name: home_workshop, widget: image }
-          - { label: Homepage — Su misura, name: home_custom, widget: image }
-          - { label: Homepage — About, name: home_about, widget: image }
-          - { label: Pagina About, name: about_page, widget: image }
-          - { label: Pagina Su misura, name: custom_page, widget: image }
 
   - name: content
     label: "01 — CONTENUTI"
@@ -43,6 +38,9 @@ collections:
         format: json
         fields:
           - { label: Intro, name: hero_intro, widget: text, i18n: true }
+          - { label: Immagine Workshop, name: workshop_image, widget: image, i18n: duplicate }
+          - { label: Immagine Su misura, name: custom_image, widget: image, i18n: duplicate }
+          - { label: Immagine About, name: about_image, widget: image, i18n: duplicate }
           - { label: Titolo Workshop, name: workshop_title, widget: string, i18n: true }
           - { label: Testo Workshop, name: workshop_text, widget: text, i18n: true }
           - { label: Titolo Manifesto, name: manifesto_title, widget: string, i18n: true }
@@ -73,6 +71,7 @@ collections:
           - { label: Etichetta, name: eyebrow, widget: string, i18n: true }
           - { label: Titolo, name: title, widget: string, i18n: true }
           - { label: Introduzione, name: lead, widget: text, i18n: true }
+          - { label: Immagine pagina, name: image, widget: image, i18n: duplicate }
           - { label: Testo, name: body, widget: markdown, i18n: true }
 
       - name: custom
