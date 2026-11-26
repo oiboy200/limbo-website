@@ -88,9 +88,25 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
   const field=(obj,key)=>obj?.[key]??'';
   const settings=await get('/content/shared-media.json');
   if(settings?.logo)document.querySelectorAll('.mini-logo img,.footer-logo img,.big-logo').forEach(img=>img.src=settings.logo);
-  const home=await get('/content/'+lang+'/pages/home.json');
+  const homeSource=await get('/content/'+lang+'/pages/home.json');
+  const home=homeSource?{
+    hero_intro:homeSource.hero?.intro,
+    workshop_eyebrow:homeSource.workshop?.eyebrow,
+    workshop_title:homeSource.workshop?.title,
+    workshop_text:homeSource.workshop?.text,
+    workshop_image:homeSource.workshop?.image,
+    custom_image:homeSource.custom?.image,
+    manifesto_title:homeSource.custom?.manifesto_title,
+    about_image:homeSource.about?.image,
+    contact_cta:homeSource.contact?.cta,
+    section_visibility:homeSource.layout?.visibility,
+    section_order:homeSource.layout?.order
+  }:null;
   const pages={};
-  for(const name of ['about','custom','contact'])pages[name]=await get('/content/'+lang+'/pages/'+name+'.json');
+  for(const name of ['about','custom','contact']){
+    const source=await get('/content/'+lang+'/pages/'+name+'.json');
+    pages[name]=source?{...(source.page||source),...(name==='custom'?{collections:source.gallery||[]}:{})}:null;
+  }
   const projectData=await get('/content/'+lang+'/projects.json'),projects=projectData?.projects||[];
   const navLabels=lang==='it'?['Progetti','Studio','Su misura','Contatti']:['Projects','About','Custom','Contact'];
   document.querySelectorAll('.site-header nav a,.footer-links a').forEach((a,i)=>{if(navLabels[i])a.textContent=navLabels[i];});
@@ -156,8 +172,8 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
   }
   if(page==='custom'){
     const gallery=document.querySelector('#custom-gallery');
-    const galleryData=await get('/content/'+lang+'/custom-gallery.json');
-    const collections=galleryData?.collections||[];
+    const galleryData=pages.custom?.collections?null:await get('/content/'+lang+'/custom-gallery.json');
+    const collections=pages.custom?.collections||galleryData?.collections||[];
     if(gallery){
       gallery.classList.add('custom-projects');
       for(const [index,item] of collections.entries()){
