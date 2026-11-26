@@ -160,6 +160,7 @@ function applyToPreview(sel,value){
   const doc=frame.contentDocument;if(!doc)return;
   const el=doc.querySelector('[data-cms-path="'+CSS.escape(sel.path)+'"]');if(!el)return;
   if(sel.kind==='image'||el.tagName==='IMG'){el.src=value;el.setAttribute('src',value);}
+  else if(sel.path==='custom_title'){el.innerHTML=String(value).replace(/\\s+/,'<br>')+'<span>®</span>';}
   else if(sel.kind==='html'||el.dataset.cmsKind==='html'){el.innerHTML=value;}
   else el.textContent=value;
  }catch(e){}
