@@ -1,9 +1,3 @@
 {
-  "page": {
-    "eyebrow": "02 / IL LABORATORIO",
-    "title": "Lo studio Limbo.",
-    "lead": "Una cornice è un confine, ma anche un invito a guardare più da vicino.",
-    "body": "<p>Limbo Cornici è un laboratorio indipendente con sede a Vicenza. Unisce uno sguardo attento alle immagini, la passione per i materiali e la precisione del lavoro rifinito a mano.</p><p>Da una singola opera a uno spazio completo, ogni progetto nasce dall’ascolto. Studiamo proporzioni, colori, finiture e dettagli per creare una cornice che appartenga a ciò che custodisce.</p><p>Sono i piccoli dettagli a fare la differenza. Crediamo nel tempo necessario per curarli al meglio.</p>",
-    "image": "/uploads/immagine-chatgpt-26-nov-2026-16_25_31.jpg"
-  }
+  "page": {}
 }
