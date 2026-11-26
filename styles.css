@@ -364,3 +364,27 @@ em{font-style:normal;font-family:'Inter',Arial,sans-serif;font-weight:700}
 @media(max-width:760px){
  .home-image-section .home-image-link img{height:68vw;min-height:260px}
 }
+
+/* First workshop image only: oversized, centered entrance that settles into the grid */
+html,body{overflow-x:clip}
+.home-image-section{padding:0 var(--pad) 7vw;overflow:visible}
+.home-image-section .home-image-link{
+  width:100%!important;
+  margin-left:0!important;
+  overflow:hidden;
+  opacity:1!important;
+  transform:scale(var(--workshop-frame-scale,1.42));
+  transform-origin:center center;
+  will-change:transform;
+  transition:none!important;
+}
+.home-image-section .home-image-link img{
+  width:100%;
+  height:clamp(340px,58vw,760px);
+  max-height:none;
+  object-fit:cover;
+  transform:none!important;
+}
+@media(max-width:760px){
+ .home-image-section .home-image-link img{height:68vw;min-height:260px}
+}
