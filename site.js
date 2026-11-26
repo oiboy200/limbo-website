@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
   const setText=(selector,value)=>{const el=document.querySelector(selector);if(el&&value!==undefined&&value!==null)el.textContent=value;};
   const setHTML=(selector,value)=>{const el=document.querySelector(selector);if(el&&value!==undefined&&value!==null)el.innerHTML=value;};
   const page=location.pathname.split('/').pop().replace('.html','')||'index';
-  const lang=localStorage.getItem('limbo-language')||'it';
+  const lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('limbo-language')||'it';
   document.documentElement.lang=lang;
   document.querySelectorAll('.language-option').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);b.setAttribute('aria-pressed',String(b.dataset.lang===lang));b.addEventListener('click',()=>{if(b.dataset.lang!==lang){localStorage.setItem('limbo-language',b.dataset.lang);location.reload();}});});
   const field=(obj,key)=>obj?.[key]??'';
@@ -220,5 +220,81 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
 if(lang==='it'){
     document.querySelectorAll('.site-footer small').forEach(el=>el.textContent='© LIMBO 2026');
     const round=document.querySelector('.round-link');if(round)round.innerHTML='Scopri le<br>cornici su misura <span>↗</span>';
+  }
+})();
+
+/* LIMBO CMS content bindings — keeps the public layout intact and exposes editable targets */
+(async function initLimboCmsBindings(){
+  const get=async p=>{try{const r=await fetch(p);return r.ok?await r.json():null}catch(e){return null}};
+  const lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('limbo-language')||'it';
+  const page=location.pathname.split('/').pop().replace('.html','')||'index';
+  const home=await get('/content/'+lang+'/pages/home.json');
+  const attr=(el,path,kind='text',label='')=>{if(!el)return;el.dataset.cmsPath=path;el.dataset.cmsKind=kind;if(label)el.dataset.cmsLabel=label};
+  const text=(selector,value,path,label)=>{const el=document.querySelector(selector);if(el&&value!==undefined){el.textContent=value;attr(el,path,'text',label)}};
+  const html=(selector,value,path,label)=>{const el=document.querySelector(selector);if(el&&value!==undefined){el.innerHTML=value;attr(el,path,'html',label)}};
+  const image=(selector,value,path,label)=>{const el=document.querySelector(selector);if(el&&value){el.src=value;attr(el,path,'image',label)}};
+  if(page==='index'&&home){
+    text('.hero-copy > p',home.hero_intro,'hero_intro','Testo principale');
+    image('.home-image-section .home-image-link img',home.workshop_image,'workshop_image','Immagine Workshop');
+    text('.home-custom h2',home.custom_title||'Custom Frames','custom_title','Titolo Custom Frames');
+    image('.custom-feature-image img',home.custom_image,'custom_image','Immagine Custom');
+    text('.home-custom .home-section-label a',home.custom_link||'Explore custom ↗','custom_link','Link Custom');
+    text('.home-featured .home-section-label span',home.featured_label||'03 / FEATURED PROJECTS','featured_label','Etichetta Progetti');
+    text('.home-about .home-section-label span',home.about_eyebrow||'04 / ABOUT','about_eyebrow','Etichetta About');
+    text('.home-about > h2',home.about_title||'About LIMBO','about_title','Titolo About LIMBO');
+    html('.about-copy',home.about_text||'', 'about_text','Testo About');
+    const aboutCopy=document.querySelector('.about-copy');
+    if(aboutCopy){const link=document.createElement('a');link.href='about.html';link.textContent=home.about_link||'Discover the studio ↗';attr(link,'about_link','text','Link About');aboutCopy.append(link);}
+    image('.about-split > img',home.about_image,'about_image','Immagine About');
+    text('.home-contact h2',home.contact_title||'Get in touch.','contact_title','Titolo Contatti');
+    text('.home-contact > div > span',home.contact_label||'Say Hello','contact_label','Etichetta Contatti');
+    text('.home-contact > div > a',home.contact_link||'Contact LIMBO ↗','contact_link','Link Contatti');
+    const visibility=home.section_visibility||{};
+    const sections={workshop:document.querySelector('.workshop-image'),custom:document.querySelector('.home-custom'),featured:document.querySelector('.home-featured'),about:document.querySelector('.home-about'),contact:document.querySelector('.home-contact')};
+    Object.entries(visibility).forEach(([k,v])=>{if(sections[k])sections[k].hidden=v===false;});
+  }
+  if(['about','custom','contact'].includes(page)){
+    const d=await get('/content/'+lang+'/pages/'+page+'.json');
+    if(d){
+      text('.page-main .eyebrow',d.eyebrow,'eyebrow','Soprattitolo');
+      text('.page-main .page-title',d.title,'title','Titolo pagina');
+      text('.page-main .page-lead',d.lead,'lead','Introduzione');
+      html('.page-main .page-copy',d.body,'body','Testo pagina');
+      image('.page-main .page-grid img',d.image,'image','Immagine pagina');
+      const email=document.querySelector('.contact-email');
+      if(email&&d.email){email.innerHTML='<a href="mailto:'+d.email+'">'+d.email+'</a>';attr(email,'email','html','Email');}
+    }
+  }
+  if(page==='projects'||page==='index'){
+    const d=await get('/content/'+lang+'/projects.json');
+    const projects=d?.projects||[];
+    const cards=page==='projects'?document.querySelectorAll('.page-main .page-grid .project-card'):document.querySelectorAll('.home-projects .home-project');
+    cards.forEach((card,i)=>{
+      const project=projects.find(x=>x.slug===new URL(card.href).searchParams.get('project'))||projects[i];
+      if(!project)return;
+      const prefix='projects.'+projects.indexOf(project)+'.';
+      const img=card.querySelector('img');if(img)attr(img,prefix+'cover','image','Copertina progetto');
+      const title=card.querySelector('b,.project-meta span:first-child');if(title)attr(title,prefix+'title','text','Titolo progetto');
+      const year=card.querySelector('div span');if(year)attr(year,prefix+'year','text','Anno progetto');
+      const category=card.querySelector('.project-meta span:last-child');if(category)attr(category,prefix+'category','text','Categoria progetto');
+    });
+  }
+  if(page==='custom'){
+    const d=await get('/content/'+lang+'/custom-gallery.json');
+    document.querySelectorAll('.custom-project').forEach((section,i)=>{
+      const item=d?.collections?.[i];if(!item)return;
+      const title=section.querySelector('.custom-project-heading h2');attr(title,'collections.'+i+'.title','text','Nome collezione');
+      const hero=section.querySelector('.custom-project-hero-image');attr(hero,'collections.'+i+'.hero','image','Immagine principale collezione');
+      section.querySelectorAll('.custom-project-detail img').forEach((img,j)=>attr(img,'collections.'+i+'.images.'+j,'image','Immagine collezione '+(j+1)));
+    });
+  }
+  if(page==='project-japan'){
+    const data=await get('/content/'+lang+'/projects.json'),projects=data?.projects||[];
+    const slug=new URLSearchParams(location.search).get('project'),i=projects.findIndex(x=>x.slug===slug),p=projects[i];
+    if(p){
+      text('.case-title',p.title,'projects.'+i+'.title','Titolo progetto');
+      text('.case-deck > p',p.description,'projects.'+i+'.description','Descrizione progetto');
+      document.querySelectorAll('.case-image img').forEach((img,j)=>attr(img,'projects.'+i+'.gallery.'+j,'image','Immagine galleria '+(j+1)));
+    }
   }
 })();
