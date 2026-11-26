@@ -476,3 +476,9 @@ html.lenis.lenis-stopped{overflow:hidden}
     padding-top:clamp(150px,25vh,260px)!important;
   }
 }
+
+/* No artificial yellow spacer after the hero: the workshop image follows naturally */
+.home-image-section{padding-top:0!important}
+@media(max-width:760px){
+  .home-image-section{padding-top:0!important}
+}
