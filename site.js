@@ -1,4 +1,29 @@
 
+function initImageScrollMotion(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const items=[...document.querySelectorAll('.home-image-link,.custom-feature-image,.home-project,.about-split>img,.custom-project-hero,.custom-project-detail,.project-list .project-card,.case-image')];
+  if(!items.length)return;
+  items.forEach(el=>el.classList.add('motion-image'));
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>entry.target.classList.toggle('is-visible',entry.isIntersecting));
+  },{threshold:0.02});
+  items.forEach(el=>observer.observe(el));
+  let busy=false;
+  const update=()=>{
+    const vh=window.innerHeight;
+    items.forEach(el=>{
+      const r=el.getBoundingClientRect();
+      const p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height)));
+      el.style.setProperty('--scroll-scale',(0.92+p*0.10).toFixed(3));
+    });
+    busy=false;
+  };
+  const onScroll=()=>{if(!busy){busy=true;requestAnimationFrame(update);}};
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  update();
+}
+
 (async function(){
   const get=async(path)=>{try{const r=await fetch(path);return r.ok?await r.json():null;}catch(e){return null;}};
   const setText=(selector,value)=>{const el=document.querySelector(selector);if(el&&value!==undefined&&value!==null)el.textContent=value;};
@@ -138,6 +163,7 @@
     setText('.page-main .eyebrow',lang==='it'?'PROGETTO 001 / CORNICI SU MISURA':'PROJECT 001 / CUSTOM FRAMING');
     const back=document.querySelector('.page-copy a');if(back)back.textContent=lang==='it'?'← Torna a tutti i progetti':'← Back to all projects';
   }
+  initImageScrollMotion();
   if(lang==='it'){
     document.querySelectorAll('.site-footer small').forEach(el=>el.textContent='© LIMBO 2026');
     const round=document.querySelector('.round-link');if(round)round.innerHTML='Scopri le<br>cornici su misura <span>↗</span>';
