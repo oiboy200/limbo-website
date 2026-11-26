@@ -438,3 +438,31 @@ html.lenis.lenis-stopped{overflow:hidden}
   .hero .logo-stage{padding:clamp(30px,6vh,54px) 0 clamp(22px,4vh,38px)}
   .hero .big-logo{width:100%;max-width:none;max-height:none}
 }
+
+/* Homepage hero: anchor the wordmark to the bottom edge, inside the same side margins */
+.hero{
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+.hero .logo-stage{
+  width:100%;
+  margin-top:auto;
+  margin-bottom:0;
+  padding:0;
+  flex:0 0 auto;
+  align-self:stretch;
+}
+.hero .big-logo{
+  display:block;
+  width:100%;
+  max-width:none;
+  max-height:none;
+  height:auto;
+  object-fit:contain;
+}
+@media(max-width:760px){
+  .hero .logo-stage{margin-top:auto;padding:0}
+  .hero .big-logo{width:100%;max-width:none;max-height:none}
+}
