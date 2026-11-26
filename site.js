@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
     image('.custom-feature-image img',home.custom_image,'LIMBO — custom framing');
     image('.home-about .about-split img',home.about_image,'LIMBO — the workshop');
     const sections={workshop:document.querySelector('.workshop-image'),custom:document.querySelector('.home-custom'),featured:document.querySelector('.home-featured'),about:document.querySelector('.home-about'),contact:document.querySelector('.home-contact')};
-    Object.entries(home.section_visibility||{}).forEach(([key,visible])=>{if(sections[key])sections[key].hidden=visible===false;});
+    Object.entries(home.section_visibility||{}).forEach(([key,visible])=>{if(sections[key]){sections[key].hidden=visible===false;sections[key].style.display=visible===false?'none':'';}});
     const order=Array.isArray(home.section_order)?home.section_order:['workshop','custom','featured','about','contact'];
     const main=document.querySelector('.limbo-home');
     if(main)order.forEach(key=>{if(sections[key])main.appendChild(sections[key]);});
