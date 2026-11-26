@@ -14,21 +14,15 @@
 
   function HomePreview({ entry, getAsset }) {
     const data = getData(entry);
-    const [media, setMedia] = useState({});
-    useEffect(() => {
-      fetch('/content/shared-media.json', { cache: 'no-store' })
-        .then((r) => r.ok ? r.json() : {})
-        .then(setMedia)
-        .catch(() => setMedia({}));
-    }, []);
+    const media = data;
     const assetUrl = (path) => {
       if (!path) return '';
       const asset = getAsset && getAsset(path);
       return asset && asset.url ? asset.url : path;
     };
-    const workshop = assetUrl(media.home_workshop);
-    const custom = assetUrl(media.home_custom);
-    const about = assetUrl(media.home_about);
+    const workshop = assetUrl(media.workshop_image);
+    const custom = assetUrl(media.custom_image);
+    const about = assetUrl(media.about_image);
     return h('main', { className: 'limbo-live-preview' },
       h('div', { className: 'lp-top' }, h('span', null, 'LIMBO / STUDIO'), h('span', null, 'HOMEPAGE')),
       h('section', { className: 'lp-hero' },
@@ -39,10 +33,10 @@
         h('div', null, h('p', { className: 'lp-kicker' }, data.workshop_eyebrow || '01 / WORKSHOP'),
           h('h2', { 'data-key-path': 'workshop_title', tabIndex: 0 }, data.workshop_title || ''),
           h('p', { 'data-key-path': 'workshop_text', tabIndex: 0 }, data.workshop_text || '')),
-        img(workshop, 'Workshop')
+        h('div', { 'data-key-path': 'workshop_image' }, img(workshop, 'Workshop'))
       ),
       h('section', { className: 'lp-split lp-reverse' },
-        img(custom, 'Su misura'),
+        h('div', { 'data-key-path': 'custom_image' }, img(custom, 'Su misura')),
         h('div', null, h('p', { className: 'lp-kicker' }, '02 / SU MISURA'),
           h('h2', null, 'Cornici e specchi su misura'))
       ),
@@ -53,7 +47,7 @@
       h('section', { className: 'lp-split' },
         h('div', null, h('p', { className: 'lp-kicker' }, '04 / STUDIO'),
           h('h2', null, 'Uno sguardo attento alle immagini')),
-        img(about, 'About')
+        h('div', { 'data-key-path': 'about_image' }, img(about, 'About'))
       ),
       h('section', { className: 'lp-contact' },
         h('h2', { 'data-key-path': 'contact_cta', tabIndex: 0 }, data.contact_cta || 'Contatti'),
@@ -73,7 +67,7 @@
         h('h1', { 'data-key-path': 'title', tabIndex: 0 }, data.title || ''),
         h('p', { className: 'lp-lead', 'data-key-path': 'lead', tabIndex: 0 }, data.lead || '')
       ),
-      imageSrc ? h('div', { className: 'lp-page-image' }, img(imageSrc, data.title)) : null,
+      imageSrc ? h('div', { className: 'lp-page-image' }, h('div', { 'data-key-path': 'image' }, img(imageSrc, data.title))) : null,
       h('article', { className: 'lp-body', 'data-key-path': 'body', tabIndex: 0 },
         h('div', { dangerouslySetInnerHTML: { __html: data.body || '' } })
       )
