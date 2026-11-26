@@ -207,8 +207,7 @@ function initImageScrollMotion(){
     setText('.page-main .eyebrow',lang==='it'?'PROGETTO 001 / CORNICI SU MISURA':'PROJECT 001 / CUSTOM FRAMING');
     const back=document.querySelector('.page-copy a');if(back)back.textContent=lang==='it'?'← Torna a tutti i progetti':'← Back to all projects';
   }
-  initImageScrollMotion();
-  if(lang==='it'){
+if(lang==='it'){
     document.querySelectorAll('.site-footer small').forEach(el=>el.textContent='© LIMBO 2026');
     const round=document.querySelector('.round-link');if(round)round.innerHTML='Scopri le<br>cornici su misura <span>↗</span>';
   }
