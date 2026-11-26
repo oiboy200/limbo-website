@@ -63,10 +63,7 @@ function renderHome(d){
  field('Titolo contatti','contact_title',d.contact_title);
  field('Etichetta contatti','contact_label',d.contact_label);
  field('Link contatti','contact_link',d.contact_link);
- group('WORKSHOP');
- field('Etichetta Workshop','workshop_eyebrow',d.workshop_eyebrow);
- field('Titolo Workshop','workshop_title',d.workshop_title);
- field('Testo Workshop','workshop_text',d.workshop_text,{long:true});
+ group('IMMAGINE WORKSHOP');
  field('Immagine Workshop','workshop_image',d.workshop_image,{type:'image'});
 }
 function renderArray(key,arr,kind){
@@ -233,7 +230,7 @@ window.addEventListener('message',e=>{
 frame.addEventListener('load',()=>{attachPreview();});
 document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=async()=>{
  if(b.dataset.lang===lang)return;
- if(dirty.size&&!confirm('Hai modifiche non pubblicate. Cambiare lingua e perderle?'))return;
+ if(dirty.size&&!confirm('Hai modifiche non pubblicate. Vuoi cambiare lingua? Le modifiche resteranno in bozza e potrai pubblicarle dopo.'))return;
  lang=b.dataset.lang;document.querySelectorAll('[data-lang]').forEach(x=>x.classList.toggle('active',x===b));
  await loadPage(active);
 });
