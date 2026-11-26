@@ -1,4 +1,39 @@
 
+document.addEventListener('DOMContentLoaded',()=>{
+  const source=document.querySelector('.big-logo');
+  const target=document.querySelector('.mini-logo');
+  const hero=document.querySelector('.hero');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!source||!target||!hero||reduce)return;
+  const flight=document.createElement('img');
+  flight.className='logo-flight';
+  flight.src=source.currentSrc||source.src;
+  flight.alt='';
+  document.body.appendChild(flight);
+  source.style.visibility='hidden';
+  target.style.visibility='hidden';
+  let start=null,end=null,travel=0;
+  const measure=()=>{
+    const a=source.getBoundingClientRect(),b=target.getBoundingClientRect();
+    start={left:a.left,top:a.top,width:a.width};
+    end={left:b.left,top:b.top,width:b.width};
+    travel=Math.max(360,window.innerHeight*.78);
+    render();
+  };
+  const render=()=>{
+    if(!start||!end)return;
+    const p=Math.max(0,Math.min(1,window.scrollY/travel));
+    const eased=p*p*(3-2*p);
+    const lerp=(a,b)=>a+(b-a)*eased;
+    flight.style.left=lerp(start.left,end.left)+'px';
+    flight.style.top=lerp(start.top,end.top)+'px';
+    flight.style.width=lerp(start.width,end.width)+'px';
+  };
+  if(source.complete)measure();else source.addEventListener('load',measure,{once:true});
+  window.addEventListener('scroll',render,{passive:true});
+  window.addEventListener('resize',measure);
+});
+
 function initImageScrollMotion(){
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const items=[...document.querySelectorAll('.home-image-link,.custom-feature-image,.home-project,.about-split>img,.custom-project-hero,.custom-project-detail,.project-list .project-card,.case-image')];
@@ -25,8 +60,11 @@ function initImageScrollMotion(){
     const rect=section.getBoundingClientRect();
     const p=Math.max(0,Math.min(1,(window.innerHeight-rect.top)/(window.innerHeight*.9)));
     const pad=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad'))||24;
-    firstWorkshop.style.width=(window.innerWidth+2*pad-2*pad*p)+'px';
-    firstWorkshop.style.marginLeft=(-pad+pad*p)+'px';
+    const bleed=Math.max(34,pad*1.25);
+    const startWidth=window.innerWidth+2*bleed;
+    const endWidth=window.innerWidth-2*pad;
+    firstWorkshop.style.width=(startWidth+(endWidth-startWidth)*p)+'px';
+    firstWorkshop.style.marginLeft=(-pad-bleed+bleed*p)+'px';
   };
   const onScroll=()=>{if(!busy){busy=true;requestAnimationFrame(()=>{update();updateWorkshopFrame();});}};
   window.addEventListener('scroll',onScroll,{passive:true});
