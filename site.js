@@ -86,6 +86,8 @@ document.addEventListener('DOMContentLoaded',initWorkshopImageMotion);
   document.documentElement.lang=lang;
   document.querySelectorAll('.language-option').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);b.setAttribute('aria-pressed',String(b.dataset.lang===lang));b.addEventListener('click',()=>{if(b.dataset.lang!==lang){localStorage.setItem('limbo-language',b.dataset.lang);location.reload();}});});
   const field=(obj,key)=>obj?.[lang==='it'?key+'_it':key]||obj?.[key]||'';
+  const settings=await get('/content/site-settings.json');
+  if(settings?.logo)document.querySelectorAll('.mini-logo img,.footer-logo img,.big-logo').forEach(img=>img.src=settings.logo);
   const home=await get('/content/pages/home.json');
   const pages={};
   for(const name of ['about','custom','contact'])pages[name]=await get('/content/pages/'+name+'.json');
