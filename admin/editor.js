@@ -218,14 +218,27 @@ async function save(){
   refreshPreview();
  }catch(e){tell('Salvataggio non completato: '+e.message,'error');status('Errore di salvataggio');}
 }
+function acceptToken(value){
+ if(!value)return;
+ token=value;
+ $('#login').textContent='GitHub collegato';
+ $('#login').disabled=true;
+ tell('GitHub collegato. Carico i contenuti…','good');
+ loadPage();
+}
 function connect(){
- const w=window.open(WORKER+'/login?origin='+encodeURIComponent(location.origin),'limbo-github-auth','width=600,height=720');
- if(!w)tell('Abilita i popup per collegare GitHub.','error');else tell('Completa l’accesso GitHub nella finestra che si è aperta.');
+ tell('Apro GitHub per autorizzare il CMS…');
+ location.href=WORKER+'/login?origin='+encodeURIComponent(location.origin);
+}
+const authParams=new URLSearchParams(location.hash.slice(1));
+if(authParams.has('limbo_token')){
+ const value=authParams.get('limbo_token');
+ history.replaceState(null,'',location.pathname+location.search);
+ acceptToken(value);
 }
 window.addEventListener('message',e=>{
  if(e.origin!==new URL(WORKER).origin||e.data?.type!=='LIMBO_GITHUB_TOKEN'||!e.data.token)return;
- token=e.data.token;$('#login').textContent='GitHub collegato';$('#login').disabled=true;
- tell('GitHub collegato. Carico i contenuti…','good');loadPage();
+ acceptToken(e.data.token);
 });
 frame.addEventListener('load',()=>{attachPreview();});
 document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=async()=>{
