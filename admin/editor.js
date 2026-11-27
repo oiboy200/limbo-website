@@ -230,11 +230,13 @@ function connect(){
  tell('Apro GitHub per autorizzare il CMS…');
  location.href=WORKER+'/login?origin='+encodeURIComponent(location.origin);
 }
-const authParams=new URLSearchParams(location.hash.slice(1));
-if(authParams.has('limbo_token')){
+function consumeAuthToken(){
+ const authParams=new URLSearchParams(location.hash.slice(1));
  const value=authParams.get('limbo_token');
- history.replaceState(null,'',location.pathname+location.search);
- acceptToken(value);
+ if(value){
+  history.replaceState(null,'',location.pathname+location.search);
+  acceptToken(value);
+ }
 }
 window.addEventListener('message',e=>{
  if(e.origin!==new URL(WORKER).origin||e.data?.type!=='LIMBO_GITHUB_TOKEN'||!e.data.token)return;
@@ -249,4 +251,5 @@ document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=async()=>{
 });
 $('#login').onclick=connect;$('#save').onclick=save;
 nav();tell('Collega GitHub per caricare e modificare i contenuti.');
+consumeAuthToken();
 })();
