@@ -4,6 +4,8 @@
   "workshop_title": "Cornici che danno alle cose un posto.",
   "workshop_text": "Una cornice non è mai soltanto una cornice. È un modo per guardare più da vicino, dare valore a un’immagine, a un oggetto, a un ricordo. Progettata e realizzata a mano a Vicenza.",
   "custom_image": "/uploads/japan_0001_8.png",
+  "custom_title": "Custom Frames",
+  "custom_link": "Scopri il su misura ↗",
   "manifesto_title": "Ogni cornice ha la sua storia.",
   "about_image": "/uploads/japan_0006_3.png",
   "contact_cta": "Hai qualcosa da incorniciare?",
@@ -21,5 +23,13 @@
     "featured",
     "about",
     "contact"
-  ]
+  ],
+  "about_title": "About LIMBO",
+  "about_eyebrow": "04 / LO STUDIO",
+  "about_text": "<p>Limbo Cornici è un laboratorio indipendente con sede a Vicenza. Unisce uno sguardo attento alle immagini, la passione per i materiali e la precisione del lavoro rifinito a mano.</p><p>Da una singola opera a uno spazio completo, ogni progetto nasce dall’ascolto. Studiamo proporzioni, colori, finiture e dettagli per creare una cornice che appartenga a ciò che custodisce.</p>",
+  "about_link": "Scopri lo studio ↗",
+  "featured_label": "03 / PROGETTI SELEZIONATI",
+  "contact_title": "Parliamone.",
+  "contact_label": "Hai un progetto in mente?",
+  "contact_link": "Contatta LIMBO ↗"
 }

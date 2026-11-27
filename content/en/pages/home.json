@@ -4,6 +4,8 @@
   "workshop_title": "Frames that give things a place.",
   "workshop_text": "A frame is never just a frame. It is a way to look closer, to give value to an image, an object, a memory. Designed and made by hand in Vicenza.",
   "custom_image": "/uploads/japan_0001_8.png",
+  "custom_title": "Custom Frames",
+  "custom_link": "Explore custom ↗",
   "manifesto_title": "Every frame has its story.",
   "about_image": "/uploads/japan_0006_3.png",
   "contact_cta": "Have something worth framing?",
@@ -21,5 +23,13 @@
     "featured",
     "about",
     "contact"
-  ]
+  ],
+  "about_title": "About LIMBO",
+  "about_eyebrow": "04 / ABOUT LIMBO",
+  "about_text": "<p>Limbo Cornici is an independent framing workshop based in Vicenza, Italy. We bring together a considered eye for images, a love for materials and the precision of hand-finished work.</p><p>From a single artwork to a complete space, every project begins with listening. We study proportions, colours, finishes and details to create a frame that belongs to what it holds.</p>",
+  "about_link": "Discover the studio ↗",
+  "featured_label": "03 / FEATURED PROJECTS",
+  "contact_title": "Get in touch.",
+  "contact_label": "Have a project in mind?",
+  "contact_link": "Contact LIMBO ↗"
 }
